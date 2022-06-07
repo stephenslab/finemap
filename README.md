@@ -1,2 +1,3 @@
 # finemap
-Some small demos of SuSiE and FINEMAP
+
+Some small demos of SuSiE and FINEMAP.
