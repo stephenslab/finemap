@@ -16,11 +16,11 @@ print(which(b != 0))
 
 # Run susie.
 n <- 800
-Rin  <- as.matrix(fread("/project2/mstephens/yuxin/dsc_susierss/dsc_output/susierss_ukb_REF1000_pve_n/small_data/small_data_11.ld_sample_file.sample.ld"))
-fit1 <- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
-                  verbose = TRUE)
+R <- as.matrix(fread("small_data_11.ld_sample_file.sample.ld"))
+fit <- susie_rss(z,R,n = 800,min_abs_corr = 0.1,refine = FALSE,
+                 verbose = TRUE)
 cat("SuSiE CSs:\n")
-print(fit1$sets[c("cs","purity")])
+print(fit$sets[c("cs","purity")])
 
 # Run FINEMAP... not working!
 p   <- length(b)
