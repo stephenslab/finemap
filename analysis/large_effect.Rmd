@@ -1,0 +1,1 @@
+Title: SuSiE vs. FINEMAP in an example where the causal SNPs have relatively large effects
