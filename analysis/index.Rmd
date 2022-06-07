@@ -1,11 +1,11 @@
 ---
-title: "Home"
+title: "Working examples of SuSiE and FINEMAP"
+author: Peter Carbonetto
 site: workflowr::wflow_site
-output:
-  workflowr::wflow_html:
-    toc: false
-editor_options:
-  chunk_output_type: console
+output: workflowr::wflow_html
 ---
 
-Welcome to my research website.
+Follow the links below view and try out the working examples.
+
++ [SuSiE vs. FINEMAP in an example where the causal SNPs have
+relatively large effects](large_effect.html)
