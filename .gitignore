@@ -1,7 +1,8 @@
-small_data_11.ld_refin_file.refin.ld
+small_data_11.ld_sample_file.sample.ld
 sim.bf5
 sim.config
-sim.cred5
+sim.bf*
+sim.cred*
 sim.log_sss
 sim.snp
 sim.z

@@ -20,7 +20,7 @@ Rin  <- as.matrix(fread("/project2/mstephens/yuxin/dsc_susierss/dsc_output/susie
 fit1 <- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
                   verbose = TRUE)
 cat("SuSiE CSs:\n")
-print(fit1$sets[c("cs","purity")])
+print(fit$sets[c("cs","purity")])
 
 # Run FINEMAP... not working!
 p   <- length(b)
