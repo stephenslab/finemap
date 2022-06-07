@@ -15,14 +15,15 @@ cat("True causal SNPs:\n")
 print(which(b != 0))
 
 # Run susie.
-n <- 800
-Rin  <- as.matrix(fread("/project2/mstephens/yuxin/dsc_susierss/dsc_output/susierss_ukb_REF1000_pve_n/get_sumstats_n/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld"))
-fit1 <- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
-                  verbose = TRUE)
+n      <- 800
+ldfile <- "small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld"
+R      <- as.matrix(fread(ldfile))
+fit    <- susie_rss(z,R,n = 800,min_abs_corr = 0.1,refine = FALSE,
+                    verbose = TRUE)
 cat("SuSiE CSs:\n")
 print(fit$sets[c("cs","purity")])
 
-# Run FINEMAP... not working!
+# Run FINEMAP.
 p   <- length(b)
 dat <- data.frame(rsid       = 1:p,
                   chromosome = rep(1,p),
