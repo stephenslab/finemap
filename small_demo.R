@@ -7,7 +7,7 @@ dat1 <- readRDS("small_data_11.rds")
 dat2 <- readRDS("small_data_11_sim_gaussian_pve_n_8.rds")
 dat3 <- readRDS("small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.rds")
 b    <- drop(dat2$meta$true_coef)
-maf  <- dat1$maf$refin_sample
+maf  <- dat1$maf$in_sample
 bhat <- dat3$sumstats$bhat
 shat <- dat3$sumstats$shat
 z    <- bhat/shat
@@ -16,7 +16,7 @@ print(which(b != 0))
 
 # Run susie.
 n <- 800
-Rin  <- as.matrix(fread("small_data_11.ld_refin_file.refin.ld"))
+Rin  <- as.matrix(fread("/project2/mstephens/yuxin/dsc_susierss/dsc_output/susierss_ukb_REF1000_pve_n/small_data/small_data_11.ld_sample_file.sample.ld"))
 fit1 <- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
                   verbose = TRUE)
 cat("SuSiE CSs:\n")
