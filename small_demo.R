@@ -15,11 +15,12 @@ cat("True causal SNPs:\n")
 print(which(b != 0))
 
 # Run susie.
-n      <- 800
+n <- 800
 ldfile <- "small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld"
-R      <- as.matrix(fread(ldfile))
-fit    <- susie_rss(z,R,n = 800,min_abs_corr = 0.1,refine = FALSE,
-                    verbose = TRUE)
+# ldfile <- "small_data_11.ld_refout_file.refout.ld"
+R <- as.matrix(fread(ldfile))
+fit <- susie_rss(z,R,n = 800,min_abs_corr = 0.1,refine = FALSE,
+                 verbose = TRUE)
 cat("SuSiE CSs:\n")
 print(fit$sets[c("cs","purity")])
 
