@@ -7,7 +7,7 @@ navbar:
       href: index.html
   right:
     - text: source
-      href: https://github.com/stephenslab/finemaap
+      href: https://github.com/stephenslab/finemap
 output:
   workflowr::wflow_html:
     toc: no

@@ -4,14 +4,26 @@ author: Peter Carbonetto
 output: workflowr::wflow_html
 ---
 
-*Add text here.*
+In this small example drawn from our [simulations][dsc], we show that
+that FINEMAP works well with an "in-sample LD" matrix---that is, a
+correlation matrix that was estimated using the same sample that was
+used to compute the single-SNP association statistics---but, can
+perform surprisingly poorly with an "out-of-sample" LD matrix. We have
+observed that this degradation in performance only occurs in rare
+cases, specifically when the effects of the causal SNPs are very
+large--*i.e.*, when individual SNPs explain a large fraction of the
+total variance in the phenotype. So in this example the phenotypes
+were simulated with large coefficients for the causal SNPs.
+
+We also run SuSiE on the same data. Unlike FINEMAP, SuSiE performs
+similarly well with both the in-sample and out-of-sample LD matrix.
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
                       fig.align = "center",dpi = 120)
 ```
 
-Load the packages used in the code below.
+First, we load some packages used in the code below.
 
 ```{r load-pkgs, message=FALSE}
 library(data.table)
@@ -20,3 +32,33 @@ library(ggplot2)
 library(cowplot)
 ```
 
+Load the summary data: the least-squares effect estimates
+$\hat{\beta}_i$ and their standard errors $\hat{s}_i$ for each SNP
+$i$. Here we also compute the *z*-scores since SuSiE accepts the
+*z*-scores as input.
+
+```{r load-data-1}
+dat1 <- readRDS("../data/small_data_11.rds")
+dat3 <- readRDS("../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.rds")
+maf  <- dat1$maf$in_sample
+bhat <- dat3$sumstats$bhat
+shat <- dat3$sumstats$shat
+z    <- bhat/shat
+```
+
+In this simulation, two of the SNPs have a nonzero effect on the
+phenotype:
+
+```{r load-data-2}
+dat2 <- readRDS("../data/small_data_11_sim_gaussian_pve_n_8.rds")
+b <- drop(dat2$meta$true_coef)
+which(b != 0)
+```
+
+In-sample LD
+------------
+
+Out-of-sample LD
+----------------
+
+[dsc]: https://github.com/zouyuxin/dsc_susierss
