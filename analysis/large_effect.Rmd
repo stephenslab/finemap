@@ -10,13 +10,15 @@ correlation matrix that was estimated using the same sample that was
 used to compute the single-SNP association statistics---but, can
 perform surprisingly poorly with an "out-of-sample" LD matrix. We have
 observed that this degradation in performance only occurs in rare
-cases, specifically when the effects of the causal SNPs are very
-large--*i.e.*, when individual SNPs explain a large fraction of the
-total variance in the phenotype. So in this example the phenotypes
-were simulated with large coefficients for the causal SNPs.
+cases---specifically, these are caases when the effects of the causal
+SNPs are very large (*i.e.*, when individual causal SNPs explain a
+large fraction of the total variance in the phenotype). In this
+example, the phenotypes were simulated from a linear regression model
+with large coefficients for the causal SNPs.
 
 We also run SuSiE on the same data. Unlike FINEMAP, SuSiE performs
-similarly well with both the in-sample and out-of-sample LD matrix.
+similarly well in this example with either the in-sample and
+out-of-sample LD matrix.
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
@@ -57,6 +59,29 @@ which(b != 0)
 
 In-sample LD
 ------------
+
+*Add text here.*
+
+```{r susie-in-sample-1}
+ldinfile <- "small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld"
+Rin <- as.matrix(fread(ldinfile))
+fit <- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
+                 verbose = TRUE)
+```
+
+*Add text here.*
+
+```{r susie-in-sample-2}
+print(fit$sets[c("cs","purity")])
+vars <- which(b != 0)
+cs1 <- fit$sets$cs$L1
+cs2 <- fit$sets$cs$L2
+plot(1:1001,fit$pip,pch = 20,cex = 0.8,ylim = c(0,0.5),
+     xlab = "SNP",ylab = "susie PIP")
+points(cs1,fit$pip[cs1],pch = 1,cex = 1,col = "cyan")
+points(cs2,fit$pip[cs2],pch = 1,cex = 1,col = "gold")
+points(vars,fit$pip[vars],pch = 2,cex = 0.8,col = "tomato")
+```
 
 Out-of-sample LD
 ----------------
