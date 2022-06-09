@@ -85,7 +85,7 @@ Here's a visualization of this result. (In this plot, the CS is
 depicted by the light blue circles, and the two causal SNPs are drawn
 as red triangles.)
 
-```{r susie-in-3, fig.height=3.5, fig.width=4.5}
+```{r susie-in-3, fig.height=3, fig.width=4.5}
 cs1 <- fit1$sets$cs$L1
 par(mar = c(4,4,1,1))
 plot(1:1001,fit1$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
@@ -132,7 +132,7 @@ print(fit2$sets[c("cs","purity")])
 
 Here is a visualization of this result:
 
-```{r susie-out-3, fig.height=3.5, fig.width=4.5}
+```{r susie-out-3, fig.height=3, fig.width=4.5}
 cs1 <- fit2$sets$cs$L1
 par(mar = c(4,4,1,1))
 plot(1:1001,fit2$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
