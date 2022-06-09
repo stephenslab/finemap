@@ -25,11 +25,13 @@ knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
                       fig.align = "center",dpi = 120)
 ```
 
-First, we load some packages used in the code below.
+First, we load some packages used in the code below, and set the seed
+for reproducibility.
 
 ```{r load-pkgs, message=FALSE}
 library(data.table)
 library(susieR)
+set.seed(1)
 ```
 
 Load the summary data: the least-squares effect estimates
@@ -74,14 +76,15 @@ to maintain consistency with the analysis below using an out-of-sample
 LD estimate, we ignore this advice.)
 
 SuSiE returns a single credible set (CS) containing a large number of strongly
-correlated SNPs. One of the SNPs in this CS is a (true) causal SNP.
+correlated SNPs, and one of the SNPs in this CS is a (true) causal SNP.
 
 ```{r susie-in-sample-2}
 print(fit$sets[c("cs","purity")])
 ```
 
-In this plot, the CS is depicted by the light blue circles, and the two
-causal SNPs are drawn as red triangles:
+Here's a visualization of this result. (In this plot, the CS is
+depicted by the light blue circles, and the two causal SNPs are drawn
+as red triangles.)
 
 ```{r susie-in-sample-3, fig.height=3.5, fig.width=4.5}
 cs1 <- fit$sets$cs$L1
@@ -94,7 +97,20 @@ points(vars,fit$pip[vars],pch = 2,cex = 0.8,col = "tomato")
 
 Now let's try running FINEMAP on these same data:
 
-
+```{r finemap-in-sample-1}
+p   <- length(b)
+dat <- data.frame(rsid       = 1:p,
+                  chromosome = rep(1,p),
+                  position   = rep(1,p),
+                  allele1    = rep("A",p),
+                  allele2    = rep("C",p),
+                  maf        = round(maf,digits = 6),
+                  beta       = round(bhat,digits = 6),
+                  se         = round(shat,digits = 6))
+write.table(dat,"sim1.z",quote = FALSE,col.names = TRUE,row.names = FALSE)
+system(paste("./finemap_v1.4.1_x86_64 --sss --log --in-files sim1.master",
+             "--n-causal-snps 5"))
+```
 
 Out-of-sample LD
 ----------------
