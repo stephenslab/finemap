@@ -30,8 +30,6 @@ First, we load some packages used in the code below.
 ```{r load-pkgs, message=FALSE}
 library(data.table)
 library(susieR)
-library(ggplot2)
-library(cowplot)
 ```
 
 Load the summary data: the least-squares effect estimates
@@ -54,34 +52,49 @@ phenotype:
 ```{r load-data-2}
 dat2 <- readRDS("../data/small_data_11_sim_gaussian_pve_n_8.rds")
 b <- drop(dat2$meta$true_coef)
-which(b != 0)
+vars <- which(b != 0)
+vars
 ```
 
 In-sample LD
 ------------
 
-*Add text here.*
+We begin by running SuSiE with the "in-sample" LD estimate.
 
 ```{r susie-in-sample-1}
-ldinfile <- "small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld"
+ldinfile <- file.path("../data",
+  "small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld.gz")
 Rin <- as.matrix(fread(ldinfile))
 fit <- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
                  verbose = TRUE)
 ```
 
-*Add text here.*
+(We will get a recommendation to estimate the residual variance, but
+to maintain consistency with the analysis below using an out-of-sample
+LD estimate, we ignore this advice.)
+
+SuSiE returns a single credible set (CS) containing a large number of strongly
+correlated SNPs. One of the SNPs in this CS is a (true) causal SNP.
 
 ```{r susie-in-sample-2}
 print(fit$sets[c("cs","purity")])
-vars <- which(b != 0)
+```
+
+In this plot, the CS is depicted by the light blue circles, and the two
+causal SNPs are drawn as red triangles:
+
+```{r susie-in-sample-3, fig.height=3.5, fig.width=4.5}
 cs1 <- fit$sets$cs$L1
-cs2 <- fit$sets$cs$L2
-plot(1:1001,fit$pip,pch = 20,cex = 0.8,ylim = c(0,0.5),
+par(mar = c(4,4,1,1))
+plot(1:1001,fit$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
      xlab = "SNP",ylab = "susie PIP")
 points(cs1,fit$pip[cs1],pch = 1,cex = 1,col = "cyan")
-points(cs2,fit$pip[cs2],pch = 1,cex = 1,col = "gold")
 points(vars,fit$pip[vars],pch = 2,cex = 0.8,col = "tomato")
 ```
+
+Now let's try running FINEMAP on these same data:
+
+
 
 Out-of-sample LD
 ----------------
