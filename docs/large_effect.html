@@ -431,15 +431,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree2c327c826cad7e1720f9354ae293d305d4cc319atargetblank2c327c8a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree9dc1f67b5012476fdf01e5d1346365806f5d557ctargetblank9dc1f67a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/finemap/tree/2c327c826cad7e1720f9354ae293d305d4cc319a" target="_blank">2c327c8</a>
+<a href="https://github.com/stephenslab/finemap/tree/9dc1f67b5012476fdf01e5d1346365806f5d557c" target="_blank">9dc1f67</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree2c327c826cad7e1720f9354ae293d305d4cc319atargetblank2c327c8a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree9dc1f67b5012476fdf01e5d1346365806f5d557ctargetblank9dc1f67a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -449,7 +449,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/finemap/tree/2c327c826cad7e1720f9354ae293d305d4cc319a" target="_blank">2c327c8</a>.
+<a href="https://github.com/stephenslab/finemap/tree/9dc1f67b5012476fdf01e5d1346365806f5d557c" target="_blank">9dc1f67</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -508,6 +508,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/9dc1f67b5012476fdf01e5d1346365806f5d557c/analysis/large_effect.Rmd" target="_blank">9dc1f67</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-09
+</td>
+<td>
+workflowr::wflow_publish("large_effect.Rmd", verbose = TRUE)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/finemap/37627a79ca9fa6005c154dd5592d5519e78a046b/docs/large_effect.html" target="_blank">37627a7</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-09
+</td>
+<td>
+Added susie-rss fit using out-of-sample LD.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -802,6 +836,43 @@ plot(1:1001,fit1$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
 points(cs1,fit1$pip[cs1],pch = 1,cex = 1,col = &quot;cyan&quot;)
 points(vars,fit1$pip[vars],pch = 2,cex = 0.8,col = &quot;tomato&quot;)</code></pre>
 <p><img src="figure/large_effect.Rmd/susie-in-3-1.png" width="540" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-susie-in-3-1">
+Past versions of susie-in-3-1.png
+</button>
+</p>
+<div id="fig-susie-in-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/37627a79ca9fa6005c154dd5592d5519e78a046b/docs/figure/large_effect.Rmd/susie-in-3-1.png" target="_blank">37627a7</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Now let’s try running FINEMAP on these same data:</p>
 <pre class="r"><code>p   &lt;- length(b)
 dat &lt;- data.frame(rsid       = 1:p,
@@ -849,6 +920,43 @@ plot(1:1001,fit2$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
 points(cs1,fit2$pip[cs1],pch = 1,cex = 1,col = &quot;cyan&quot;)
 points(vars,fit2$pip[vars],pch = 2,cex = 0.8,col = &quot;tomato&quot;)</code></pre>
 <p><img src="figure/large_effect.Rmd/susie-out-3-1.png" width="540" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-susie-out-3-1">
+Past versions of susie-out-3-1.png
+</button>
+</p>
+<div id="fig-susie-out-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/37627a79ca9fa6005c154dd5592d5519e78a046b/docs/figure/large_effect.Rmd/susie-out-3-1.png" target="_blank">37627a7</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
