@@ -86,8 +86,8 @@ depicted by the light blue circles, and the two causal SNPs are drawn
 as red triangles.)
 
 ```{r susie-in-3, fig.height=3, fig.width=4.5}
-cs1 <- fit1$sets$cs$L1
 par(mar = c(4,4,1,1))
+cs1 <- fit1$sets$cs$L1
 plot(1:1001,fit1$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
      xlab = "SNP",ylab = "susie PIP")
 points(cs1,fit1$pip[cs1],pch = 1,cex = 1,col = "cyan")
@@ -110,8 +110,13 @@ run_finemap <- function (bhat, shat, maf, prefix) {
   outfile <- paste(prefix,"z",sep = ".")
   masterfile <- paste(prefix,"master",sep = ".")
   write.table(dat,outfile,quote = FALSE,col.names = TRUE,row.names = FALSE)
-  system(paste("./finemap_v1.4.1_x86_64 --sss --log --n-causal-snps 5",
-               "--in-files",masterfile))
+  out <- system(paste("./finemap_v1.4.1_x86_64 --sss --log --n-causal-snps 5",
+                      "--in-files",masterfile),intern = TRUE)
+  out <- out[which(!grepl("Reading",out,fixed = TRUE))]
+  out <- out[which(!grepl("Computing",out,fixed = TRUE))]
+  out <- out[which(!grepl("evaluated",out,fixed = TRUE))]
+  cat(out,sep = "\n")
+  return(invisible(out))
 }
 setwd("../output")
 run_finemap(bhat,shat,maf,prefix = "sim1")
@@ -120,7 +125,18 @@ setwd("../analysis")
 
 *Add text here.*
 
-```{r finemap-in-2}
+```{r finemap-in-2, fig.height=3, fig.width=4.5}
+par(mar = c(4,4,1,1))
+finemap <- read.table("../output/sim1.cred2",header = TRUE)
+pip   <- rep(0,1001)
+cs1   <- finemap$cred1
+rows1 <- which(!is.na(cs1))
+cs1   <- cs1[rows1]
+pip[cs1] <- pip[cs1] + finemap$prob1[rows1]
+plot(1:1001,pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
+     xlab = "SNP",ylab = "finemap PIP")
+points(cs1,pip[cs1],pch = 1,cex = 1,col = "cyan")
+points(vars,pip[vars],pch = 2,cex = 0.8,col = "tomato")
 ```
 
 Out-of-sample LD
@@ -151,6 +167,14 @@ plot(1:1001,fit2$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
      xlab = "SNP",ylab = "susie PIP")
 points(cs1,fit2$pip[cs1],pch = 1,cex = 1,col = "cyan")
 points(vars,fit2$pip[vars],pch = 2,cex = 0.8,col = "tomato")
+```
+
+*Add text here.*
+
+```{r finemap-out-1}
+setwd("../output")
+run_finemap(bhat,shat,maf,prefix = "sim2")
+setwd("../analysis")
 ```
 
 [dsc]: https://github.com/zouyuxin/dsc_susierss
