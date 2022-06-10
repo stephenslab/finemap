@@ -174,8 +174,8 @@ setwd("../analysis")
 
 With the out-of-sample LD estimate, FINEMAP gives a very different
 result: it predicts 5 causal SNPs (which is the maximum we allowed),
-all the CSs contain a single SNP, and none of the CSs contain a true
-causal SNP.
+all the CSs contain a single SNP (except the last CS, which has 2
+SNPs), and none of the CSs contain a true causal SNP.
 
 ```{r finemap-out-2}
 cat(readLines("../output/sim2.cred5"),sep = "\n")

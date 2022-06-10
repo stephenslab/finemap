@@ -1140,7 +1140,7 @@ setwd(&quot;../analysis&quot;)
 #    4 -&gt; 4.06e-113
 #    5 -&gt; 1
 # - Run time                         : 0 hours, 0 minutes, 23 seconds</code></pre>
-<p>With the out-of-sample LD estimate, FINEMAP gives a very different result: it predicts 5 causal SNPs (which is the maximum we allowed), all the CSs contain a single SNP, and none of the CSs contain a true causal SNP.</p>
+<p>With the out-of-sample LD estimate, FINEMAP gives a very different result: it predicts 5 causal SNPs (which is the maximum we allowed), all the CSs contain a single SNP (except the last CS, which has 2 SNPs), and none of the CSs contain a true causal SNP.</p>
 <pre class="r"><code>cat(readLines(&quot;../output/sim2.cred5&quot;),sep = &quot;\n&quot;)
 # # Post-Pr(# of causal SNPs is 5) = 1
 # #log10bf 600.715 NA 531.267 NA 135.593 NA 133.711 NA 117.309 NA
