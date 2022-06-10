@@ -64,7 +64,7 @@ In-sample LD
 We begin by running SuSiE with the "in-sample" LD estimate.
 
 ```{r susie-in-1}
-ldinfile <- "../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld.gz"
+ldinfile <- "../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld"
 Rin <- as.matrix(fread(ldinfile))
 fit1 <- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
                  verbose = TRUE)
@@ -96,19 +96,31 @@ points(vars,fit1$pip[vars],pch = 2,cex = 0.8,col = "tomato")
 
 Now let's try running FINEMAP on these same data:
 
-```{r finemap-in-1, eval=FALSE}
-p   <- length(b)
-dat <- data.frame(rsid       = 1:p,
-                  chromosome = rep(1,p),
-                  position   = rep(1,p),
-                  allele1    = rep("A",p),
-                  allele2    = rep("C",p),
-                  maf        = round(maf,digits = 6),
-                  beta       = round(bhat,digits = 6),
-                  se         = round(shat,digits = 6))
-write.table(dat,"sim1.z",quote = FALSE,col.names = TRUE,row.names = FALSE)
-system(paste("./finemap_v1.4.1_x86_64 --sss --log --in-files sim1.master",
-             "--n-causal-snps 5"))
+```{r finemap-in-1}
+run_finemap <- function (bhat, shat, maf, prefix) {
+  p <- length(b)
+  dat <- data.frame(rsid       = 1:p,
+                    chromosome = rep(1,p),
+                    position   = rep(1,p),
+                    allele1    = rep("A",p),
+                    allele2    = rep("C",p),
+                    maf        = round(maf,digits = 6),
+                    beta       = round(bhat,digits = 6),
+                    se         = round(shat,digits = 6))
+  outfile <- paste(prefix,"z",sep = ".")
+  masterfile <- paste(prefix,"master",sep = ".")
+  write.table(dat,outfile,quote = FALSE,col.names = TRUE,row.names = FALSE)
+  system(paste("./finemap_v1.4.1_x86_64 --sss --log --n-causal-snps 5",
+               "--in-files",masterfile))
+}
+setwd("../output")
+run_finemap(bhat,shat,maf,prefix = "sim1")
+setwd("../analysis")
+```
+
+*Add text here.*
+
+```{r finemap-in-2}
 ```
 
 Out-of-sample LD
@@ -117,7 +129,7 @@ Out-of-sample LD
 *Add text here.*
 
 ```{r susie-out-1}
-ldoutfile <- "../data/small_data_11.ld_refout_file.refout.ld.gz"
+ldoutfile <- "../data/small_data_11.ld_refout_file.refout.ld"
 Rout <- as.matrix(fread(ldoutfile))
 fit2 <- susie_rss(z,Rout,n = 800,min_abs_corr = 0.1,refine = FALSE,
                  verbose = TRUE)
