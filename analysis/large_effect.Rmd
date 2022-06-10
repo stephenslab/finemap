@@ -5,19 +5,14 @@ output: workflowr::wflow_html
 ---
 
 In this small example drawn from our [simulations][dsc], we show that
-that FINEMAP works well with an "in-sample LD" matrix---that is, a
-correlation matrix that was estimated using the same sample that was
-used to compute the single-SNP association statistics---but, can
+that [FINEMAP][finemap] works well with an "in-sample LD" matrix—that
+is, a correlation matrix that was estimated using the same sample that
+was used to compute the single-SNP association statistics—but, can
 perform surprisingly poorly with an "out-of-sample" LD matrix. We have
-observed that this degradation in performance only occurs in rare
-cases---specifically, these are caases when the effects of the causal
-SNPs are very large (*i.e.*, when individual causal SNPs explain a
-large fraction of the total variance in the phenotype). In this
-example, the phenotypes were simulated from a linear regression model
-with large coefficients for the causal SNPs.
-
-We also run SuSiE on the same data. Unlike FINEMAP, SuSiE performs
-similarly well in this example with either the in-sample and
+observed that this degradation in performance is unusual—specifically,
+when the effects of the causal SNPs are very large. Nonetheless, this
+example may be instructive. In contrast to FINEMAP, [SuSiE][susie]
+performs similarly well in this example with either the in-sample and
 out-of-sample LD matrix.
 
 ```{r knitr-opts, include=FALSE}
@@ -25,8 +20,7 @@ knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
                       fig.align = "center",dpi = 120)
 ```
 
-First, we load some packages used in the code below, and set the seed
-for reproducibility.
+First, load some packages, and set the seed for reproducibility.
 
 ```{r load-pkgs, message=FALSE}
 library(data.table)
@@ -36,7 +30,7 @@ set.seed(1)
 
 Load the summary data: the least-squares effect estimates
 $\hat{\beta}_i$ and their standard errors $\hat{s}_i$ for each SNP
-$i$. Here we also compute the *z*-scores since SuSiE accepts the
+$i$. Here we also compute the *z*-scores since SuSiE accepts 
 *z*-scores as input.
 
 ```{r load-data-1}
@@ -48,8 +42,7 @@ shat <- dat3$sumstats$shat
 z    <- bhat/shat
 ```
 
-In this simulation, two of the SNPs have a nonzero effect on the
-phenotype:
+In this simulation, 2 out of 1,001 SNPs affect the phenotype:
 
 ```{r load-data-2}
 dat2 <- readRDS("../data/small_data_11_sim_gaussian_pve_n_8.rds")
@@ -61,7 +54,7 @@ vars
 In-sample LD
 ------------
 
-We begin by running SuSiE with the "in-sample" LD estimate.
+Run SuSiE with the "in-sample" LD estimate:
 
 ```{r susie-in-1}
 ldinfile <- "../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld"
@@ -70,12 +63,13 @@ fit1 <- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
                  verbose = TRUE)
 ```
 
-(We will get a recommendation to estimate the residual variance, but
-to maintain consistency with the analysis below using an out-of-sample
-LD estimate, we ignore this advice.)
+(Although the recommendation is to estimate the residual variance, to
+maintain consistency with the analysis using out-of-sample LD, we
+ignore this advice.)
 
-SuSiE returns a single credible set (CS) containing a large number of strongly
-correlated SNPs, and one of the SNPs in this CS is a (true) causal SNP.
+SuSiE returns a single credible set (CS) containing a large number of
+strongly correlated SNPs. One of the SNPs in this CS is a (true)
+causal SNP.
 
 ```{r susie-in-2}
 print(fit1$sets[c("cs","purity")])
@@ -123,7 +117,9 @@ run_finemap(bhat,shat,maf,prefix = "sim1")
 setwd("../analysis")
 ```
 
-*Add text here.*
+FINEMAP predicts 2 causal SNPs (with 74% probability). The second
+FINEMAP credible set is a diffuse set with lots of uncorrelated SNPs,
+so we visualize the first CS only:
 
 ```{r finemap-in-2, fig.height=3, fig.width=4.5}
 par(mar = c(4,4,1,1))
@@ -139,10 +135,13 @@ points(cs1,pip[cs1],pch = 1,cex = 1,col = "cyan")
 points(vars,pip[vars],pch = 2,cex = 0.8,col = "tomato")
 ```
 
+This looks very similar to the SuSiE credible set, which is reassuring.
+
 Out-of-sample LD
 ----------------
 
-*Add text here.*
+Let's try running SuSiE and FINEMAP as before, except using
+an out-of-sample LD estimate.
 
 ```{r susie-out-1}
 ldoutfile <- "../data/small_data_11.ld_refout_file.refout.ld"
@@ -152,24 +151,20 @@ fit2 <- susie_rss(z,Rout,n = 800,min_abs_corr = 0.1,refine = FALSE,
 ```
 
 As above, SuSiE returns a single CS containing one of the two causal
-SNPs:
+SNPs.
 
 ```{r susie-out-2}
 print(fit2$sets[c("cs","purity")])
 ```
 
-Here is a visualization of this result:
+In fact, in this particular example the CS is exactly the same as the CS
+above obtained using the in-sample LD:
 
-```{r susie-out-3, fig.height=3, fig.width=4.5}
-cs1 <- fit2$sets$cs$L1
-par(mar = c(4,4,1,1))
-plot(1:1001,fit2$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
-     xlab = "SNP",ylab = "susie PIP")
-points(cs1,fit2$pip[cs1],pch = 1,cex = 1,col = "cyan")
-points(vars,fit2$pip[vars],pch = 2,cex = 0.8,col = "tomato")
+```{r susie-out-3}
+all(fit1$sets$cs$L1 == fit2$sets$cs$L1)
 ```
 
-*Add text here.*
+Now let's run FINEMAP:
 
 ```{r finemap-out-1}
 setwd("../output")
@@ -177,5 +172,15 @@ run_finemap(bhat,shat,maf,prefix = "sim2")
 setwd("../analysis")
 ```
 
-[dsc]: https://github.com/zouyuxin/dsc_susierss
+With the out-of-sample LD estimate, FINEMAP gives a very different
+result: it predicts 5 causal SNPs (which is the maximum we allowed),
+all the CSs contain a single SNP, and none of the CSs contain a true
+causal SNP.
 
+```{r finemap-out-2}
+cat(readLines("../output/sim2.cred5"),sep = "\n")
+```
+
+[dsc]: https://github.com/stephenslab/dsc_susierss
+[finemap]: http://www.christianbenner.com
+[susie]: https://github.com/stephenslab/susieR
