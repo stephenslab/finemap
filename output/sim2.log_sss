@@ -1,0 +1,65 @@
+
+|--------------------------------------|
+| Welcome to FINEMAP v1.4.1            |
+|                                      |
+| (c) 2015-2022 University of Helsinki |
+|                                      |
+| Help :                               |
+| - ./finemap --help                   |
+| - www.finemap.me                     |
+| - www.christianbenner.com            |
+|                                      |
+| Contact:                             |
+| - finemap@christianbenner.com        |
+| - matti.pirinen@helsinki.fi          |
+|--------------------------------------|
+
+--------
+SETTINGS
+--------
+- dataset            : all
+- corr-config        : 0.95
+- n-causal-snps      : 5
+- n-configs-top      : 50000
+- n-conv-sss         : 100
+- n-iter             : 100000
+- n-threads          : 1
+- prior-k0           : 0
+- prior-std          : 0.05 
+- prob-conv-sss-tol  : 0.001
+- prob-cred-set      : 0.95
+
+------------
+FINE-MAPPING (1/1)
+------------
+- GWAS summary stats               : sim2.z
+- SNP correlations                 : ../data/small_data_11.ld_refout_file.refout.ld
+- Causal SNP stats                 : sim2.snp
+- Causal configurations            : sim2.config
+- Credible sets                    : sim2.cred
+- Log file                         : sim2.log_sss
+
+- Updated prior SD of effect sizes : 0.05 0.0906 0.164 0.297 
+
+- Number of GWAS samples           : 800
+- Number of SNPs                   : 1001
+- Prior-Pr(# of causal SNPs is k)  : 
+  (0 -> 0)
+   1 -> 0.583
+   2 -> 0.291
+   3 -> 0.097
+   4 -> 0.0242
+   5 -> 0.00483
+- 194729 configurations evaluated (0.514/100%) : converged after 514 iterations
+- Regional SNP heritability        : 0.289 (SD: 0.021 ; 95% CI: [0.249,0.331])
+- Log10-BF of >= one causal SNP    : 86.5937
+- Post-expected # of causal SNPs   : 5
+- Post-Pr(# of causal SNPs is k)   : 
+  (0 -> 0)
+   1 -> 0
+   2 -> 0
+   3 -> 5.7e-27
+   4 -> 1.44e-14
+   5 -> 1
+- Run time                         : 0 hours, 0 minutes, 26 seconds
+
