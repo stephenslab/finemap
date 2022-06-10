@@ -387,35 +387,36 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptreec3f0aa36bdb09f42e9c4d4f00d2dc5b594d2faa0targetblankc3f0aa3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/stephenslab/finemap/tree/c3f0aa36bdb09f42e9c4d4f00d2dc5b594d2faa0" target="_blank">c3f0aa3</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree38a8ed50c67dd1e656bb95bfa089816d14e46d21targetblank38a8ed5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/stephenslab/finemap/tree/38a8ed50c67dd1e656bb95bfa089816d14e46d21" target="_blank">38a8ed5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptreec3f0aa36bdb09f42e9c4d4f00d2dc5b594d2faa0targetblankc3f0aa3a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree38a8ed50c67dd1e656bb95bfa089816d14e46d21targetblank38a8ed5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/stephenslab/finemap/tree/c3f0aa36bdb09f42e9c4d4f00d2dc5b594d2faa0" target="_blank">c3f0aa3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/stephenslab/finemap/tree/38a8ed50c67dd1e656bb95bfa089816d14e46d21" target="_blank">38a8ed5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    analysis/figure/
     Ignored:    data/small_data_11.ld_refout_file.refout.ld
     Ignored:    data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld
     Ignored:    output/sim1.config
     Ignored:    output/sim2.config
 
 Unstaged changes:
-    Modified:   .gitignore
     Modified:   output/sim1.cred1
     Modified:   output/sim1.cred2
     Modified:   output/sim1.log_sss
     Modified:   output/sim1.snp
-    Modified:   output/sim2.master
+    Modified:   output/sim2.bf5
+    Modified:   output/sim2.cred5
+    Modified:   output/sim2.log_sss
+    Modified:   output/sim2.snp
 
 </code></pre>
 <p>
@@ -454,6 +455,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/38a8ed50c67dd1e656bb95bfa089816d14e46d21/analysis/large_effect.Rmd" target="_blank">38a8ed5</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-10
+</td>
+<td>
+workflowr::wflow_publish(&quot;large_effect.Rmd&quot;, view = FALSE, verbose = TRUE)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/finemap/e597078613eccec56421d2eb742c8e6925472770/docs/large_effect.html" target="_blank">e597078</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-10
+</td>
+<td>
+Added finemap results to large_effect example.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -750,20 +785,19 @@ Revised workflowr files.
 </div>
 </div>
 </div>
-<p>In this small example drawn from our <a href="https://github.com/zouyuxin/dsc_susierss">simulations</a>, we show that that FINEMAP works well with an &quot;in-sample LD&quot; matrix---that is, a correlation matrix that was estimated using the same sample that was used to compute the single-SNP association statistics---but, can perform surprisingly poorly with an &quot;out-of-sample&quot; LD matrix. We have observed that this degradation in performance only occurs in rare cases---specifically, these are caases when the effects of the causal SNPs are very large (<em>i.e.</em>, when individual causal SNPs explain a large fraction of the total variance in the phenotype). In this example, the phenotypes were simulated from a linear regression model with large coefficients for the causal SNPs.</p>
-<p>We also run SuSiE on the same data. Unlike FINEMAP, SuSiE performs similarly well in this example with either the in-sample and out-of-sample LD matrix.</p>
-<p>First, we load some packages used in the code below, and set the seed for reproducibility.</p>
+<p>In this small example drawn from our <a href="https://github.com/stephenslab/dsc_susierss">simulations</a>, we show that that <a href="http://www.christianbenner.com">FINEMAP</a> works well with an &quot;in-sample LD&quot; matrix—that is, a correlation matrix that was estimated using the same sample that was used to compute the single-SNP association statistics—but, can perform surprisingly poorly with an &quot;out-of-sample&quot; LD matrix. We have observed that this degradation in performance is unusual—specifically, when the effects of the causal SNPs are very large. Nonetheless, this example may be instructive. In contrast to FINEMAP, <a href="https://github.com/stephenslab/susieR">SuSiE</a> performs similarly well in this example with either the in-sample and out-of-sample LD matrix.</p>
+<p>First, load some packages, and set the seed for reproducibility.</p>
 <pre class="r"><code>library(data.table)
 library(susieR)
 set.seed(1)</code></pre>
-<p>Load the summary data: the least-squares effect estimates <span class="math">\(\hat{\beta}_i\)</span> and their standard errors <span class="math">\(\hat{s}_i\)</span> for each SNP <span class="math">\(i\)</span>. Here we also compute the <em>z</em>-scores since SuSiE accepts the <em>z</em>-scores as input.</p>
+<p>Load the summary data: the least-squares effect estimates <span class="math">\(\hat{\beta}_i\)</span> and their standard errors <span class="math">\(\hat{s}_i\)</span> for each SNP <span class="math">\(i\)</span>. Here we also compute the <em>z</em>-scores since SuSiE accepts <em>z</em>-scores as input.</p>
 <pre class="r"><code>dat1 &lt;- readRDS(&quot;../data/small_data_11.rds&quot;)
 dat3 &lt;- readRDS(&quot;../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.rds&quot;)
 maf  &lt;- dat1$maf$in_sample
 bhat &lt;- dat3$sumstats$bhat
 shat &lt;- dat3$sumstats$shat
 z    &lt;- bhat/shat</code></pre>
-<p>In this simulation, two of the SNPs have a nonzero effect on the phenotype:</p>
+<p>In this simulation, 2 out of 1,001 SNPs affect the phenotype:</p>
 <pre class="r"><code>dat2 &lt;- readRDS(&quot;../data/small_data_11_sim_gaussian_pve_n_8.rds&quot;)
 b &lt;- drop(dat2$meta$true_coef)
 vars &lt;- which(b != 0)
@@ -771,7 +805,7 @@ vars
 # [1] 305 740</code></pre>
 <div id="in-sample-ld" class="section level2">
 <h2>In-sample LD</h2>
-<p>We begin by running SuSiE with the &quot;in-sample&quot; LD estimate.</p>
+<p>Run SuSiE with the &quot;in-sample&quot; LD estimate:</p>
 <pre class="r"><code>ldinfile &lt;- &quot;../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld&quot;
 Rin &lt;- as.matrix(fread(ldinfile))
 fit1 &lt;- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
@@ -786,8 +820,8 @@ fit1 &lt;- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
 # [1] &quot;objective:-1022.08453069756&quot;
 # [1] &quot;objective:-1022.08341717686&quot;
 # [1] &quot;objective:-1022.08267674839&quot;</code></pre>
-<p>(We will get a recommendation to estimate the residual variance, but to maintain consistency with the analysis below using an out-of-sample LD estimate, we ignore this advice.)</p>
-<p>SuSiE returns a single credible set (CS) containing a large number of strongly correlated SNPs, and one of the SNPs in this CS is a (true) causal SNP.</p>
+<p>(Although the recommendation is to estimate the residual variance, to maintain consistency with the analysis using out-of-sample LD, we ignore this advice.)</p>
+<p>SuSiE returns a single credible set (CS) containing a large number of strongly correlated SNPs. One of the SNPs in this CS is a (true) causal SNP.</p>
 <pre class="r"><code>print(fit1$sets[c(&quot;cs&quot;,&quot;purity&quot;)])
 # $cs
 # $cs$L1
@@ -831,6 +865,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/e597078613eccec56421d2eb742c8e6925472770/docs/figure/large_effect.Rmd/susie-in-3-1.png" target="_blank">e597078</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-10
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/stephenslab/finemap/blob/f40a3371cf2fddff478035de02f3255f0c5c0650/docs/figure/large_effect.Rmd/susie-in-3-1.png" target="_blank">f40a337</a>
@@ -940,13 +985,13 @@ setwd(&quot;../analysis&quot;)
 # - Post-expected # of causal SNPs   : 1.74
 # - Post-Pr(# of causal SNPs is k)   : 
 #   (0 -&gt; 0)
-#    1 -&gt; 0.26
-#    2 -&gt; 0.74
+#    1 -&gt; 0.262
+#    2 -&gt; 0.738
 #    3 -&gt; 0
 #    4 -&gt; 0
 #    5 -&gt; 0
 # - Run time                         : 0 hours, 0 minutes, 10 seconds</code></pre>
-<p><em>Add text here.</em></p>
+<p>FINEMAP predicts 2 causal SNPs (with 74% probability). The second FINEMAP credible set is a diffuse set with lots of uncorrelated SNPs, so we visualize the first CS only:</p>
 <pre class="r"><code>par(mar = c(4,4,1,1))
 finemap &lt;- read.table(&quot;../output/sim1.cred2&quot;,header = TRUE)
 pip   &lt;- rep(0,1001)
@@ -959,47 +1004,12 @@ plot(1:1001,pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
 points(cs1,pip[cs1],pch = 1,cex = 1,col = &quot;cyan&quot;)
 points(vars,pip[vars],pch = 2,cex = 0.8,col = &quot;tomato&quot;)</code></pre>
 <p><img src="figure/large_effect.Rmd/finemap-in-2-1.png" width="540" style="display: block; margin: auto;" /></p>
-</div>
-<div id="out-of-sample-ld" class="section level2">
-<h2>Out-of-sample LD</h2>
-<p><em>Add text here.</em></p>
-<pre class="r"><code>ldoutfile &lt;- &quot;../data/small_data_11.ld_refout_file.refout.ld&quot;
-Rout &lt;- as.matrix(fread(ldoutfile))
-fit2 &lt;- susie_rss(z,Rout,n = 800,min_abs_corr = 0.1,refine = FALSE,
-                 verbose = TRUE)
-# HINT: If the in-sample LD matrix is available, we recommend calling susie_rss with the in-sample LD matrix, and setting estimate_residual_variance = TRUE
-# HINT: For large R or large XtX, consider installing theRfast package for better performance.
-# WARNING: XtX is not symmetric; forcing XtX to be symmetric by replacing XtX with (XtX + t(XtX))/2
-# [1] &quot;objective:-1022.15334027678&quot;
-# [1] &quot;objective:-1022.1533319747&quot;</code></pre>
-<p>As above, SuSiE returns a single CS containing one of the two causal SNPs:</p>
-<pre class="r"><code>print(fit2$sets[c(&quot;cs&quot;,&quot;purity&quot;)])
-# $cs
-# $cs$L1
-#  [1] 195 197 203 213 226 237 238 243 247 248 249 254 255 278 294 296 301 305 319
-# [20] 325 351 371 380 381 389 390 393 405 420 421 422 424 427 434 435 436 437 438
-# [39] 441 442 443 445 448 450 452 454 456 459 462 464 466 467 468 473 477 478 479
-# [58] 483 484 485 486 487 488 489 490 492 493 497 503 504 512 520 535 552 554 555
-# [77] 558 571
-# 
-# 
-# $purity
-#    min.abs.corr mean.abs.corr median.abs.corr
-# L1    0.9759149     0.9986827        0.999996</code></pre>
-<p>Here is a visualization of this result:</p>
-<pre class="r"><code>cs1 &lt;- fit2$sets$cs$L1
-par(mar = c(4,4,1,1))
-plot(1:1001,fit2$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
-     xlab = &quot;SNP&quot;,ylab = &quot;susie PIP&quot;)
-points(cs1,fit2$pip[cs1],pch = 1,cex = 1,col = &quot;cyan&quot;)
-points(vars,fit2$pip[vars],pch = 2,cex = 0.8,col = &quot;tomato&quot;)</code></pre>
-<p><img src="figure/large_effect.Rmd/susie-out-3-1.png" width="540" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-susie-out-3-1">
-Past versions of susie-out-3-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-finemap-in-2-1">
+Past versions of finemap-in-2-1.png
 </button>
 </p>
-<div id="fig-susie-out-3-1" class="collapse">
+<div id="fig-finemap-in-2-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1018,31 +1028,51 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/stephenslab/finemap/blob/f40a3371cf2fddff478035de02f3255f0c5c0650/docs/figure/large_effect.Rmd/susie-out-3-1.png" target="_blank">f40a337</a>
+<a href="https://github.com/stephenslab/finemap/blob/e597078613eccec56421d2eb742c8e6925472770/docs/figure/large_effect.Rmd/finemap-in-2-1.png" target="_blank">e597078</a>
 </td>
 <td>
 Peter Carbonetto
 </td>
 <td>
-2022-06-09
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/finemap/blob/37627a79ca9fa6005c154dd5592d5519e78a046b/docs/figure/large_effect.Rmd/susie-out-3-1.png" target="_blank">37627a7</a>
-</td>
-<td>
-Peter Carbonetto
-</td>
-<td>
-2022-06-09
+2022-06-10
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p><em>Add text here.</em></p>
+<p>This looks very similar to the SuSiE credible set, which is reassuring.</p>
+</div>
+<div id="out-of-sample-ld" class="section level2">
+<h2>Out-of-sample LD</h2>
+<p>Let's try running SuSiE and FINEMAP as before, except using an out-of-sample LD estimate.</p>
+<pre class="r"><code>ldoutfile &lt;- &quot;../data/small_data_11.ld_refout_file.refout.ld&quot;
+Rout &lt;- as.matrix(fread(ldoutfile))
+fit2 &lt;- susie_rss(z,Rout,n = 800,min_abs_corr = 0.1,refine = FALSE,
+                 verbose = TRUE)
+# HINT: If the in-sample LD matrix is available, we recommend calling susie_rss with the in-sample LD matrix, and setting estimate_residual_variance = TRUE
+# HINT: For large R or large XtX, consider installing theRfast package for better performance.
+# WARNING: XtX is not symmetric; forcing XtX to be symmetric by replacing XtX with (XtX + t(XtX))/2
+# [1] &quot;objective:-1022.15334027678&quot;
+# [1] &quot;objective:-1022.1533319747&quot;</code></pre>
+<p>As above, SuSiE returns a single CS containing one of the two causal SNPs.</p>
+<pre class="r"><code>print(fit2$sets[c(&quot;cs&quot;,&quot;purity&quot;)])
+# $cs
+# $cs$L1
+#  [1] 195 197 203 213 226 237 238 243 247 248 249 254 255 278 294 296 301 305 319
+# [20] 325 351 371 380 381 389 390 393 405 420 421 422 424 427 434 435 436 437 438
+# [39] 441 442 443 445 448 450 452 454 456 459 462 464 466 467 468 473 477 478 479
+# [58] 483 484 485 486 487 488 489 490 492 493 497 503 504 512 520 535 552 554 555
+# [77] 558 571
+# 
+# 
+# $purity
+#    min.abs.corr mean.abs.corr median.abs.corr
+# L1    0.9759149     0.9986827        0.999996</code></pre>
+<p>In fact, in this particular example the CS is exactly the same as the CS above obtained using the in-sample LD:</p>
+<pre class="r"><code>all(fit1$sets$cs$L1 == fit2$sets$cs$L1)
+# [1] TRUE</code></pre>
+<p>Now let's run FINEMAP:</p>
 <pre class="r"><code>setwd(&quot;../output&quot;)
 run_finemap(bhat,shat,maf,prefix = &quot;sim2&quot;)
 setwd(&quot;../analysis&quot;)
@@ -1099,17 +1129,27 @@ setwd(&quot;../analysis&quot;)
 #    3 -&gt; 0.097
 #    4 -&gt; 0.0242
 #    5 -&gt; 0.00483
-# - Regional SNP heritability        : 1 (SD: 2.7e-05 ; 95% CI: [1,1])
-# - Log10-BF of &gt;= one causal SNP    : 2.05e+03
+# - Regional SNP heritability        : 0.986 (SD: 0.000581 ; 95% CI: [0.984,0.987])
+# - Log10-BF of &gt;= one causal SNP    : 185
 # - Post-expected # of causal SNPs   : 5
 # - Post-Pr(# of causal SNPs is k)   : 
 #   (0 -&gt; 0)
 #    1 -&gt; 0
 #    2 -&gt; 0
-#    3 -&gt; 0
-#    4 -&gt; 2.45e-78
+#    3 -&gt; 4.93e-126
+#    4 -&gt; 4.06e-113
 #    5 -&gt; 1
-# - Run time                         : 0 hours, 0 minutes, 12 seconds</code></pre>
+# - Run time                         : 0 hours, 0 minutes, 23 seconds</code></pre>
+<p>With the out-of-sample LD estimate, FINEMAP gives a very different result: it predicts 5 causal SNPs (which is the maximum we allowed), all the CSs contain a single SNP, and none of the CSs contain a true causal SNP.</p>
+<pre class="r"><code>cat(readLines(&quot;../output/sim2.cred5&quot;),sep = &quot;\n&quot;)
+# # Post-Pr(# of causal SNPs is 5) = 1
+# #log10bf 600.715 NA 531.267 NA 135.593 NA 133.711 NA 117.309 NA
+# #min(|ld|) 1 NA 1 NA 1 NA 1 NA 1 NA
+# #mean(|ld|) 1 NA 1 NA 1 NA 1 NA 1 NA
+# #median(|ld|) 1 NA 1 NA 1 NA 1 NA 1 NA
+# index cred1 prob1 cred2 prob2 cred3 prob3 cred4 prob4 cred5 prob5
+# 1 765 1 949 1 592 1 583 1 389 0.5
+# 2 NA NA NA NA NA NA NA NA 405 0.5</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
