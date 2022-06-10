@@ -50,16 +50,16 @@ FINE-MAPPING (1/1)
    3 -> 0.097
    4 -> 0.0242
    5 -> 0.00483
-- 80723 configurations evaluated (0.404/100%) : converged after 404 iterations
-- Regional SNP heritability        : 1 (SD: 2.7e-05 ; 95% CI: [1,1])
-- Log10-BF of >= one causal SNP    : 2046.56
+- 221790 configurations evaluated (0.436/100%) : converged after 436 iterations
+- Regional SNP heritability        : 0.986 (SD: 0.000581 ; 95% CI: [0.984,0.987])
+- Log10-BF of >= one causal SNP    : 185.093
 - Post-expected # of causal SNPs   : 5
 - Post-Pr(# of causal SNPs is k)   : 
   (0 -> 0)
    1 -> 0
    2 -> 0
-   3 -> 0
-   4 -> 2.45e-78
+   3 -> 4.93e-126
+   4 -> 4.06e-113
    5 -> 1
-- Run time                         : 0 hours, 0 minutes, 12 seconds
+- Run time                         : 0 hours, 0 minutes, 23 seconds
 

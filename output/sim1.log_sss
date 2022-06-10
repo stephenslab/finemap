@@ -50,14 +50,14 @@ FINE-MAPPING (1/1)
    3 -> 0.097
    4 -> 0.0242
    5 -> 0.00483
-- 70219 configurations evaluated (0.441/100%) : converged after 441 iterations
+- 69804 configurations evaluated (0.434/100%) : converged after 434 iterations
 - Regional SNP heritability        : 0.246 (SD: 0.0278 ; 95% CI: [0.194,0.303])
-- Log10-BF of >= one causal SNP    : 57.0752
+- Log10-BF of >= one causal SNP    : 57.0725
 - Post-expected # of causal SNPs   : 1.74
 - Post-Pr(# of causal SNPs is k)   : 
   (0 -> 0)
-   1 -> 0.26
-   2 -> 0.74
+   1 -> 0.262
+   2 -> 0.738
    3 -> 0
    4 -> 0
    5 -> 0
