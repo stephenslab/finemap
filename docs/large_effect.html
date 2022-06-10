@@ -12,9 +12,8 @@
 <meta name="author" content="Peter Carbonetto" />
 
 
-<title>SuSiE vs. FINEMAP in an example where the causal SNPs have relatively large effects</title>
+<title>SuSiE vs. FINEMAP in an example where the causal SNPs have relatively large effects</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -41,8 +40,6 @@ div.section {
   padding-top: 12px;
 }
 </style>
-
-
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -71,6 +68,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -91,6 +89,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -243,7 +244,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -269,8 +270,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">SuSiE vs. FINEMAP in an example where the
-causal SNPs have relatively large effects</h1>
+<h1 class="title toc-ignore">SuSiE vs. FINEMAP in an example where the causal SNPs have relatively large effects</h1>
 <h4 class="author">Peter Carbonetto</h4>
 
 </div>
@@ -278,9 +278,7 @@ causal SNPs have relatively large effects</h1>
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -289,9 +287,7 @@ aria-hidden="true"></span>
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -300,27 +296,17 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-06-09
+<strong>Last updated:</strong> 2022-06-10
 </p>
 <p>
-<strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>finemap/analysis/</code> <span
-class="glyphicon glyphicon-question-sign" aria-hidden="true"
-title="This is the local directory in which the code in this file was executed.">
-</span>
+<strong>Knit directory:</strong> <code>finemap/analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
-This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
-analysis was created with <a
-  href="https://github.com/workflowr/workflowr">workflowr</a> (version
-1.7.0). The <em>Checks</em> tab describes the reproducibility checks
-that were applied when the results were created. The <em>Past
-versions</em> tab lists the development history.
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version 1.7.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -329,146 +315,111 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
-class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
 <div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the
-global environment can affect the analysis in your R Markdown file in
-unknown ways. For reproduciblity it’s best to always run the code in an
-empty environment.</p>
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed1code">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Seed:</strong>
-<code>set.seed(1)</code> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed1code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(1)</code> </a>
 </p>
 </div>
-<div id="strongSeedstrongcodesetseed1code"
-class="panel-collapse collapse">
+<div id="strongSeedstrongcodesetseed1code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(1)</code> was run prior to running the
-code in the R Markdown file. Setting a seed ensures that any results
-that rely on randomness, e.g. subsampling or permutations, are
-reproducible.</p>
+<p>The command <code>set.seed(1)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Session information:</strong>
-recorded </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
 </p>
 </div>
-<div id="strongSessioninformationstrongrecorded"
-class="panel-collapse collapse">
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package
-versions is critical for reproducibility.</p>
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
 </p>
 </div>
 <div id="strongCachestrongnone" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be
-confident that you successfully produced the results during this
-run.</p>
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
 <div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr
-project makes it easier to run your code on other machines.</p>
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree9dc1f67b5012476fdf01e5d1346365806f5d557ctargetblank9dc1f67a">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/finemap/tree/9dc1f67b5012476fdf01e5d1346365806f5d557c" target="_blank">9dc1f67</a>
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptreec3f0aa36bdb09f42e9c4d4f00d2dc5b594d2faa0targetblankc3f0aa3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/stephenslab/finemap/tree/c3f0aa36bdb09f42e9c4d4f00d2dc5b594d2faa0" target="_blank">c3f0aa3</a> </a>
 </p>
 </div>
-<div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree9dc1f67b5012476fdf01e5d1346365806f5d557ctargetblank9dc1f67a"
-class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptreec3f0aa36bdb09f42e9c4d4f00d2dc5b594d2faa0targetblankc3f0aa3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development
-and connecting the code version to the results is critical for
-reproducibility.
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/finemap/tree/9dc1f67b5012476fdf01e5d1346365806f5d557c" target="_blank">9dc1f67</a>.
-See the <em>Past versions</em> tab to see a history of the changes made
-to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/stephenslab/finemap/tree/c3f0aa36bdb09f42e9c4d4f00d2dc5b594d2faa0" target="_blank">c3f0aa3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
-Note that you need to be careful to ensure that all relevant files for
-the analysis have been committed to Git prior to generating the results
-(you can use <code>wflow_publish</code> or
-<code>wflow_git_commit</code>). workflowr only checks the R Markdown
-file, but you know if there are other scripts or data files that it
-depends on. Below is the status of the Git repository when the results
-were generated:
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
-working directory clean
+Ignored files:
+    Ignored:    analysis/figure/
+    Ignored:    data/small_data_11.ld_refout_file.refout.ld
+    Ignored:    data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld
+    Ignored:    output/sim1.config
+    Ignored:    output/sim2.config
+
+Unstaged changes:
+    Modified:   .gitignore
+    Modified:   output/sim1.cred1
+    Modified:   output/sim1.cred2
+    Modified:   output/sim1.log_sss
+    Modified:   output/sim1.snp
+    Modified:   output/sim2.master
+
 </code></pre>
 <p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not
-included in this status report because it is ok for generated content to
-have uncommitted changes.
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
 </p>
 </div>
 </div>
@@ -479,12 +430,7 @@ have uncommitted changes.
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/large_effect.Rmd</code>) and HTML
-(<code>docs/large_effect.html</code>) files. If you’ve configured a
-remote Git repository (see <code>?wflow_git_remote</code>), click on the
-hyperlinks in the table below to view the files as they were in that
-past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/large_effect.Rmd</code>) and HTML (<code>docs/large_effect.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -513,6 +459,57 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/stephenslab/finemap/blob/c3f0aa36bdb09f42e9c4d4f00d2dc5b594d2faa0/analysis/large_effect.Rmd" target="_blank">c3f0aa3</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-10
+</td>
+<td>
+workflowr::wflow_publish(&quot;large_effect.Rmd&quot;, view = FALSE, verbose = TRUE)
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/6c863a1f9725be8b803c3d2ffc96e9d3d877e8a1/analysis/large_effect.Rmd" target="_blank">6c863a1</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-10
+</td>
+<td>
+Working on adding finemap analysis to large_effect example.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/finemap/f40a3371cf2fddff478035de02f3255f0c5c0650/docs/large_effect.html" target="_blank">f40a337</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-09
+</td>
+<td>
+Adjusted plot dims slightly.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/stephenslab/finemap/blob/9dc1f67b5012476fdf01e5d1346365806f5d557c/analysis/large_effect.Rmd" target="_blank">9dc1f67</a>
 </td>
 <td>
@@ -522,7 +519,7 @@ Peter Carbonetto
 2022-06-09
 </td>
 <td>
-workflowr::wflow_publish("large_effect.Rmd", verbose = TRUE)
+workflowr::wflow_publish(&quot;large_effect.Rmd&quot;, verbose = TRUE)
 </td>
 </tr>
 <tr>
@@ -556,7 +553,7 @@ Peter Carbonetto
 2022-06-09
 </td>
 <td>
-workflowr::wflow_publish("large_effect.Rmd", verbose = TRUE)
+workflowr::wflow_publish(&quot;large_effect.Rmd&quot;, verbose = TRUE)
 </td>
 </tr>
 <tr>
@@ -607,7 +604,7 @@ Peter Carbonetto
 2022-06-08
 </td>
 <td>
-workflowr::wflow_publish("large_effect.Rmd")
+workflowr::wflow_publish(&quot;large_effect.Rmd&quot;)
 </td>
 </tr>
 <tr>
@@ -726,7 +723,7 @@ Peter Carbonetto
 2022-06-07
 </td>
 <td>
-workflowr::wflow_publish("large_effect.Rmd")
+workflowr::wflow_publish(&quot;large_effect.Rmd&quot;)
 </td>
 </tr>
 <tr>
@@ -753,40 +750,20 @@ Revised workflowr files.
 </div>
 </div>
 </div>
-<p>In this small example drawn from our <a
-href="https://github.com/zouyuxin/dsc_susierss">simulations</a>, we show
-that that FINEMAP works well with an “in-sample LD” matrix—that is, a
-correlation matrix that was estimated using the same sample that was
-used to compute the single-SNP association statistics—but, can perform
-surprisingly poorly with an “out-of-sample” LD matrix. We have observed
-that this degradation in performance only occurs in rare
-cases—specifically, these are caases when the effects of the causal SNPs
-are very large (<em>i.e.</em>, when individual causal SNPs explain a
-large fraction of the total variance in the phenotype). In this example,
-the phenotypes were simulated from a linear regression model with large
-coefficients for the causal SNPs.</p>
-<p>We also run SuSiE on the same data. Unlike FINEMAP, SuSiE performs
-similarly well in this example with either the in-sample and
-out-of-sample LD matrix.</p>
-<p>First, we load some packages used in the code below, and set the seed
-for reproducibility.</p>
+<p>In this small example drawn from our <a href="https://github.com/zouyuxin/dsc_susierss">simulations</a>, we show that that FINEMAP works well with an &quot;in-sample LD&quot; matrix---that is, a correlation matrix that was estimated using the same sample that was used to compute the single-SNP association statistics---but, can perform surprisingly poorly with an &quot;out-of-sample&quot; LD matrix. We have observed that this degradation in performance only occurs in rare cases---specifically, these are caases when the effects of the causal SNPs are very large (<em>i.e.</em>, when individual causal SNPs explain a large fraction of the total variance in the phenotype). In this example, the phenotypes were simulated from a linear regression model with large coefficients for the causal SNPs.</p>
+<p>We also run SuSiE on the same data. Unlike FINEMAP, SuSiE performs similarly well in this example with either the in-sample and out-of-sample LD matrix.</p>
+<p>First, we load some packages used in the code below, and set the seed for reproducibility.</p>
 <pre class="r"><code>library(data.table)
 library(susieR)
 set.seed(1)</code></pre>
-<p>Load the summary data: the least-squares effect estimates <span
-class="math inline">\(\hat{\beta}_i\)</span> and their standard errors
-<span class="math inline">\(\hat{s}_i\)</span> for each SNP <span
-class="math inline">\(i\)</span>. Here we also compute the
-<em>z</em>-scores since SuSiE accepts the <em>z</em>-scores as
-input.</p>
+<p>Load the summary data: the least-squares effect estimates <span class="math">\(\hat{\beta}_i\)</span> and their standard errors <span class="math">\(\hat{s}_i\)</span> for each SNP <span class="math">\(i\)</span>. Here we also compute the <em>z</em>-scores since SuSiE accepts the <em>z</em>-scores as input.</p>
 <pre class="r"><code>dat1 &lt;- readRDS(&quot;../data/small_data_11.rds&quot;)
 dat3 &lt;- readRDS(&quot;../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.rds&quot;)
 maf  &lt;- dat1$maf$in_sample
 bhat &lt;- dat3$sumstats$bhat
 shat &lt;- dat3$sumstats$shat
 z    &lt;- bhat/shat</code></pre>
-<p>In this simulation, two of the SNPs have a nonzero effect on the
-phenotype:</p>
+<p>In this simulation, two of the SNPs have a nonzero effect on the phenotype:</p>
 <pre class="r"><code>dat2 &lt;- readRDS(&quot;../data/small_data_11_sim_gaussian_pve_n_8.rds&quot;)
 b &lt;- drop(dat2$meta$true_coef)
 vars &lt;- which(b != 0)
@@ -794,25 +771,23 @@ vars
 # [1] 305 740</code></pre>
 <div id="in-sample-ld" class="section level2">
 <h2>In-sample LD</h2>
-<p>We begin by running SuSiE with the “in-sample” LD estimate.</p>
-<pre class="r"><code>ldinfile &lt;- &quot;../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld.gz&quot;
+<p>We begin by running SuSiE with the &quot;in-sample&quot; LD estimate.</p>
+<pre class="r"><code>ldinfile &lt;- &quot;../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld&quot;
 Rin &lt;- as.matrix(fread(ldinfile))
 fit1 &lt;- susie_rss(z,Rin,n = 800,min_abs_corr = 0.1,refine = FALSE,
                  verbose = TRUE)
 # HINT: If the in-sample LD matrix is available, we recommend calling susie_rss with the in-sample LD matrix, and setting estimate_residual_variance = TRUE
-# [1] &quot;objective:-1022.11016014083&quot;
-# [1] &quot;objective:-1022.09485818675&quot;
-# [1] &quot;objective:-1022.08938881293&quot;
-# [1] &quot;objective:-1022.08631623612&quot;
-# [1] &quot;objective:-1022.08453069749&quot;
-# [1] &quot;objective:-1022.08341717597&quot;
-# [1] &quot;objective:-1022.08267674806&quot;</code></pre>
-<p>(We will get a recommendation to estimate the residual variance, but
-to maintain consistency with the analysis below using an out-of-sample
-LD estimate, we ignore this advice.)</p>
-<p>SuSiE returns a single credible set (CS) containing a large number of
-strongly correlated SNPs, and one of the SNPs in this CS is a (true)
-causal SNP.</p>
+# HINT: For large R or large XtX, consider installing theRfast package for better performance.
+# WARNING: XtX is not symmetric; forcing XtX to be symmetric by replacing XtX with (XtX + t(XtX))/2
+# [1] &quot;objective:-1022.11016014142&quot;
+# [1] &quot;objective:-1022.09485818746&quot;
+# [1] &quot;objective:-1022.08938881341&quot;
+# [1] &quot;objective:-1022.08631623581&quot;
+# [1] &quot;objective:-1022.08453069756&quot;
+# [1] &quot;objective:-1022.08341717686&quot;
+# [1] &quot;objective:-1022.08267674839&quot;</code></pre>
+<p>(We will get a recommendation to estimate the residual variance, but to maintain consistency with the analysis below using an out-of-sample LD estimate, we ignore this advice.)</p>
+<p>SuSiE returns a single credible set (CS) containing a large number of strongly correlated SNPs, and one of the SNPs in this CS is a (true) causal SNP.</p>
 <pre class="r"><code>print(fit1$sets[c(&quot;cs&quot;,&quot;purity&quot;)])
 # $cs
 # $cs$L1
@@ -826,11 +801,9 @@ causal SNP.</p>
 # $purity
 #    min.abs.corr mean.abs.corr median.abs.corr
 # L1    0.9827454     0.9993761       0.9999995</code></pre>
-<p>Here’s a visualization of this result. (In this plot, the CS is
-depicted by the light blue circles, and the two causal SNPs are drawn as
-red triangles.)</p>
-<pre class="r"><code>cs1 &lt;- fit1$sets$cs$L1
-par(mar = c(4,4,1,1))
+<p>Here's a visualization of this result. (In this plot, the CS is depicted by the light blue circles, and the two causal SNPs are drawn as red triangles.)</p>
+<pre class="r"><code>par(mar = c(4,4,1,1))
+cs1 &lt;- fit1$sets$cs$L1
 plot(1:1001,fit1$pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
      xlab = &quot;SNP&quot;,ylab = &quot;susie PIP&quot;)
 points(cs1,fit1$pip[cs1],pch = 1,cex = 1,col = &quot;cyan&quot;)
@@ -860,6 +833,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/stephenslab/finemap/blob/f40a3371cf2fddff478035de02f3255f0c5c0650/docs/figure/large_effect.Rmd/susie-in-3-1.png" target="_blank">f40a337</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-09
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/stephenslab/finemap/blob/37627a79ca9fa6005c154dd5592d5519e78a046b/docs/figure/large_effect.Rmd/susie-in-3-1.png" target="_blank">37627a7</a>
 </td>
 <td>
@@ -873,32 +857,122 @@ Peter Carbonetto
 </table>
 </div>
 </div>
-<p>Now let’s try running FINEMAP on these same data:</p>
-<pre class="r"><code>p   &lt;- length(b)
-dat &lt;- data.frame(rsid       = 1:p,
-                  chromosome = rep(1,p),
-                  position   = rep(1,p),
-                  allele1    = rep(&quot;A&quot;,p),
-                  allele2    = rep(&quot;C&quot;,p),
-                  maf        = round(maf,digits = 6),
-                  beta       = round(bhat,digits = 6),
-                  se         = round(shat,digits = 6))
-write.table(dat,&quot;sim1.z&quot;,quote = FALSE,col.names = TRUE,row.names = FALSE)
-system(paste(&quot;./finemap_v1.4.1_x86_64 --sss --log --in-files sim1.master&quot;,
-             &quot;--n-causal-snps 5&quot;))</code></pre>
+<p>Now let's try running FINEMAP on these same data:</p>
+<pre class="r"><code>run_finemap &lt;- function (bhat, shat, maf, prefix) {
+  p &lt;- length(b)
+  dat &lt;- data.frame(rsid       = 1:p,
+                    chromosome = rep(1,p),
+                    position   = rep(1,p),
+                    allele1    = rep(&quot;A&quot;,p),
+                    allele2    = rep(&quot;C&quot;,p),
+                    maf        = round(maf,digits = 6),
+                    beta       = round(bhat,digits = 6),
+                    se         = round(shat,digits = 6))
+  outfile &lt;- paste(prefix,&quot;z&quot;,sep = &quot;.&quot;)
+  masterfile &lt;- paste(prefix,&quot;master&quot;,sep = &quot;.&quot;)
+  write.table(dat,outfile,quote = FALSE,col.names = TRUE,row.names = FALSE)
+  out &lt;- system(paste(&quot;./finemap_v1.4.1_x86_64 --sss --log --n-causal-snps 5&quot;,
+                      &quot;--in-files&quot;,masterfile),intern = TRUE)
+  out &lt;- out[which(!grepl(&quot;Reading&quot;,out,fixed = TRUE))]
+  out &lt;- out[which(!grepl(&quot;Computing&quot;,out,fixed = TRUE))]
+  out &lt;- out[which(!grepl(&quot;evaluated&quot;,out,fixed = TRUE))]
+  cat(out,sep = &quot;\n&quot;)
+  return(invisible(out))
+}
+setwd(&quot;../output&quot;)
+run_finemap(bhat,shat,maf,prefix = &quot;sim1&quot;)
+setwd(&quot;../analysis&quot;)
+# 
+# |--------------------------------------|
+# | Welcome to FINEMAP v1.4.1            |
+# |                                      |
+# | (c) 2015-2022 University of Helsinki |
+# |                                      |
+# | Help :                               |
+# | - ./finemap --help                   |
+# | - www.finemap.me                     |
+# | - www.christianbenner.com            |
+# |                                      |
+# | Contact :                            |
+# | - finemap@christianbenner.com        |
+# | - matti.pirinen@helsinki.fi          |
+# |--------------------------------------|
+# 
+# --------
+# SETTINGS
+# --------
+# - dataset            : all
+# - corr-config        : 0.95
+# - n-causal-snps      : 5
+# - n-configs-top      : 50000
+# - n-conv-sss         : 100
+# - n-iter             : 100000
+# - n-threads          : 1
+# - prior-k0           : 0
+# - prior-std          : 0.05 
+# - prob-conv-sss-tol  : 0.001
+# - prob-cred-set      : 0.95
+# 
+# ------------
+# FINE-MAPPING (1/1)
+# ------------
+# - GWAS summary stats               : sim1.z
+# - SNP correlations                 : ../data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld
+# - Causal SNP stats                 : sim1.snp
+# - Causal configurations            : sim1.config
+# - Credible sets                    : sim1.cred
+# - Log file                         : sim1.log_sss
+# 
+# 
+- Updated prior SD of effect sizes : 0.05 0.0902 0.163 0.293 
+# 
+# - Number of GWAS samples           : 800
+# - Number of SNPs                   : 1001
+# - Prior-Pr(# of causal SNPs is k)  : 
+#   (0 -&gt; 0)
+#    1 -&gt; 0.583
+#    2 -&gt; 0.291
+#    3 -&gt; 0.097
+#    4 -&gt; 0.0242
+#    5 -&gt; 0.00483
+# - Regional SNP heritability        : 0.246 (SD: 0.0278 ; 95% CI: [0.194,0.303])
+# - Log10-BF of &gt;= one causal SNP    : 57.1
+# - Post-expected # of causal SNPs   : 1.74
+# - Post-Pr(# of causal SNPs is k)   : 
+#   (0 -&gt; 0)
+#    1 -&gt; 0.26
+#    2 -&gt; 0.74
+#    3 -&gt; 0
+#    4 -&gt; 0
+#    5 -&gt; 0
+# - Run time                         : 0 hours, 0 minutes, 10 seconds</code></pre>
+<p><em>Add text here.</em></p>
+<pre class="r"><code>par(mar = c(4,4,1,1))
+finemap &lt;- read.table(&quot;../output/sim1.cred2&quot;,header = TRUE)
+pip   &lt;- rep(0,1001)
+cs1   &lt;- finemap$cred1
+rows1 &lt;- which(!is.na(cs1))
+cs1   &lt;- cs1[rows1]
+pip[cs1] &lt;- pip[cs1] + finemap$prob1[rows1]
+plot(1:1001,pip,pch = 20,cex = 0.8,ylim = c(0,0.1),
+     xlab = &quot;SNP&quot;,ylab = &quot;finemap PIP&quot;)
+points(cs1,pip[cs1],pch = 1,cex = 1,col = &quot;cyan&quot;)
+points(vars,pip[vars],pch = 2,cex = 0.8,col = &quot;tomato&quot;)</code></pre>
+<p><img src="figure/large_effect.Rmd/finemap-in-2-1.png" width="540" style="display: block; margin: auto;" /></p>
 </div>
 <div id="out-of-sample-ld" class="section level2">
 <h2>Out-of-sample LD</h2>
 <p><em>Add text here.</em></p>
-<pre class="r"><code>ldoutfile &lt;- &quot;../data/small_data_11.ld_refout_file.refout.ld.gz&quot;
+<pre class="r"><code>ldoutfile &lt;- &quot;../data/small_data_11.ld_refout_file.refout.ld&quot;
 Rout &lt;- as.matrix(fread(ldoutfile))
 fit2 &lt;- susie_rss(z,Rout,n = 800,min_abs_corr = 0.1,refine = FALSE,
                  verbose = TRUE)
 # HINT: If the in-sample LD matrix is available, we recommend calling susie_rss with the in-sample LD matrix, and setting estimate_residual_variance = TRUE
+# HINT: For large R or large XtX, consider installing theRfast package for better performance.
+# WARNING: XtX is not symmetric; forcing XtX to be symmetric by replacing XtX with (XtX + t(XtX))/2
 # [1] &quot;objective:-1022.15334027678&quot;
 # [1] &quot;objective:-1022.1533319747&quot;</code></pre>
-<p>As above, SuSiE returns a single CS containing one of the two causal
-SNPs:</p>
+<p>As above, SuSiE returns a single CS containing one of the two causal SNPs:</p>
 <pre class="r"><code>print(fit2$sets[c(&quot;cs&quot;,&quot;purity&quot;)])
 # $cs
 # $cs$L1
@@ -944,6 +1018,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/stephenslab/finemap/blob/f40a3371cf2fddff478035de02f3255f0c5c0650/docs/figure/large_effect.Rmd/susie-out-3-1.png" target="_blank">f40a337</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2022-06-09
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/stephenslab/finemap/blob/37627a79ca9fa6005c154dd5592d5519e78a046b/docs/figure/large_effect.Rmd/susie-out-3-1.png" target="_blank">37627a7</a>
 </td>
 <td>
@@ -957,50 +1042,119 @@ Peter Carbonetto
 </table>
 </div>
 </div>
+<p><em>Add text here.</em></p>
+<pre class="r"><code>setwd(&quot;../output&quot;)
+run_finemap(bhat,shat,maf,prefix = &quot;sim2&quot;)
+setwd(&quot;../analysis&quot;)
+# 
+# |--------------------------------------|
+# | Welcome to FINEMAP v1.4.1            |
+# |                                      |
+# | (c) 2015-2022 University of Helsinki |
+# |                                      |
+# | Help :                               |
+# | - ./finemap --help                   |
+# | - www.finemap.me                     |
+# | - www.christianbenner.com            |
+# |                                      |
+# | Contact :                            |
+# | - finemap@christianbenner.com        |
+# | - matti.pirinen@helsinki.fi          |
+# |--------------------------------------|
+# 
+# --------
+# SETTINGS
+# --------
+# - dataset            : all
+# - corr-config        : 0.95
+# - n-causal-snps      : 5
+# - n-configs-top      : 50000
+# - n-conv-sss         : 100
+# - n-iter             : 100000
+# - n-threads          : 1
+# - prior-k0           : 0
+# - prior-std          : 0.05 
+# - prob-conv-sss-tol  : 0.001
+# - prob-cred-set      : 0.95
+# 
+# ------------
+# FINE-MAPPING (1/1)
+# ------------
+# - GWAS summary stats               : sim2.z
+# - SNP correlations                 : ../data/small_data_11.ld_refout_file.refout.ld
+# - Causal SNP stats                 : sim2.snp
+# - Causal configurations            : sim2.config
+# - Credible sets                    : sim2.cred
+# - Log file                         : sim2.log_sss
+# 
+# 
+- Updated prior SD of effect sizes : 0.05 0.0906 0.164 0.297 
+# 
+# - Number of GWAS samples           : 800
+# - Number of SNPs                   : 1001
+# - Prior-Pr(# of causal SNPs is k)  : 
+#   (0 -&gt; 0)
+#    1 -&gt; 0.583
+#    2 -&gt; 0.291
+#    3 -&gt; 0.097
+#    4 -&gt; 0.0242
+#    5 -&gt; 0.00483
+# - Regional SNP heritability        : 1 (SD: 2.7e-05 ; 95% CI: [1,1])
+# - Log10-BF of &gt;= one causal SNP    : 2.05e+03
+# - Post-expected # of causal SNPs   : 5
+# - Post-Pr(# of causal SNPs is k)   : 
+#   (0 -&gt; 0)
+#    1 -&gt; 0
+#    2 -&gt; 0
+#    3 -&gt; 0
+#    4 -&gt; 2.45e-78
+#    5 -&gt; 1
+# - Run time                         : 0 hours, 0 minutes, 12 seconds</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-Session information
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
 </button>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()
-# R version 3.6.2 (2019-12-12)
-# Platform: x86_64-apple-darwin15.6.0 (64-bit)
-# Running under: macOS Catalina 10.15.7
+# R version 3.5.1 (2018-07-02)
+# Platform: x86_64-pc-linux-gnu (64-bit)
+# Running under: Scientific Linux 7.4 (Nitrogen)
 # 
 # Matrix products: default
-# BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
-# LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+# BLAS/LAPACK: /software/openblas-0.2.19-el7-x86_64/lib/libopenblas_haswellp-r0.2.19.so
 # 
 # locale:
-# [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+#  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+#  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+#  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+#  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+#  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+# [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 # 
 # attached base packages:
 # [1] stats     graphics  grDevices utils     datasets  methods   base     
 # 
 # other attached packages:
-# [1] susieR_0.12.07    data.table_1.12.8
+# [1] susieR_0.12.07    data.table_1.12.0
 # 
 # loaded via a namespace (and not attached):
-#  [1] tidyselect_1.1.1   xfun_0.29          bslib_0.3.1        purrr_0.3.4       
-#  [5] lattice_0.20-38    colorspace_1.4-1   vctrs_0.3.8        generics_0.0.2    
-#  [9] htmltools_0.5.2    yaml_2.2.0         utf8_1.1.4         rlang_0.4.11      
-# [13] R.oo_1.24.0        mixsqp_0.3-46      jquerylib_0.1.4    later_1.0.0       
-# [17] pillar_1.6.2       R.utils_2.11.0     glue_1.4.2         DBI_1.1.0         
-# [21] RcppZiggurat_0.1.5 plyr_1.8.5         matrixStats_0.61.0 lifecycle_1.0.0   
-# [25] stringr_1.4.0      munsell_0.5.0      gtable_0.3.0       workflowr_1.7.0   
-# [29] R.methodsS3_1.8.1  evaluate_0.14      knitr_1.37         fastmap_1.1.0     
-# [33] httpuv_1.5.2       parallel_3.6.2     irlba_2.3.3        fansi_0.4.0       
-# [37] highr_0.8          Rfast_2.0.3        Rcpp_1.0.7         promises_1.1.0    
-# [41] backports_1.1.5    scales_1.1.0       jsonlite_1.7.2     fs_1.5.2          
-# [45] ggplot2_3.3.5      digest_0.6.23      stringi_1.4.3      dplyr_1.0.7       
-# [49] rprojroot_1.3-2    grid_3.6.2         tools_3.6.2        magrittr_2.0.1    
-# [53] sass_0.4.0         tibble_3.1.3       crayon_1.4.1       whisker_0.4       
-# [57] pkgconfig_2.0.3    ellipsis_0.3.2     Matrix_1.2-18      assertthat_0.2.1  
-# [61] rmarkdown_2.11     reshape_0.8.8      R6_2.4.1           git2r_0.29.0      
-# [65] compiler_3.6.2</code></pre>
+#  [1] tidyselect_1.1.0   xfun_0.31          bslib_0.3.1        purrr_0.3.4       
+#  [5] lattice_0.20-38    colorspace_1.3-2   vctrs_0.3.6        generics_0.0.2    
+#  [9] htmltools_0.5.2    yaml_2.2.0         utf8_1.1.4         rlang_0.4.10      
+# [13] mixsqp_0.3-46      jquerylib_0.1.4    later_0.7.5        pillar_1.5.0      
+# [17] glue_1.4.2         DBI_1.0.0          matrixStats_0.54.0 lifecycle_1.0.0   
+# [21] plyr_1.8.4         stringr_1.3.1      munsell_0.5.0      gtable_0.2.0      
+# [25] workflowr_1.7.0    evaluate_0.15      knitr_1.39         fastmap_1.1.0     
+# [29] httpuv_1.4.5       irlba_2.3.3        fansi_0.4.0        highr_0.7         
+# [33] Rcpp_1.0.7         promises_1.0.1     backports_1.1.2    scales_1.0.0      
+# [37] jsonlite_1.6       fs_1.5.0           ggplot2_3.3.3      digest_0.6.18     
+# [41] stringi_1.2.4      dplyr_1.0.5        rprojroot_1.3-2    grid_3.5.1        
+# [45] tools_3.5.1        magrittr_1.5       sass_0.4.1         tibble_3.1.0      
+# [49] crayon_1.3.4       whisker_0.3-2      pkgconfig_2.0.2    ellipsis_0.3.2    
+# [53] Matrix_1.2-15      rmarkdown_2.14     reshape_0.8.8      R6_2.3.0          
+# [57] git2r_0.26.1       compiler_3.5.1</code></pre>
 </div>
 </div>
 
@@ -1016,8 +1170,6 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
-
-
 
 
 
