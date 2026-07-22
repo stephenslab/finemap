@@ -1,0 +1,30 @@
+---
+title: JSS tutorial
+author: Peter Carbonetto
+output: workflowr::wflow_html
+---
+
+ADD TEXT HERE.
+
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
+                      fig.align = "center",dpi = 120)
+```
+
+Initial setup
+-------------
+
+ADD TEXT HERE.
+
+```{r load-pkgs}
+library(ggplot2)
+library(cowplot)
+library(susieR)
+```
+
+ADD TEXT HERE.
+
+```{r susie-version}
+packageVersion("susieR")
+```
+
