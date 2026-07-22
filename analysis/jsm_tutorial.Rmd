@@ -1,5 +1,5 @@
 ---
-title: JSS tutorial
+title: JSM tutorial
 author: Peter Carbonetto
 output: workflowr::wflow_html
 ---
