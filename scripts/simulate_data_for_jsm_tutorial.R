@@ -48,7 +48,7 @@ zhat <- with(out,betahat/sebetahat)
 pval <- pfromz(zhat)
 
 # Save the data to an .RData file.
-sim <- list(b = b)
+b_true <- b
 save(file = "jsm_tutorial_data.RData",
-     list = c("y","X","zhat","pval","R","R_out"))
+     list = c("y","X","zhat","pval","R","R_out","b_true"))
 resaveRdaFiles("jsm_tutorial_data.RData")

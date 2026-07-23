@@ -41,25 +41,74 @@ ADD TEXT HERE.
 
 ```{r load-data}
 load("../data/jsm_tutorial_data.RData")
+n <- nrow(X)
 dim(X)
 ```
 
 ADD TEXT HERE.
 
-```{r manhattan-plot, fig.height=2, fig.width=5}
-manhattan_plot <- function (pval, xlab = "") {
+```{r manhattan-plot}
+manhattan_plot <- function (pval, causal_snps = NULL, xlab = "") {
   n <- length(pval)
   dat <- data.frame(pos = 1:n,pval = -log10(pval))
-  return(ggplot(dat,aes(x = pos,y = pval)) +
-         geom_point() +
-		 scale_x_continuous(breaks = NULL) +
-		 labs(x = xlab,y = "-log10 p-value") +
-         theme_cowplot(font_size = 12))
+  out <- ggplot(dat,aes(x = pos,y = pval)) +
+    geom_point() +
+	scale_x_continuous(breaks = NULL) +
+	labs(x = xlab,y = "-log10 p-value") +
+    theme_cowplot(font_size = 12)
+  if (!is.null(causal_snps)) {
+	dat_causal <- dat[causal_snps,]
+    out <- out + geom_point(data = dat_causal,color = "red")
+  }
+  return(out)
 }
+```
+
+ADD TEXT HERE.
+
+```{r show-manhattan-plot, fig.height=2, fig.width=5}
 manhattan_plot(pval,xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
 
 ADD TEXT HERE.
 
-```{r susie-plot, fig.height, fig.width=5}
+```{r susie-rss, fig.height=2, fig.width=5}
+fit <- susie_rss(zhat,R,n = n,estimate_prior_method = "EM",
+                 tol = 1e-6,min_abs_corr = 0,verbose = FALSE)
+```
+
+ADD TEXT HERE.
+
+```{r susie-plot-better}
+susie_plot_better <- function (fit, causal_snps = NULL, xlab = "") {
+  cs_colors <- c("dodgerblue","darkorange")
+  pip <- fit$pip
+  n   <- length(pip)
+  dat <- data.frame(pos = 1:n,pip = pip)
+  out <- ggplot(dat,aes(x = pos,y = pip)) +
+    geom_point() +
+	scale_x_continuous(breaks = NULL) +
+	labs(x = xlab,y = "-log10 p-value") +
+    theme_cowplot(font_size = 12)
+  if (!is.null(causal_snps)) {
+	dat_causal <- dat[causal_snps,]
+    out <- out + geom_point(data = dat_causal,color = "red")
+  }
+  return(out)
+}
+```
+
+ADD TEXT HERE.
+
+```{r susie-rss-plot, fig.height=2, fig.width=5}
+causal_snps <- which(b_true != 0)
+susie_plot_better(fit,causal_snps,
+                  xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+```
+
+ADD TEXT HERE.
+
+```{r, fig.height=2, fig.width=5}
+manhattan_plot(pval,causal_snps,
+               xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
