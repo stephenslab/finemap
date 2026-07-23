@@ -152,7 +152,8 @@ compute_log_bayes_factor <- function () {
 
 TO DO:
 
-+ Give expression for the Bayes factor.
++ Give expression for the Bayes factor and the PIPs (assuming prior
+  inclusion probabilities are uniform across all SNPs).
 
 + Wrap the BF calculation into a function.
 
