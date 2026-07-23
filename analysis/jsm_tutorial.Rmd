@@ -1,10 +1,10 @@
 ---
-title: JSM tutorial
+title: "JSM tutorial on fine-mapping with summary statistics: the RSS likelihood and the SuSiE model"
 author: Peter Carbonetto
 output: workflowr::wflow_html
 ---
 
-ADD TEXT HERE.
+ADD SUMMARY OF THE TUTORIAL HERE.
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
@@ -14,8 +14,8 @@ knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
 Initial setup
 -------------
 
-For this tutorial, I'm using a lightly modified version of susieR that
-can be installed from the "output_residuals" branch:
+For this tutorial, I'm using a lightly modified version of susieR in
+the "output_residuals" branch:
 
 ```{r install-susie, eval=FALSE}
 library(remotes)
@@ -37,7 +37,8 @@ Set the seed for reproducibility:
 set.seed(1)
 ```
 
-ADD TEXT HERE.
+The data set contains genotype and quantitative trait data for $n
+= 574$ individuals and $p = 750$ genetic markers (SNPs).
 
 ```{r load-data}
 load("../data/jsm_tutorial_data.RData")
@@ -45,7 +46,14 @@ n <- nrow(X)
 dim(X)
 ```
 
-ADD TEXT HERE.
+Association analysis vs. fine-mapping 
+-------------------------------------
+
+First let's relate a typical genetic association analysis to a
+fine-mapping analysis, and understand the points of overlap and their
+differences.
+
+This is a function we will use to create a basic Manhattan plot:
 
 ```{r manhattan-plot}
 manhattan_plot <- function (pval, causal_snps = NULL, xlab = "") {
@@ -64,7 +72,9 @@ manhattan_plot <- function (pval, causal_snps = NULL, xlab = "") {
 }
 ```
 
-ADD TEXT HERE.
+The Manhattan plot is a visualization of the association analysis: it
+summarizes the evidence for association with the quantitative trait at
+each of the 740 SNPs.
 
 ```{r show-manhattan-plot, fig.height=1.75, fig.width=5}
 manhattan_plot(pval,xlab = "SNPs on human chromosome 1 near the FMO2 gene")
@@ -74,7 +84,7 @@ ADD TEXT HERE.
 
 ```{r susie-rss, fig.height=1.75, fig.width=5}
 fit <- susie_rss(zhat,R,n = n,estimate_prior_method = "EM",
-                 tol = 1e-6,min_abs_corr = 0,verbose = FALSE)
+                 tol = 1e-6,min_abs_corr = 0)
 ```
 
 ADD TEXT HERE.
@@ -97,7 +107,7 @@ susie_plot_better <- function (fit, causal_snps = NULL, xlab = "") {
 	           mapping = aes(color = CS)) +
 	scale_x_continuous(breaks = NULL) +
 	scale_color_manual(values = cs_colors) + 
-	labs(x = xlab,y = "-log10 p-value") +
+	labs(x = xlab,y = "PIP") +
     theme_cowplot(font_size = 12)
   if (!is.null(causal_snps)) {
 	dat_causal <- dat[causal_snps,]
@@ -124,3 +134,65 @@ p2 <- susie_plot_better(fit,causal_snps,
                         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 plot_grid(p1,p2,nrow = 2,ncol = 1,align = "v",axis = "lr")
 ```
+
+ADD TEXT HERE.
+
+```{r}
+normalizelogweights <- function (logw) {
+  x <- max(logw)
+  w <- exp(logw - x)
+  return(w/sum(w))
+}
+```
+
+```{r}
+compute_log_bayes_factor <- function () {
+}
+```
+
+TO DO:
+
++ Give expression for the Bayes factor.
+
++ Wrap the BF calculation into a function.
+
+See eq. A.3 of the SuSiE paper and eq. 17 of the SuSiE-RSS paper.
+
+
+```{r}
+z   <- sqrt(n/(n + zhat^2)) * zhat
+s   <- 1
+s0  <- n * 0.36
+lbf <- z^2/2 * s0/(s0 + s)
+pip <- normalizelogweights(lbf)
+```
+
+ADD TEXT HERE.
+
+```{r}
+j  <- order(pip,decreasing = TRUE)
+m  <- which(cumsum(pip[j]) > 0.95)[1]
+cs <- j[1:m]
+```
+
+ADD TEXT HERE.
+
+```{r, fig.height=1.75, fig.width=5.25}
+susie_plot_better(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
+                  xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+```
+
+Verify my calculations:
+
+```{r, fig.height=3, fig.width=3}
+par(mar = c(4,4,2,1))
+fit_1cs <- susie_rss(zhat,R,n = n,L = 1,estimate_prior_method = "EM",
+                     tol = 1e-6)
+plot(fit_1cs$pip,pip,pch = 20)
+abline(a = 0,b = 1,lty = "dotted",col = "magenta")
+```
+
+TO DO NEXT: Implement a simple version of the IBSS algorithm.
+
+### References
+
