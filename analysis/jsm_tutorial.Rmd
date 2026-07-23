@@ -66,13 +66,13 @@ manhattan_plot <- function (pval, causal_snps = NULL, xlab = "") {
 
 ADD TEXT HERE.
 
-```{r show-manhattan-plot, fig.height=2, fig.width=5}
+```{r show-manhattan-plot, fig.height=1.75, fig.width=5}
 manhattan_plot(pval,xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
 
 ADD TEXT HERE.
 
-```{r susie-rss, fig.height=2, fig.width=5}
+```{r susie-rss, fig.height=1.75, fig.width=5}
 fit <- susie_rss(zhat,R,n = n,estimate_prior_method = "EM",
                  tol = 1e-6,min_abs_corr = 0,verbose = FALSE)
 ```
@@ -81,13 +81,22 @@ ADD TEXT HERE.
 
 ```{r susie-plot-better}
 susie_plot_better <- function (fit, causal_snps = NULL, xlab = "") {
-  cs_colors <- c("dodgerblue","darkorange")
+  cs_colors <- c("dodgerblue","limegreen")
   pip <- fit$pip
   n   <- length(pip)
-  dat <- data.frame(pos = 1:n,pip = pip)
+  dat <- data.frame(pos = 1:n,pip = pip,CS = as.character(NA))
+  num_cs <- length(fit$sets$cs)
+  for (i in 1:num_cs) {
+    j <- fit$sets$cs[[i]]
+	dat[j,"CS"] <- paste0("CS",i)
+  }
+  dat_cs <- subset(dat,!is.na(CS))
   out <- ggplot(dat,aes(x = pos,y = pip)) +
     geom_point() +
+	geom_point(data = dat_cs,shape = 1,size = 3,
+	           mapping = aes(color = CS)) +
 	scale_x_continuous(breaks = NULL) +
+	scale_color_manual(values = cs_colors) + 
 	labs(x = xlab,y = "-log10 p-value") +
     theme_cowplot(font_size = 12)
   if (!is.null(causal_snps)) {
@@ -100,7 +109,7 @@ susie_plot_better <- function (fit, causal_snps = NULL, xlab = "") {
 
 ADD TEXT HERE.
 
-```{r susie-rss-plot, fig.height=2, fig.width=5}
+```{r susie-rss-plot, fig.height=1.75, fig.width=5.25}
 causal_snps <- which(b_true != 0)
 susie_plot_better(fit,causal_snps,
                   xlab = "SNPs on human chromosome 1 near the FMO2 gene")
@@ -108,7 +117,10 @@ susie_plot_better(fit,causal_snps,
 
 ADD TEXT HERE.
 
-```{r, fig.height=2, fig.width=5}
-manhattan_plot(pval,causal_snps,
-               xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+```{r more-susie-plots, fig.height=3.25, fig.width=5.25}
+p1 <- manhattan_plot(pval,causal_snps,
+                     xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+p2 <- susie_plot_better(fit,causal_snps,
+                        xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+plot_grid(p1,p2,nrow = 2,ncol = 1,align = "v",axis = "lr")
 ```
