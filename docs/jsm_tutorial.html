@@ -300,7 +300,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-22
+<strong>Last updated:</strong> 2026-07-23
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -431,15 +431,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptreefbad676140115eac152923bb54d422db66f22032targetblankfbad676a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree934de1c995ae3443e4ec70a7871899dc2d4bee73targetblank934de1ca">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/finemap/tree/fbad676140115eac152923bb54d422db66f22032" target="_blank">fbad676</a>
+<a href="https://github.com/stephenslab/finemap/tree/934de1c995ae3443e4ec70a7871899dc2d4bee73" target="_blank">934de1c</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptreefbad676140115eac152923bb54d422db66f22032targetblankfbad676a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree934de1c995ae3443e4ec70a7871899dc2d4bee73targetblank934de1ca"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -449,7 +449,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/finemap/tree/fbad676140115eac152923bb54d422db66f22032" target="_blank">fbad676</a>.
+<a href="https://github.com/stephenslab/finemap/tree/934de1c995ae3443e4ec70a7871899dc2d4bee73" target="_blank">934de1c</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -465,6 +465,9 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld
+
+Untracked files:
+    Untracked:  data/Thyroid.FMO2.1Mb.RDS
 
 </code></pre>
 <p>
@@ -514,6 +517,74 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/stephenslab/finemap/blob/934de1c995ae3443e4ec70a7871899dc2d4bee73/analysis/jsm_tutorial.Rmd" target="_blank">934de1c</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+<td>
+Added more plots to the jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/857537941e26b758b2cc87b4a9ffee46d25e7c20/analysis/jsm_tutorial.Rmd" target="_blank">8575379</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+<td>
+Added a susie plot to the jss tutorial.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/df382f6fec7bb47a4937c2b1e3a6982f4a6180e8/analysis/jsm_tutorial.Rmd" target="_blank">df382f6</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+<td>
+Added a basic manhattan plot to the jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/finemap/d63177dacf59adca13323c275620bcb89cc1a9c3/docs/jsm_tutorial.html" target="_blank">d63177d</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/stephenslab/finemap/blob/20ec50fd0541d0352cae8d02d20294793292e694/analysis/jsm_tutorial.Rmd" target="_blank">20ec50f</a>
 </td>
 <td>
@@ -536,13 +607,82 @@ wflow_remove("jss_tutorial.Rmd")
 <p>ADD TEXT HERE.</p>
 <div id="initial-setup" class="section level2">
 <h2>Initial setup</h2>
-<p>ADD TEXT HERE.</p>
+<p>For this tutorial, I’m using a lightly modified version of susieR
+that can be installed from the “output_residuals” branch:</p>
+<pre class="r"><code>library(remotes)
+install_github(&quot;stephenslab/susieR@output_residuals&quot;)</code></pre>
+<p>Load all the packages used in the tutorial:</p>
 <pre class="r"><code>library(ggplot2)
 library(cowplot)
-library(susieR)</code></pre>
-<p>ADD TEXT HERE.</p>
-<pre class="r"><code>packageVersion(&quot;susieR&quot;)
+library(susieR)
+packageVersion(&quot;susieR&quot;)
 # [1] &#39;0.14.4&#39;</code></pre>
+<p>Set the seed for reproducibility:</p>
+<pre class="r"><code>set.seed(1)</code></pre>
+<p>ADD TEXT HERE.</p>
+<pre class="r"><code>load(&quot;../data/jsm_tutorial_data.RData&quot;)
+n &lt;- nrow(X)
+dim(X)
+# [1] 574 740</code></pre>
+<p>ADD TEXT HERE.</p>
+<pre class="r"><code>manhattan_plot &lt;- function (pval, causal_snps = NULL, xlab = &quot;&quot;) {
+  n &lt;- length(pval)
+  dat &lt;- data.frame(pos = 1:n,pval = -log10(pval))
+  out &lt;- ggplot(dat,aes(x = pos,y = pval)) +
+    geom_point() +
+    scale_x_continuous(breaks = NULL) +
+    labs(x = xlab,y = &quot;-log10 p-value&quot;) +
+    theme_cowplot(font_size = 12)
+  if (!is.null(causal_snps)) {
+    dat_causal &lt;- dat[causal_snps,]
+    out &lt;- out + geom_point(data = dat_causal,color = &quot;red&quot;)
+  }
+  return(out)
+}</code></pre>
+<p>ADD TEXT HERE.</p>
+<pre class="r"><code>manhattan_plot(pval,xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/show-manhattan-plot-1.png" width="600" style="display: block; margin: auto;" /></p>
+<p>ADD TEXT HERE.</p>
+<pre class="r"><code>fit &lt;- susie_rss(zhat,R,n = n,estimate_prior_method = &quot;EM&quot;,
+                 tol = 1e-6,min_abs_corr = 0,verbose = FALSE)</code></pre>
+<p>ADD TEXT HERE.</p>
+<pre class="r"><code>susie_plot_better &lt;- function (fit, causal_snps = NULL, xlab = &quot;&quot;) {
+  cs_colors &lt;- c(&quot;dodgerblue&quot;,&quot;limegreen&quot;)
+  pip &lt;- fit$pip
+  n   &lt;- length(pip)
+  dat &lt;- data.frame(pos = 1:n,pip = pip,CS = as.character(NA))
+  num_cs &lt;- length(fit$sets$cs)
+  for (i in 1:num_cs) {
+    j &lt;- fit$sets$cs[[i]]
+    dat[j,&quot;CS&quot;] &lt;- paste0(&quot;CS&quot;,i)
+  }
+  dat_cs &lt;- subset(dat,!is.na(CS))
+  out &lt;- ggplot(dat,aes(x = pos,y = pip)) +
+    geom_point() +
+    geom_point(data = dat_cs,shape = 1,size = 3,
+               mapping = aes(color = CS)) +
+    scale_x_continuous(breaks = NULL) +
+    scale_color_manual(values = cs_colors) + 
+    labs(x = xlab,y = &quot;-log10 p-value&quot;) +
+    theme_cowplot(font_size = 12)
+  if (!is.null(causal_snps)) {
+    dat_causal &lt;- dat[causal_snps,]
+    out &lt;- out + geom_point(data = dat_causal,color = &quot;red&quot;)
+  }
+  return(out)
+}</code></pre>
+<p>ADD TEXT HERE.</p>
+<pre class="r"><code>causal_snps &lt;- which(b_true != 0)
+susie_plot_better(fit,causal_snps,
+                  xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/susie-rss-plot-1.png" width="630" style="display: block; margin: auto;" /></p>
+<p>ADD TEXT HERE.</p>
+<pre class="r"><code>p1 &lt;- manhattan_plot(pval,causal_snps,
+                     xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)
+p2 &lt;- susie_plot_better(fit,causal_snps,
+                        xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)
+plot_grid(p1,p2,nrow = 2,ncol = 1,align = &quot;v&quot;,axis = &quot;lr&quot;)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/more-susie-plots-1.png" width="630" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -573,20 +713,26 @@ Session information
 # [1] susieR_0.14.4 cowplot_1.1.3 ggplot2_3.5.2
 # 
 # loaded via a namespace (and not attached):
-#  [1] Matrix_1.6-5       gtable_0.3.6       jsonlite_2.0.0     crayon_1.5.3      
-#  [5] dplyr_1.1.4        compiler_4.3.3     promises_1.3.3     tidyselect_1.2.1  
-#  [9] Rcpp_1.1.0         stringr_1.5.1      git2r_0.33.0       dichromat_2.0-0.1 
-# [13] later_1.4.2        jquerylib_0.1.4    scales_1.4.0       yaml_2.3.10       
-# [17] fastmap_1.2.0      lattice_0.22-5     plyr_1.8.9         R6_2.6.1          
-# [21] generics_0.1.4     mixsqp_0.3-54      workflowr_1.7.1    knitr_1.50        
-# [25] tibble_3.3.0       rprojroot_2.0.4    bslib_0.9.0        pillar_1.11.0     
-# [29] RColorBrewer_1.1-3 rlang_1.1.6        reshape_0.8.9      cachem_1.1.0      
-# [33] stringi_1.8.7      httpuv_1.6.14      xfun_0.52          fs_1.6.6          
-# [37] sass_0.4.10        cli_3.6.5          withr_3.0.2        magrittr_2.0.3    
-# [41] digest_0.6.37      grid_4.3.3         irlba_2.3.5.1      lifecycle_1.0.4   
-# [45] vctrs_0.6.5        evaluate_1.0.4     glue_1.8.0         farver_2.1.2      
-# [49] whisker_0.4.1      rmarkdown_2.29     matrixStats_1.2.0  tools_4.3.3       
-# [53] pkgconfig_2.0.3    htmltools_0.5.8.1</code></pre>
+#  [1] sass_0.4.10         generics_0.1.4      stringi_1.8.7      
+#  [4] lattice_0.22-5      digest_0.6.37       magrittr_2.0.3     
+#  [7] evaluate_1.0.4      grid_4.3.3          RColorBrewer_1.1-3 
+# [10] fastmap_1.2.0       rprojroot_2.0.4     workflowr_1.7.1    
+# [13] plyr_1.8.9          jsonlite_2.0.0      Matrix_1.6-5       
+# [16] whisker_0.4.1       reshape_0.8.9       mixsqp_0.3-54      
+# [19] promises_1.3.3      scales_1.4.0        jquerylib_0.1.4    
+# [22] cli_3.6.5           rlang_1.1.6         crayon_1.5.3       
+# [25] withr_3.0.2         cachem_1.1.0        yaml_2.3.10        
+# [28] parallel_4.3.3      tools_4.3.3         dplyr_1.1.4        
+# [31] httpuv_1.6.14       RcppZiggurat_0.1.6  Rfast_2.1.0        
+# [34] vctrs_0.6.5         R6_2.6.1            matrixStats_1.2.0  
+# [37] lifecycle_1.0.4     git2r_0.33.0        stringr_1.5.1      
+# [40] fs_1.6.6            irlba_2.3.5.1       pkgconfig_2.0.3    
+# [43] RcppParallel_5.1.10 pillar_1.11.0       bslib_0.9.0        
+# [46] later_1.4.2         gtable_0.3.6        glue_1.8.0         
+# [49] Rcpp_1.1.0          xfun_0.52           tibble_3.3.0       
+# [52] tidyselect_1.2.1    knitr_1.50          dichromat_2.0-0.1  
+# [55] farver_2.1.2        htmltools_0.5.8.1   rmarkdown_2.29     
+# [58] labeling_0.4.3      compiler_4.3.3</code></pre>
 </div>
 </div>
 </div>
