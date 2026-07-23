@@ -14,17 +14,52 @@ knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
 Initial setup
 -------------
 
-ADD TEXT HERE.
+For this tutorial, I'm using a lightly modified version of susieR that
+can be installed from the "output_residuals" branch:
+
+```{r install-susie, eval=FALSE}
+library(remotes)
+install_github("stephenslab/susieR@output_residuals")
+```
+
+Load all the packages used in the tutorial:
 
 ```{r load-pkgs}
 library(ggplot2)
 library(cowplot)
 library(susieR)
+packageVersion("susieR")
+```
+
+Set the seed for reproducibility:
+
+```{r set-seed}
+set.seed(1)
 ```
 
 ADD TEXT HERE.
 
-```{r susie-version}
-packageVersion("susieR")
+```{r load-data}
+load("../data/jsm_tutorial_data.RData")
+dim(X)
 ```
 
+ADD TEXT HERE.
+
+```{r manhattan-plot, fig.height=2, fig.width=5}
+manhattan_plot <- function (pval, xlab = "") {
+  n <- length(pval)
+  dat <- data.frame(pos = 1:n,pval = -log10(pval))
+  return(ggplot(dat,aes(x = pos,y = pval)) +
+         geom_point() +
+		 scale_x_continuous(breaks = NULL) +
+		 labs(x = xlab,y = "-log10 p-value") +
+         theme_cowplot(font_size = 12))
+}
+manhattan_plot(pval,xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+```
+
+ADD TEXT HERE.
+
+```{r susie-plot, fig.height, fig.width=5}
+```
