@@ -94,7 +94,7 @@ This is a function we will use to visualize the results of the
 fine-mapping:
 
 ```{r susie-plot-better}
-susie_plot_better <- function (fit, causal_snps = NULL, xlab = "") {
+pip_plot <- function (fit, causal_snps = NULL, xlab = "") {
   cs_colors <- c("dodgerblue","limegreen")
   pip <- fit$pip
   n   <- length(pip)
@@ -125,8 +125,8 @@ ADD TEXT HERE.
 
 ```{r susie-rss-plot, fig.height=1.75, fig.width=5.25}
 causal_snps <- which(b_true != 0)
-susie_plot_better(fit,causal_snps,
-                  xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+pip_plot(fit,causal_snps,
+         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
 
 ADD TEXT HERE.
@@ -134,8 +134,8 @@ ADD TEXT HERE.
 ```{r more-susie-plots, fig.height=3.25, fig.width=5.25}
 p1 <- manhattan_plot(pval,causal_snps,
                      xlab = "SNPs on human chromosome 1 near the FMO2 gene")
-p2 <- susie_plot_better(fit,causal_snps,
-                        xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+p2 <- pip_plot(fit,causal_snps,
+               xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 plot_grid(p1,p2,nrow = 2,ncol = 1,align = "v",axis = "lr")
 ```
 
@@ -200,8 +200,8 @@ cs <- j[1:m]
 ADD TEXT HERE.
 
 ```{r, fig.height=1.75, fig.width=5.25}
-susie_plot_better(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
-                  xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+pip_plot(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
+         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
 
 Verify my calculations:
