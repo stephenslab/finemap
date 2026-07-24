@@ -154,8 +154,10 @@ $$
 \mathrm{BF}_j &=
 \frac{p({\boldsymbol y} \mid {\boldsymbol x}_j, b_j \neq 0)}
      {p({\boldsymbol y} \mid {\boldsymbol x}_j, b_j = 0)} \\
+&= \frac{p(\tilde{z}_j \mid b_j \neq 0)}
+     {p(\tilde{z}_j \mid b_j = 0)} \\
 &\propto \exp\bigg\{
-\frac{z_j^2}{2} \times \frac{\sigma_0^2}{\sigma_0^2 + 1}
+\frac{\tilde{z}_j^2}{2} \times \frac{\tilde{\sigma}_0^2}{\tilde{\sigma}_0^2 + 1}
 \bigg\}.
 \end{aligned}
 $$
@@ -182,13 +184,12 @@ See eq. A.3 of the SuSiE paper and eq. 17 of the SuSiE-RSS paper.
 
 ```{r}
 z   <- sqrt(n/(n + zhat^2)) * zhat
-s   <- 1
 s0  <- n * 0.36
-lbf <- z^2/2 * s0/(s0 + s)
+lbf <- z^2/2 * s0/(s0 + 1)
 pip <- normalizelogweights(lbf)
 ```
 
-ADD TEXT HERE.
+TO DO: Implement this calculation just below as a function.
 
 ```{r}
 j  <- order(pip,decreasing = TRUE)
@@ -213,12 +214,11 @@ plot(fit_1cs$pip,pip,pch = 20)
 abline(a = 0,b = 1,lty = "dotted",col = "magenta")
 ```
 
-TO DO NEXT:
+TO DO NEXT: Give RSS likelihood expressions (general and specific to
+z-scores).
 
-+ Give RSS likelihood.
-
-+ Implement a simple version of the IBSS algorithm using the RSS
-  likelihood.
+AFTER THAT: Implement a simple version of the IBSS algorithm using the
+RSS likelihood.
 
 ### References
 
