@@ -80,14 +80,18 @@ each of the 740 SNPs.
 manhattan_plot(pval,xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
 
-ADD TEXT HERE.
+Let's now run a fine-mapping analysis *using the same statistics that
+were used in the association tests* (we also need ${\bf R}$, the $p
+\times p$ correlations matrix between all the SNPs, also sometimes
+called the "linkage disequilibrium" matrix):
 
 ```{r susie-rss, fig.height=1.75, fig.width=5}
 fit <- susie_rss(zhat,R,n = n,estimate_prior_method = "EM",
                  tol = 1e-6,min_abs_corr = 0)
 ```
 
-ADD TEXT HERE.
+This is a function we will use to visualize the results of the
+fine-mapping:
 
 ```{r susie-plot-better}
 susie_plot_better <- function (fit, causal_snps = NULL, xlab = "") {
@@ -145,6 +149,22 @@ normalizelogweights <- function (logw) {
 }
 ```
 
+$$
+\begin{aligned}
+\mathrm{BF}_j &=
+\frac{p({\boldsymbol y} \mid {\boldsymbol x}_j, b_j \neq 0)}
+     {p({\boldsymbol y} \mid {\boldsymbol x}_j, b_j = 0)} \\
+&\propto \exp\bigg\{
+\frac{z_j^2}{2} \times \frac{\sigma_0^2}{\sigma_0^2 + 1}
+\bigg\}.
+\end{aligned}
+$$
+
+Assuming the prior inclusion probabilities are the same for all SNPs:
+$$
+\mathrm{PIP}_j = \frac{\mathrm{BF}_j}{\sum_{j'=1}^p \mathrm{BF}_{j'}}.
+$$
+
 ```{r}
 compute_log_bayes_factor <- function () {
 }
@@ -193,7 +213,12 @@ plot(fit_1cs$pip,pip,pch = 20)
 abline(a = 0,b = 1,lty = "dotted",col = "magenta")
 ```
 
-TO DO NEXT: Implement a simple version of the IBSS algorithm.
+TO DO NEXT:
+
++ Give RSS likelihood.
+
++ Implement a simple version of the IBSS algorithm using the RSS
+  likelihood.
 
 ### References
 
