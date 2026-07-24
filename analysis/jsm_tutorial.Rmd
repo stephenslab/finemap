@@ -174,19 +174,16 @@ compute_log_bayes_factor <- function () {
 
 TO DO:
 
-+ Give expression for the Bayes factor and the PIPs (assuming prior
-  inclusion probabilities are uniform across all SNPs).
-
-+ Wrap the BF calculation into a function.
++ Wrap the BF and posterior mean calculations into a function.
 
 See eq. A.3 of the SuSiE paper and eq. 17 of the SuSiE-RSS paper.
-
 
 ```{r}
 z   <- sqrt(n/(n + zhat^2)) * zhat
 s0  <- n * 0.36
 lbf <- z^2/2 * s0/(s0 + 1)
 pip <- normalizelogweights(lbf)
+b1  <- z/(1 + 1/s0)
 ```
 
 TO DO: Implement this calculation just below as a function.
@@ -214,11 +211,30 @@ plot(fit_1cs$pip,pip,pch = 20)
 abline(a = 0,b = 1,lty = "dotted",col = "magenta")
 ```
 
-TO DO NEXT: Give RSS likelihood expressions (general and specific to
-z-scores).
+Multi-SNP regression likelihood:
+$$
+{\boldsymbol y} \mid {\boldsymbol b}, \sigma^2 \sim
+N_n({\bf X}{\boldsymbol b}, \sigma^2 {\bf I}_n)
+$$
+Equivalent likelihood formulated using summary statistics:
+$$
+{\boldsymbol t} \mid {\bf R}, n, \tilde{\boldsymbol b}, \sigma^2 \sim
+N_p(\sqrt{n} {\bf R} \tilde{\boldsymbol b}, \sigma^2{\bf R})
+$$
+With a few additional assumptions, the
+RSS likelihood using *z*-scores (actually these are "lightly modified"
+*z*-scores):
+$$
+\tilde{\boldsymbol z} \mid {\bf R}, n, {\boldsymbol b}, \sigma^2 \sim
+N_p(\sqrt{n} {\bf R} \boldsymbol b, \sigma^2{\bf R})
+$$
+
+${\bf R}$ is the $p \times p$ correlation ("LD") matrix;
+${\bm z}$ is a "lightly modified" z-score. Refer to the corresponding
+equation for the RSS likelihood in the SuSiE-RSS paper.
 
 AFTER THAT: Implement a simple version of the IBSS algorithm using the
-RSS likelihood.
+RSS likelihood. See Algorithm 1 in the S1 Text of the SuSiE-RSS paper.
 
 ### References
 
