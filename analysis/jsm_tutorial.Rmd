@@ -230,7 +230,7 @@ N_p(\sqrt{n} {\bf R} \boldsymbol b, \sigma^2{\bf R})
 $$
 
 ${\bf R}$ is the $p \times p$ correlation ("LD") matrix;
-${\bm z}$ is a "lightly modified" z-score. Refer to the corresponding
+${\boldsymbol z}$ is a "lightly modified" z-score. Refer to the corresponding
 equation for the RSS likelihood in the SuSiE-RSS paper.
 
 AFTER THAT: Implement a simple version of the IBSS algorithm using the
