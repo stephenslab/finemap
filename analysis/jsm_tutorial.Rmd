@@ -172,12 +172,12 @@ p2 <- pip_plot(fit,causal_snps,
 plot_grid(p1,p2,nrow = 2,ncol = 1,align = "v",axis = "lr")
 ```
 
-The special case of 1 causal SNP: single effect regression
-----------------------------------------------------------
+The special case of 1 causal SNP
+--------------------------------
 
 A goal of this tutorial is to gain some insight into how we arrived at
 this fine-mapping result and how SuSiE works. Starting with the case
-of a single causal SNP will be our first step toward that goal.
+of a single causal SNP will be our first step toward that goal. 
 
 Assuming a single causal SNP simplifies things greatly because we can
 compute the PIPs and CS quite easily using the *z*-scores. Here we break
@@ -264,7 +264,13 @@ pip_plot(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
 to match the estimate obtained by running susie_rss, and the
 particular choice is not critical.)
 
-Verify that these calculations match the susie_rss result:
+Not surprisingly, because we assumed only 1 causal SNP, the CS
+captures only one of the two causal SNPs. Despite this failure, we
+still made some progress by reusing the association tests to perform
+fine-mapping (that is, we computed a CS and a PIP for each SNP). 
+
+A quick verification that these calculations match the susie_rss
+result:
 
 ```{r, fig.height=3, fig.width=3}
 par(mar = c(4,4,2,1))
@@ -274,7 +280,13 @@ plot(fit_1cs$pip,pip,pch = 20,xlab = "susie_rss PIP",ylab = "JSM tutorial PIP")
 abline(a = 0,b = 1,lty = "dotted",col = "magenta")
 ```
 
+Extending to more than one causal SNP: a simple iterative calculation
+---------------------------------------------------------------------
 
+ADD TEXT HERE.
+
+```{r}
+```
 
 Multi-SNP regression likelihood:
 $$
