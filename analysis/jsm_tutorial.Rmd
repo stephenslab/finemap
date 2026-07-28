@@ -88,18 +88,19 @@ suggests that perhaps there is more than one SNP affecting the
 quantitative trait, but it is hard to say for sure based on an
 association analysis alone.
 
-Let's now run a fine-mapping analysis *using the same statistics that
-were used in the association tests* (we also need ${\bf R}$, the $p
-\times p$ correlations matrix between all the SNPs, also sometimes
-called the "linkage disequilibrium" matrix):
+Let's now run a SuSiE fine-mapping analysis *using the same statistics
+that were used in the association tests*—specifically, we will use the
+*z*-scores. (We will also eventually need ${\bf R}$, the $p \times p$
+matrix of correlations between all SNPs, also sometimes called the "LD
+matrix".)
 
 ```{r susie-rss, fig.height=1.75, fig.width=5}
 fit <- susie_rss(zhat,R,n = n,estimate_prior_method = "EM",
                  tol = 1e-6,min_abs_corr = 0)
 ```
 
-This is a function we will use to visualize the results of the
-fine-mapping:
+This is a function we will use in the code chunks below to visualize
+the results of the SuSiE fine-mapping analysis:
 
 ```{r susie-plot-better}
 pip_plot <- function (fit, causal_snps = NULL, xlab = "") {
@@ -129,7 +130,10 @@ pip_plot <- function (fit, causal_snps = NULL, xlab = "") {
 }
 ```
 
-ADD TEXT HERE.
+One thing we did not show in the previous plot is that there are
+actually 2 "causal SNPs"—that is, 2 SNPs that affect the trait, shown
+as 2 red dots in the next plot. (This is a simulated quantitative
+trait, so we know the truth.)
 
 ```{r susie-rss-plot, fig.height=1.75, fig.width=5.25}
 causal_snps <- which(b_true != 0)
@@ -137,7 +141,28 @@ pip_plot(fit,causal_snps,
          xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
 
-ADD TEXT HERE.
+
+This plot is a "PIP plot", where PIP = "posterior inclusion
+probability". The PIPs weigh the support a SNP being a causal SNP, and
+indeed, the two causal SNPs have the highest PIPs. Each of the two
+credible sets (CSs) is meant to capture a causal SNP with high
+probability, and indeed in this example they do. And then the PIPs
+within each CS capture the uncertainty in which of the nearby SNPs is
+the true causal SNP. In CS2, several SNPs are strongly correlated with
+each other—the minimum correlation among the four SNPs in CS2
+is 0.99—and so it difficult to say for sure which of these SNPs is the
+causal SNP. The PIPs in CS2 reflect this. 
+
+```{r cs2-correlations}
+j <- fit$sets$cs$L1
+min(R[j,j])
+```
+
+By contrast, in CS1 we are quite confident (PIP > 0.96) that the one
+SNP is causal.
+
+To reinforce some of these points, it is helpful to compare the
+association analysis directly with the fine-mapping analysis:
 
 ```{r more-susie-plots, fig.height=3.25, fig.width=5.25}
 p1 <- manhattan_plot(pval,causal_snps,
@@ -147,9 +172,28 @@ p2 <- pip_plot(fit,causal_snps,
 plot_grid(p1,p2,nrow = 2,ncol = 1,align = "v",axis = "lr")
 ```
 
-ADD TEXT HERE.
+The special case of 1 causal SNP: single effect regression
+----------------------------------------------------------
 
-```{r}
+A goal of this tutorial is to gain some insight into how we arrived at
+this fine-mapping result and how SuSiE works. Starting with the case
+of a single causal SNP will be our first step toward that goal.
+
+Assuming a single causal SNP simplifies things greatly because we can
+compute the PIPs and CS quite easily using the *z*-scores. Here we break
+down the analysis into three calculations: the calculation of the CS
+given the PIPs; the calculation of the PIPs given the Bayes factors
+(BFs); and the calculation of the BFs.
+
+Computing the PIPs given the BFs is quite simple. If we assume the
+prior inclusion probabilities are the same for all SNPs, we have
+$$
+\mathrm{PIP}_j = \frac{\mathrm{BF}_j}{\sum_{j'=1}^p \mathrm{BF}_{j'}}.
+$$
+This function performs this calculation in a numerically stable way
+given the log-BFs:
+
+```{r normalizelogweights}
 normalizelogweights <- function (logw) {
   x <- max(logw)
   w <- exp(logw - x)
@@ -157,6 +201,21 @@ normalizelogweights <- function (logw) {
 }
 ```
 
+This function returns a CS given the PIPs:
+
+```{r get-cs}
+get_cs <- function (pip, alpha = 0.95) {
+  i <- order(pip,decreasing = TRUE)
+  n <- which(cumsum(pip[i]) > alpha)[1]
+  return(i[1:n])
+}
+```
+
+The Bayes factor for each SNP $j$ is a ratio of two likelihoods
+comparing a single-SNP model of the quantitative trait
+$\boldsymbol{y}$ against a "null model" in which no SNP affects the
+trait. A key idea is this can be reframed as a comparison of two
+models of the $z$-scores:
 $$
 \begin{aligned}
 \mathrm{BF}_j &=
@@ -169,55 +228,53 @@ $$
 \bigg\}.
 \end{aligned}
 $$
+The following function implements this calculation for all SNPs. (It
+also computes the posterior mean effect estimates $p(b_j \mid
+\tilde{z}_j, \tilde{\sigma}_0^2)$ which we do not need immediately,
+but we will need later on.)
 
-Assuming the prior inclusion probabilities are the same for all SNPs:
-$$
-\mathrm{PIP}_j = \frac{\mathrm{BF}_j}{\sum_{j'=1}^p \mathrm{BF}_{j'}}.
-$$
-
-```{r}
-compute_log_bayes_factor <- function () {
+```{r compute-log-bf}
+compute_log_bf <- function (zhat, n, s0) {
+  z   <- sqrt(n/(n + zhat^2)) * zhat
+  s0  <- n * s0
+  lbf <- z^2/2 * s0/(s0 + 1)
+  b1  <- z/(1 + 1/s0)
+  return(list(lbf = lbf,b1 = b1))
 }
 ```
 
-TO DO:
+Compare to eq. A.3 of the SuSiE paper (Wang et al, 2020) and eq. 17 of
+the SuSiE-RSS paper (Zou et al, 2022).
 
-+ Wrap the BF and posterior mean calculations into a function.
+Note that this function also adjusts the $z$-scores in the same way as
+in susie_rss. See the SuSiE-RSS paper for an explanation of why this
+is done.
 
-See eq. A.3 of the SuSiE paper and eq. 17 of the SuSiE-RSS paper.
+Let's now perform these calculations on the example data set:
 
-```{r}
-z   <- sqrt(n/(n + zhat^2)) * zhat
-s0  <- n * 0.36
-lbf <- z^2/2 * s0/(s0 + 1)
+```{r single-snp, fig.height=1.75, fig.width=5.25}
+lbf <- compute_log_bf(zhat,n,s0 = 0.36)$lbf
 pip <- normalizelogweights(lbf)
-b1  <- z/(1 + 1/s0)
-```
-
-TO DO: Implement this calculation just below as a function.
-
-```{r}
-j  <- order(pip,decreasing = TRUE)
-m  <- which(cumsum(pip[j]) > 0.95)[1]
-cs <- j[1:m]
-```
-
-ADD TEXT HERE.
-
-```{r, fig.height=1.75, fig.width=5.25}
+cs <- get_cs(pip)
 pip_plot(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
          xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
 
-Verify my calculations:
+(Note that the prior variance setting of 0.36 here was mainly chosen
+to match the estimate obtained by running susie_rss, and the
+particular choice is not critical.)
+
+Verify that these calculations match the susie_rss result:
 
 ```{r, fig.height=3, fig.width=3}
 par(mar = c(4,4,2,1))
 fit_1cs <- susie_rss(zhat,R,n = n,L = 1,estimate_prior_method = "EM",
                      tol = 1e-6)
-plot(fit_1cs$pip,pip,pch = 20)
+plot(fit_1cs$pip,pip,pch = 20,xlab = "susie_rss PIP",ylab = "JSM tutorial PIP")
 abline(a = 0,b = 1,lty = "dotted",col = "magenta")
 ```
+
+
 
 Multi-SNP regression likelihood:
 $$
