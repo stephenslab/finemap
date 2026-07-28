@@ -14,8 +14,8 @@ knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
 Initial setup
 -------------
 
-For this tutorial, I'm using a lightly modified version of susieR in
-the "output_residuals" branch:
+For this tutorial, I'm using a lightly modified version of susieR
+available in the "output_residuals" branch:
 
 ```{r install-susie, eval=FALSE}
 library(remotes)
@@ -49,11 +49,12 @@ dim(X)
 Association analysis vs. fine-mapping 
 -------------------------------------
 
-First let's relate a typical genetic association analysis to a
-fine-mapping analysis, and understand the points of overlap and their
+First let's connect a genetic association analysis to a fine-mapping
+analysis in order to understand points of overlap and their
 differences.
 
-This is a function we will use to create a basic Manhattan plot:
+This is a function we will use in the code chunks below to create a
+basic Manhattan plot:
 
 ```{r manhattan-plot}
 manhattan_plot <- function (pval, causal_snps = NULL, xlab = "") {
@@ -74,11 +75,18 @@ manhattan_plot <- function (pval, causal_snps = NULL, xlab = "") {
 
 The Manhattan plot is a visualization of the association analysis: it
 summarizes the evidence for association with the quantitative trait at
-each of the 740 SNPs.
+the 740 SNPs.
 
 ```{r show-manhattan-plot, fig.height=1.75, fig.width=5}
 manhattan_plot(pval,xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
+
+There are several "clusters" of SNPs that have very low
+*p*-values. This clustering is typical due to strong correlations
+("LD") between nearby SNPs. The fact that there are several clusters
+suggests that perhaps there is more than one SNP affecting the
+quantitative trait, but it is hard to say for sure based on an
+association analysis alone.
 
 Let's now run a fine-mapping analysis *using the same statistics that
 were used in the association tests* (we also need ${\bf R}$, the $p
