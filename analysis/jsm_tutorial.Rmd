@@ -96,7 +96,7 @@ matrix".)
 
 ```{r susie-rss, fig.height=1.75, fig.width=5}
 fit <- susie_rss(zhat,R,n = n,estimate_prior_method = "EM",
-                 tol = 1e-6,min_abs_corr = 0)
+                 tol = 1e-8,min_abs_corr = 0)
 ```
 
 This is a function we will use in the code chunks below to visualize
@@ -172,8 +172,8 @@ p2 <- pip_plot(fit,causal_snps,
 plot_grid(p1,p2,nrow = 2,ncol = 1,align = "v",axis = "lr")
 ```
 
-The special case of 1 causal SNP
---------------------------------
+The special case of one causal SNP
+----------------------------------
 
 A goal of this tutorial is to gain some insight into how we arrived at
 this fine-mapping result and how SuSiE works. Starting with the case
@@ -204,9 +204,9 @@ normalizelogweights <- function (logw) {
 This function returns a CS given the PIPs:
 
 ```{r get-cs}
-get_cs <- function (pip, alpha = 0.95) {
+get_cs <- function (pip, coverage = 0.95) {
   i <- order(pip,decreasing = TRUE)
-  n <- which(cumsum(pip[i]) > alpha)[1]
+  n <- which(cumsum(pip[i]) > coverage)[1]
   return(i[1:n])
 }
 ```
@@ -234,9 +234,7 @@ also computes the posterior mean effect estimates $p(b_j \mid
 but we will need later on.)
 
 ```{r compute-log-bf}
-compute_log_bf <- function (zhat, n, s0) {
-  z   <- sqrt(n/(n + zhat^2)) * zhat
-  s0  <- n * s0
+compute_log_bf <- function (z, s0) {
   lbf <- z^2/2 * s0/(s0 + 1)
   b1  <- z/(1 + 1/s0)
   return(list(lbf = lbf,b1 = b1))
@@ -253,7 +251,10 @@ is done.
 Let's now perform these calculations on the example data set:
 
 ```{r single-snp, fig.height=1.75, fig.width=5.25}
-lbf <- compute_log_bf(zhat,n,s0 = 0.36)$lbf
+s0  <- 0.36
+z   <- sqrt(n/(n + zhat^2)) * zhat
+s0  <- n * s0
+lbf <- compute_log_bf(z,s0)$lbf
 pip <- normalizelogweights(lbf)
 cs <- get_cs(pip)
 pip_plot(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
@@ -285,7 +286,47 @@ Extending to more than one causal SNP: a simple iterative calculation
 
 ADD TEXT HERE.
 
+```{r ibss}
+ibss <- function (zhat, R, n, L, s0, numiter = 10, coverage = 0.95) {
+  p   <- length(zhat)
+  PIP <- matrix(0,p,L)
+  B1  <- matrix(0,p,L)
+  residuals <- matrix(0,p,L)
+  z   <- sqrt(n/(n + zhat^2)) * zhat
+  s0  <- n * s0
+  r   <- z
+  for (iter in 1:numiter) {
+    for (l in 1:L) {
+      b1  <- B1[,l]
+      r   <- r + R %*% b1
+	  residuals[,l] <- r
+	  out <- compute_log_bf(r,s0[l])
+	  pip <- normalizelogweights(out$lbf)
+	  b1  <- out$b1 * pip
+      r   <- r - R %*% b1
+	  PIP[,l] <- pip
+	  B1[,l]  <- b1
+    }
+  }
+  return(list(pip = rowSums(PIP),
+              residuals = residuals,
+              sets = list(cs = apply(PIP,2,function (x) get_cs(x,coverage)))))
+}
+res <- ibss(zhat,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
+p1 <- pip_plot(res,causal_snps,
+               xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+range(res$pip - fit$pip)
+```
+
 ```{r}
+res_iter1 <- ibss(zhat,R,n,L = 2,s0 = c(0.3,0.2),numiter = 1)
+p1 <- pip_plot(res1,causal_snps,
+               xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+res_iter10 <- ibss(zhat,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
+p2 <- pip_plot(res10,causal_snps,
+               xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+plot_grid(p1,p2,nrow = 2,ncol = 1)
+qplot(z,res1$residuals[,2],color=abs(R[,679]))
 ```
 
 Multi-SNP regression likelihood:
@@ -310,7 +351,7 @@ ${\bf R}$ is the $p \times p$ correlation ("LD") matrix;
 ${\boldsymbol z}$ is a "lightly modified" z-score. Refer to the corresponding
 equation for the RSS likelihood in the SuSiE-RSS paper.
 
-AFTER THAT: Implement a simple version of the IBSS algorithm using the
+NEXT: Implement a simple version of the IBSS algorithm using the
 RSS likelihood. See Algorithm 1 in the S1 Text of the SuSiE-RSS paper.
 
 ### References
