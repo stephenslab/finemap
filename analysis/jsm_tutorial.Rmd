@@ -356,8 +356,9 @@ posterior mean of the coefficients $\boldsymbol{b}$ from the $l$th the SER.
 from the $l$th SER model fit to the residuals obtained in Step 1,
 $\mathrm{SER}(\boldsymbol{r}_l, \sigma_{0l}^2)$.
 
-The following function implements these steps and performs them
-"numiter" times for each of the $L$ SERs:
+This iterative algorithm is called the IBSS algorithm, which is short
+for "iterative Bayesian stepwise selection". The following function
+repeats Steps 1 and 2 "numiter" times for each of the $L$ SERs:
 
 ```{r ibss}
 ibss <- function (z, R, n, L, s0, numiter, coverage = 0.95) {
