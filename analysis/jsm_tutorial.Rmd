@@ -1,10 +1,13 @@
 ---
-title: "JSM tutorial on fine-mapping with summary statistics: the RSS likelihood and the SuSiE model"
+title: "JSM tutorial on genetic fine-mapping with summary statistics: the RSS likelihood and the SuSiE model"
 author: Peter Carbonetto
 output: workflowr::wflow_html
 ---
 
-ADD SUMMARY OF THE TUTORIAL HERE.
+The goal of this tutorial is to give some intuition for the key
+statistical concepts and computations involved in genetic fine-mapping
+with the [SuSiE][susie] and [SuSiE-RSS][susie_rss] models without
+entering too deeply into the mathematical derivations.
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
@@ -241,8 +244,8 @@ compute_log_bf <- function (z, s0) {
 }
 ```
 
-Compare to eq. A.3 of the SuSiE paper (Wang et al, 2020) and eq. 17 of
-the SuSiE-RSS paper (Zou et al, 2022).
+Compare to eq. A.3 of the [SuSiE paper][susie]  and eq. 17 of
+the [SuSiE-RSS paper][susie_rss].
 
 Note that this function also adjusts the $z$-scores in the same way as
 in susie_rss. See the SuSiE-RSS paper for an explanation of why this
@@ -318,7 +321,7 @@ p1 <- pip_plot(res,causal_snps,
 range(res$pip - fit$pip)
 ```
 
-```{r}
+```{r, eval=FALSE}
 res_iter1 <- ibss(zhat,R,n,L = 2,s0 = c(0.3,0.2),numiter = 1)
 p1 <- pip_plot(res1,causal_snps,
                xlab = "SNPs on human chromosome 1 near the FMO2 gene")
@@ -326,7 +329,7 @@ res_iter10 <- ibss(zhat,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
 p2 <- pip_plot(res10,causal_snps,
                xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 plot_grid(p1,p2,nrow = 2,ncol = 1)
-qplot(z,res1$residuals[,2],color=abs(R[,679]))
+qplot(z,res1$residuals[,2],color = abs(R[,679]))
 ```
 
 Multi-SNP regression likelihood:
@@ -359,8 +362,11 @@ RSS likelihood. See Algorithm 1 in the S1 Text of the SuSiE-RSS paper.
 Wang et al (2020). A simple new approach to variable selection in
 regression, with application to genetic fine mapping. *Journal of the
 Royal Statistical Society, Series B* 82, 1273-1300.
-[link](https://doi.org/10.1101/501114)
+[link][susie]
 
 Zou et al (2022). Fine-mapping from summary data with the Sum of
 Single Effects model. *PLoS Genetics* 18, e1010299.
-[link](https://doi.org/10.1371/journal.pgen.1010299)
+[link]
+
+[susie]: https://doi.org/10.1101/501114
+[susie_rss]: https://doi.org/10.1371/journal.pgen.1010299
