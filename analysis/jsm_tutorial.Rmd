@@ -57,7 +57,8 @@ analysis in order to understand points of overlap and their
 differences.
 
 This is a function we will use in the code chunks below to create a
-basic Manhattan plot:
+basic Manhattan plot. Understanding how this function works is not
+important.
 
 ```{r manhattan-plot}
 manhattan_plot <- function (pval, causal_snps = NULL, xlab = "") {
@@ -103,7 +104,8 @@ fit <- susie_rss(zhat,R,n = n,estimate_prior_method = "EM",
 ```
 
 This is a function we will use in the code chunks below to visualize
-the results of the SuSiE fine-mapping analysis:
+the results of the SuSiE fine-mapping analysis. Understanding how this
+function works is not important.
 
 ```{r susie-plot-better}
 pip_plot <- function (fit, causal_snps = NULL, xlab = "") {
@@ -161,7 +163,7 @@ j <- fit$sets$cs$L1
 min(R[j,j])
 ```
 
-By contrast, in CS1 we are quite confident (PIP > 0.96) that the one
+By contrast, in CS1 we are quite confident (PIP > 0.95) that the one
 SNP is causal.
 
 To reinforce some of these points, it is helpful to compare the
@@ -175,8 +177,8 @@ p2 <- pip_plot(fit,causal_snps,
 plot_grid(p1,p2,nrow = 2,ncol = 1,align = "v",axis = "lr")
 ```
 
-The special case of one causal SNP
-----------------------------------
+The special case of 1 causal SNP
+--------------------------------
 
 A goal of this tutorial is to gain some insight into how we arrived at
 this fine-mapping result and how SuSiE works. Starting with the case
@@ -215,29 +217,52 @@ get_cs <- function (pip, coverage = 0.95) {
 ```
 
 The Bayes factor for each SNP $j$ is a ratio of two likelihoods
-comparing a single-SNP model of the quantitative trait
+comparing a "single-SNP model" of the quantitative trait
 $\boldsymbol{y}$ against a "null model" in which no SNP affects the
-trait. A key idea is this can be reframed as a comparison of two
+trait. In most of our analyses the single-SNP model for each SNP $j$
+is a simple linear regression in which the prior distribution for the
+unknown coefficient $b_j$ is a normal distribution centered at zero
+(for simplicity I'll assume the residual variance is 1, which is an
+assumption we will make later on anyhow):
+$$
+\begin{aligned}
+\boldsymbol{y} \mid b_j &\sim
+N_n(\boldsymbol{x}_j b_j, 1) \\
+b_j \mid \sigma_0^2 &\sim N(0, \sigma_0^2)
+\end{aligned}
+$$
+
+A key idea is this single-SNP model can be reframed as a model of the
+z-score obtained from the association test:
+$$
+\begin{aligned}
+z_j \sim N(\sqrt{n} b_j, 1) \\
+b_j \sim N(0, \sigma_0^2).
+\end{aligned}
+$$
+Therefore, the BF calculation can be expressed as a comparison of two
 models of the $z$-scores:
 $$
 \begin{aligned}
 \mathrm{BF}_j &=
 \frac{p({\boldsymbol y} \mid {\boldsymbol x}_j, b_j \neq 0)}
      {p({\boldsymbol y} \mid {\boldsymbol x}_j, b_j = 0)} \\
-&= \frac{p(\tilde{z}_j \mid b_j \neq 0)}
-     {p(\tilde{z}_j \mid b_j = 0)} \\
+&= \frac{p(z_j \mid b_j \neq 0)}
+     {p(z_j \mid b_j = 0)} \\
 &\propto \exp\bigg\{
-\frac{\tilde{z}_j^2}{2} \times \frac{\tilde{\sigma}_0^2}{\tilde{\sigma}_0^2 + 1}
-\bigg\}.
+\frac{z_j^2}{2} \times
+\frac{\tilde{\sigma}_0^2}{\tilde{\sigma}_0^2 + 1}
+\bigg\},
 \end{aligned}
 $$
-The following function implements this calculation for all SNPs. (It
-also computes the posterior mean effect estimates $p(b_j \mid
-\tilde{z}_j, \tilde{\sigma}_0^2)$ which we do not need immediately,
-but we will need later on.)
+where $\tilde{\sigma}_0^2 = n \sigma_0^2$.  The following function
+implements the BF calculation for all SNPs. (It also computes the
+posterior mean effect estimates $E[b_j \mid z_j, \sigma_0^2]$ which we
+do not need immediately, but we will need later on.)
 
 ```{r compute-log-bf}
 compute_log_bf <- function (z, s0) {
+  s0  <- n * s0
   lbf <- z^2/2 * s0/(s0 + 1)
   b1  <- z/(1 + 1/s0)
   return(list(lbf = lbf,b1 = b1))
@@ -247,22 +272,22 @@ compute_log_bf <- function (z, s0) {
 Compare to eq. A.3 of the [SuSiE paper][susie]  and eq. 17 of
 the [SuSiE-RSS paper][susie_rss].
 
-Note that this function also adjusts the $z$-scores in the same way as
-in susie_rss. See the SuSiE-RSS paper for an explanation of why this
-is done.
-
 Let's now perform these calculations on the example data set:
 
 ```{r single-snp, fig.height=1.75, fig.width=5.25}
 s0  <- 0.36
 z   <- sqrt(n/(n + zhat^2)) * zhat
-s0  <- n * s0
 lbf <- compute_log_bf(z,s0)$lbf
 pip <- normalizelogweights(lbf)
 cs <- get_cs(pip)
 pip_plot(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
          xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
+
+Note that this function also adjusts the $z$-scores in the same way as
+in susie_rss. See the SuSiE-RSS paper for an explanation of why this
+is done.
+
 
 (Note that the prior variance setting of 0.36 here was mainly chosen
 to match the estimate obtained by running susie_rss, and the
@@ -296,7 +321,6 @@ ibss <- function (zhat, R, n, L, s0, numiter = 10, coverage = 0.95) {
   B1  <- matrix(0,p,L)
   residuals <- matrix(0,p,L)
   z   <- sqrt(n/(n + zhat^2)) * zhat
-  s0  <- n * s0
   r   <- z
   for (iter in 1:numiter) {
     for (l in 1:L) {
@@ -331,6 +355,15 @@ p2 <- pip_plot(res10,causal_snps,
 plot_grid(p1,p2,nrow = 2,ncol = 1)
 qplot(z,res1$residuals[,2],color = abs(R[,679]))
 ```
+
+Multi-SNP model:
+$$
+\begin{aligned}
+\boldsymbol{y} \mid \boldsymbol{b} &\sim
+N_n({\bf X}{\boldsymbol b}, {\bf I}_n) \\
+\boldsymbol{b} \mid \sigma_0^2 &\sim N_p(0, \sigma_0^2 {\bf I}_p).
+\end{aligned}
+$$
 
 Multi-SNP regression likelihood:
 $$
