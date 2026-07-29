@@ -225,8 +225,7 @@ unknown coefficient $b_j$ is a normal distribution centered at zero
 assumption we will make later on anyhow):
 $$
 \begin{aligned}
-\boldsymbol{y} \mid b_j &\sim
-N_n(\boldsymbol{x}_j b_j, 1) \\
+\boldsymbol{y} \mid b_j &\sim N_n(\boldsymbol{x}_j b_j, 1) \\
 b_j \mid \sigma_0^2 &\sim N(0, \sigma_0^2)
 \end{aligned}
 $$
@@ -235,8 +234,8 @@ A key idea is this single-SNP model can be reframed as a model of the
 z-score obtained from the association test:
 $$
 \begin{aligned}
-z_j \sim N(\sqrt{n} b_j, 1) \\
-b_j \sim N(0, \sigma_0^2).
+z_j &\sim N(\sqrt{n} b_j, 1) \\
+b_j &\sim N(0, \sigma_0^2).
 \end{aligned}
 $$
 Therefore, the BF calculation can be expressed as a comparison of two
@@ -254,9 +253,10 @@ $$
 \bigg\}, \\
 \end{aligned}
 $$
-where $\tilde{\sigma}_0^2 = n \sigma_0^2$.  The following function
+where $\tilde{\sigma}_0^2 := n \sigma_0^2$.  The following function
 implements the BF calculation for all SNPs. (It also computes the
-posterior mean effect estimates $E[b_j \mid z_j, \sigma_0^2]$ which we
+posterior mean effect estimates $b_{j1} :=
+E[b_j \mid z_j, \sigma_0^2]$ which we
 do not need immediately, but we will need later on.)
 
 ```{r compute-log-bf}
@@ -307,13 +307,60 @@ plot(fit_1cs$pip,pip,pch = 20,xlab = "susie_rss PIP",ylab = "JSM tutorial PIP")
 abline(a = 0,b = 1,lty = "dotted",col = "magenta")
 ```
 
-Extending to more than one causal SNP: a simple iterative calculation
----------------------------------------------------------------------
+Extending to more than 1 causal SNP: a simple iterative calculation
+-------------------------------------------------------------------
 
-ADD TEXT HERE.
+Here we will show that we can reuse the previous Bayes factor and PIP
+calculations to make perform the necessary inferences for more than
+one causal SNP. In this example we will consider the case of $L = 2$
+causal SNPs, but the implementation provided here works for any number
+of causal SNPs.
+
+To explain how this works, we first formalize the ideas from the
+previous section as a model which we call the "single effect
+regression" (SER) model. This is a model in which exactly 1 out of $p$
+SNPs affects the trait, and the choice of SNP $j$ is drawn uniformly
+at random from the pool of candidate SNPs. The SER in summary
+statistics form is
+$$
+\begin{aligned}
+\boldsymbol{z} \mid b_j &\sim N_p(\sqrt{n} b_j, 1) \\
+\gamma = j &\sim \textstyle
+\mathrm{Multinom}\big(1, (\frac{1}{p}, \ldots, \frac{1}{p})\big) \\
+b_j \mid \sigma_0^2 &\sim N(0, \sigma_0^2).
+\end{aligned}
+$$
+The posterior distribution of $b$ under the SER model is a weighted
+mixture of normals in which the weights are the PIPs. In particular,
+the posterior mean of the coefficients $\boldsymbol{b} = (b_1, \ldots, b_p)$
+is given by
+$$
+\bar{b}_j = \mathrm{PIP}_j b_{1j}.
+$$
+We use $\mathrm{SER}(\boldsymbol{z}, \sigma_0^2)$ to denote the
+posterior distribution of $\boldsymbol{b} \mid \boldsymbol{z},
+\sigma_0^2$ under the SER model.
+
+Now using the SER model, we can define the solution fine-mapping
+analysis as an iterative solution obtained by repeatedly fitting $L$
+SERs in which each SER iis fit to the residuals obtained by removing
+the effects of the other $L - 1$ SERs. This essentially involves
+repeating the following steps for each $l = 1, \ldots, L$:
+
+1. Compute the residuals obtained by removing the effects of the other SERs,
+$\boldsymbol{r}_l = \boldsymbol{z} - {\bf R} \sum_{l' \neq l}
+\bar{\boldsymbol{b}}^{(l)}$, where $\bar{\boldsymbol{b}}^{(l)}$ denotes the
+posterior mean of the coefficients $\boldsymbol{b}$ from the $l$th the SER.
+
+2. Compute the PIPs, CS and posterior mean of $\boldsymbol{b}$
+from the $l$th SER model fit to the residuals obtained in Step 1,
+$\mathrm{SER}(\boldsymbol{r}_l, \sigma_{0l}^2)$.
+
+The following function implements these steps and performs them
+"numiter" times for each of the $L$ SERs:
 
 ```{r ibss}
-ibss <- function (z, R, n, L, s0, numiter = 10, coverage = 0.95) {
+ibss <- function (z, R, n, L, s0, numiter, coverage = 0.95) {
   p   <- length(zhat)
   PIP <- matrix(0,p,L)
   B1  <- matrix(0,p,L)
@@ -336,21 +383,14 @@ ibss <- function (z, R, n, L, s0, numiter = 10, coverage = 0.95) {
               residuals = residuals,
               sets = list(cs = apply(PIP,2,function (x) get_cs(x,coverage)))))
 }
-res <- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
-p1 <- pip_plot(res,causal_snps,
-               xlab = "SNPs on human chromosome 1 near the FMO2 gene")
-range(res$pip - fit$pip)
 ```
 
-```{r, eval=FALSE}
-res_iter1 <- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 1)
-p1 <- pip_plot(res1,causal_snps,
-               xlab = "SNPs on human chromosome 1 near the FMO2 gene")
-res_iter10 <- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
-p2 <- pip_plot(res10,causal_snps,
-               xlab = "SNPs on human chromosome 1 near the FMO2 gene")
-plot_grid(p1,p2,nrow = 2,ncol = 1)
-qplot(z,res1$residuals[,2],color = abs(R[,679]))
+```{r}
+res <- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
+range(res$pip - fit$pip)
+pip_plot(res,causal_snps,
+         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+qplot(z,res$residuals[,2],color = abs(R[,679]))
 ```
 
 Multi-SNP model:
