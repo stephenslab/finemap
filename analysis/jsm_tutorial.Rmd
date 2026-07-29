@@ -94,7 +94,7 @@ association analysis alone.
 
 Let's now run a SuSiE fine-mapping analysis *using the same statistics
 that were used in the association tests*—specifically, we will use the
-*z*-scores. (We will also eventually need ${\bf R}$, the $p \times p$
+z-scores. (We will also eventually need ${\bf R}$, the $p \times p$
 matrix of correlations between all SNPs, also sometimes called the "LD
 matrix".)
 
@@ -146,7 +146,6 @@ pip_plot(fit,causal_snps,
          xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
 
-
 This plot is a "PIP plot", where PIP = "posterior inclusion
 probability". The PIPs weigh the support a SNP being a causal SNP, and
 indeed, the two causal SNPs have the highest PIPs. Each of the two
@@ -185,7 +184,7 @@ this fine-mapping result and how SuSiE works. Starting with the case
 of a single causal SNP will be our first step toward that goal. 
 
 Assuming a single causal SNP simplifies things greatly because we can
-compute the PIPs and CS quite easily using the *z*-scores. Here we break
+compute the PIPs and CS quite easily using the z-scores. Here we break
 down the analysis into three calculations: the calculation of the CS
 given the PIPs; the calculation of the PIPs given the Bayes factors
 (BFs); and the calculation of the BFs.
@@ -241,18 +240,18 @@ b_j \sim N(0, \sigma_0^2).
 \end{aligned}
 $$
 Therefore, the BF calculation can be expressed as a comparison of two
-models of the $z$-scores:
+models of the z-scores:
 $$
 \begin{aligned}
 \mathrm{BF}_j &=
-\frac{p({\boldsymbol y} \mid {\boldsymbol x}_j, b_j \neq 0)}
-     {p({\boldsymbol y} \mid {\boldsymbol x}_j, b_j = 0)} \\
+\frac{p(\boldsymbol{y} \mid \boldsymbol{x}_j, b_j \neq 0)}
+     {p(\boldsymbol{y} \mid \boldsymbol{x}_j, b_j = 0)} \\
 &= \frac{p(z_j \mid b_j \neq 0)}
-     {p(z_j \mid b_j = 0)} \\
+        {p(z_j \mid b_j = 0)} \\
 &\propto \exp\bigg\{
 \frac{z_j^2}{2} \times
 \frac{\tilde{\sigma}_0^2}{\tilde{\sigma}_0^2 + 1}
-\bigg\},
+\bigg\}, \\
 \end{aligned}
 $$
 where $\tilde{\sigma}_0^2 = n \sigma_0^2$.  The following function
@@ -284,21 +283,20 @@ pip_plot(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
          xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 ```
 
-Note that this function also adjusts the $z$-scores in the same way as
-in susie_rss. See the SuSiE-RSS paper for an explanation of why this
+Note that we adjusted the z-scores in the same way as in
+`susie_rss()`. See the SuSiE-RSS paper for an explanation of why this
 is done.
 
-
 (Note that the prior variance setting of 0.36 here was mainly chosen
-to match the estimate obtained by running susie_rss, and the
+to match the estimate obtained by running `susie_rss()`, and the
 particular choice is not critical.)
 
-Not surprisingly, because we assumed only 1 causal SNP, the CS
-captures only one of the two causal SNPs. Despite this failure, we
-still made some progress by reusing the association tests to perform
-fine-mapping (that is, we computed a CS and a PIP for each SNP). 
+Not surprisingly, because we assumed 1 causal SNP, the CS captures
+only one of the two causal SNPs. Despite this failure, we still made
+some progress by reusing the association tests to perform fine-mapping
+(that is, we computed a CS and a PIP for each SNP).
 
-A quick verification that these calculations match the susie_rss
+A quick verification that these calculations match the `susie_rss()`
 result:
 
 ```{r, fig.height=3, fig.width=3}
@@ -315,13 +313,12 @@ Extending to more than one causal SNP: a simple iterative calculation
 ADD TEXT HERE.
 
 ```{r ibss}
-ibss <- function (zhat, R, n, L, s0, numiter = 10, coverage = 0.95) {
+ibss <- function (z, R, n, L, s0, numiter = 10, coverage = 0.95) {
   p   <- length(zhat)
   PIP <- matrix(0,p,L)
   B1  <- matrix(0,p,L)
-  residuals <- matrix(0,p,L)
-  z   <- sqrt(n/(n + zhat^2)) * zhat
   r   <- z
+  residuals <- matrix(0,p,L)
   for (iter in 1:numiter) {
     for (l in 1:L) {
       b1  <- B1[,l]
@@ -339,17 +336,17 @@ ibss <- function (zhat, R, n, L, s0, numiter = 10, coverage = 0.95) {
               residuals = residuals,
               sets = list(cs = apply(PIP,2,function (x) get_cs(x,coverage)))))
 }
-res <- ibss(zhat,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
+res <- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
 p1 <- pip_plot(res,causal_snps,
                xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 range(res$pip - fit$pip)
 ```
 
 ```{r, eval=FALSE}
-res_iter1 <- ibss(zhat,R,n,L = 2,s0 = c(0.3,0.2),numiter = 1)
+res_iter1 <- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 1)
 p1 <- pip_plot(res1,causal_snps,
                xlab = "SNPs on human chromosome 1 near the FMO2 gene")
-res_iter10 <- ibss(zhat,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
+res_iter10 <- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
 p2 <- pip_plot(res10,causal_snps,
                xlab = "SNPs on human chromosome 1 near the FMO2 gene")
 plot_grid(p1,p2,nrow = 2,ncol = 1)
@@ -376,8 +373,8 @@ $$
 N_p(\sqrt{n} {\bf R} \tilde{\boldsymbol b}, \sigma^2{\bf R})
 $$
 With a few additional assumptions, the
-RSS likelihood using *z*-scores (actually these are "lightly modified"
-*z*-scores):
+RSS likelihood using z-scores (actually these are "lightly modified"
+z-scores):
 $$
 \tilde{\boldsymbol z} \mid {\bf R}, n, {\boldsymbol b}, \sigma^2 \sim
 N_p(\sqrt{n} {\bf R} \boldsymbol b, \sigma^2{\bf R})
