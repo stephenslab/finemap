@@ -109,12 +109,12 @@ function works is not important.
 
 ```{r susie-plot-better}
 pip_plot <- function (fit, causal_snps = NULL, xlab = "") {
-  cs_colors <- c("dodgerblue","limegreen")
+  cs_colors <- c("dodgerblue","limegreen","darkorange")
   pip <- fit$pip
   n   <- length(pip)
   dat <- data.frame(pos = 1:n,pip = pip,CS = as.character(NA))
   num_cs <- length(fit$sets$cs)
-  for (i in 1:num_cs) {
+  for (i in num_cs:1) {
     j <- fit$sets$cs[[i]]
 	dat[j,"CS"] <- paste0("CS",i)
   }
@@ -453,7 +453,7 @@ This scatterplot compares the z-scores to the residuals that were used
 to fit the second SER after removing the posterior mean effects of the
 first SER:
 
-```{r, fig.height=2, fig.width=3}
+```{r residuals-plot-ser-2, fig.height=2, fig.width=3}
 residuals_plot(res,z,R,l = 2)
 ```
 
@@ -467,12 +467,39 @@ Likewise, when we re-fit the first SER, the z-scores in CS2 as well as
 the z-scores correlated with the SNP in CS2 are also strongly shrunk
 toward zero:
 
-```{r, fig.height=2, fig.width=3}
+```{r residuals-plot-ser-1, fig.height=2, fig.width=3}
 residuals_plot(res,z,R,l = 1)
+```
+
+ADD TEXT HERE:
+
+TO DO: Create another residuals plot to handle L > 2.
+
+```{r pip-plot-ibss-L3, fig.height=1.75, fig.width=5.25}
+res <- ibss(z,R,n,L = 3,s0 = rep(0.3,3),numiter = 10)
+pip_plot(res,causal_snps,
+         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+residuals_plot(res,z,R,l = 3) +
+  scale_y_continuous(limits = c(-12,15),breaks = seq(-15,15,5))
 ```
 
 TO DO NEXT: Give an example of what can go wrong when we use the
 "wrong" LD matrix.
+
+```{r}
+res_L2 <- ibss(z,R_out,n,L = 2,s0 = rep(0.3,3),numiter = 10)
+res_L3 <- ibss(z,R_out,n,L = 3,s0 = rep(0.3,3),numiter = 10)
+pip_plot(res_L2,causal_snps,
+         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+pip_plot(res_L3,causal_snps,
+         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+pdat <- data.frame(z = z,res = res_L3$residuals[,3])
+pdat <- pdat[res_L3$sets$cs[[3]],]
+residuals_plot(res_L3,z,R,l = 3) +
+  geom_point(data = pdat,aes(x = z,y = res),shape = 1,size = 3,
+             color = "magenta") +
+  scale_y_continuous(limits = c(-12,15),breaks = seq(-15,15,5)) 
+```
 
 Appendix: the RSS likelihood
 ----------------------------
