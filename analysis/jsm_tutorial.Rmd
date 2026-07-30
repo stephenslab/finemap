@@ -417,9 +417,35 @@ plot(fit$pip,res$pip,pch = 20,xlab = "susie_rss PIP",
 abline(a = 0,b = 1,lty = "dotted",col = "magenta")
 ```
 
-```{r}
-range(res$pip - fit$pip)
-qplot(z,res$residuals[,2],color = abs(R[,679]))
+```{r residuals-plot}
+residuals_plot <- function (fit, z, R, l, cs_color = "black") {
+  ld_colors <- c("darkblue","dodgerblue","limegreen","orange","red")
+  L   <- length(fit$sets$cs)
+  l1  <- setdiff(1:L,l)[1]
+  cs  <- fit$sets$cs[[l1]]
+  i   <- cs[which.max(fit$pip[cs])]
+  dat <- data.frame(z   = z,
+                    res = fit$residuals[,l],
+                    cor = abs(R[,i]))
+  dat <- transform(dat,cor = cut(cor,seq(0,1,length.out = 6)))
+  dat_cs <- dat[cs,]
+  return(ggplot(dat,aes(x = z,y = res,color = cor)) +
+         geom_point() +
+    	 geom_point(data = dat_cs,shape = 1,size = 3,color = cs_color) +
+		 geom_abline(intercept = 0,slope = 1,color = "black",
+		             linetype = "dotted")  +
+		 scale_color_manual(values = ld_colors) +
+		 labs(x = "z-score",y = "residual") +
+		 theme_cowplot(font_size = 12))
+}
+```
+
+```{r, fig.height=2, fig.width=3}
+residuals_plot(res,z,R,l = 2)
+```
+
+```{r, fig.height=2, fig.width=3}
+residuals_plot(res,z,R,l = 1)
 ```
 
 Multi-SNP model:
