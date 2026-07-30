@@ -12,7 +12,7 @@
 <meta name="author" content="Peter Carbonetto" />
 
 
-<title>JSM tutorial</title>
+<title>JSM tutorial on genetic fine-mapping with summary statistics: the RSS likelihood and the SuSiE model</title>
 
 <script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -270,7 +270,8 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">JSM tutorial</h1>
+<h1 class="title toc-ignore">JSM tutorial on genetic fine-mapping with
+summary statistics: the RSS likelihood and the SuSiE model</h1>
 <h4 class="author">Peter Carbonetto</h4>
 
 </div>
@@ -300,7 +301,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-23
+<strong>Last updated:</strong> 2026-07-30
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -431,15 +432,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree934de1c995ae3443e4ec70a7871899dc2d4bee73targetblank934de1ca">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree735725f5c31f0e82a68cb2c9b9b33dc99842666atargetblank735725fa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/finemap/tree/934de1c995ae3443e4ec70a7871899dc2d4bee73" target="_blank">934de1c</a>
+<a href="https://github.com/stephenslab/finemap/tree/735725f5c31f0e82a68cb2c9b9b33dc99842666a" target="_blank">735725f</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree934de1c995ae3443e4ec70a7871899dc2d4bee73targetblank934de1ca"
+id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree735725f5c31f0e82a68cb2c9b9b33dc99842666atargetblank735725fa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -449,7 +450,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/finemap/tree/934de1c995ae3443e4ec70a7871899dc2d4bee73" target="_blank">934de1c</a>.
+<a href="https://github.com/stephenslab/finemap/tree/735725f5c31f0e82a68cb2c9b9b33dc99842666a" target="_blank">735725f</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -467,6 +468,7 @@ Ignored files:
     Ignored:    data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld
 
 Untracked files:
+    Untracked:  .#README.md
     Untracked:  data/Thyroid.FMO2.1Mb.RDS
 
 </code></pre>
@@ -512,6 +514,347 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/735725f5c31f0e82a68cb2c9b9b33dc99842666a/analysis/jsm_tutorial.Rmd" target="_blank">735725f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+<td>
+Implemented residuals_plot().
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/4d8050ec9c9e435232c1f424d70dae8e9eb8453f/analysis/jsm_tutorial.Rmd" target="_blank">4d8050e</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+<td>
+Added detailed derivation of the ibss algorithm.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/370d61bf593b73d74327ffdf13158619222bc96a/analysis/jsm_tutorial.Rmd" target="_blank">370d61b</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-29
+</td>
+<td>
+A couple edits.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/edd7dcd5c2dd3534901fc0604718ce7e19f77550/analysis/jsm_tutorial.Rmd" target="_blank">edd7dcd</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-29
+</td>
+<td>
+I’ve written up a rough description of the IBSS algorithm and the SER
+model.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/92acbfb8e7b8c59d3f6e2daa25aa141f9687a90c/analysis/jsm_tutorial.Rmd" target="_blank">92acbfb</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-29
+</td>
+<td>
+Made a few small improvements to the jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/1f46352b3bfd7ddb9fd0137630927996747dea09/analysis/jsm_tutorial.Rmd" target="_blank">1f46352</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-29
+</td>
+<td>
+Added equations to describe the single-SNP model in more detail.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/1af9ba03483b9aefca8126d18ffb0a9c6dec8254/analysis/jsm_tutorial.Rmd" target="_blank">1af9ba0</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-29
+</td>
+<td>
+Added overview and links to jsm tutorial
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/b3cc068ef4af19c24cf0ed7be3d885a66491f8b3/analysis/jsm_tutorial.Rmd" target="_blank">b3cc068</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-28
+</td>
+<td>
+I (re)implemented the summary stats verison of the IBSS algorithm.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/c1d0298c008762ea33ae8a6551d3bd5d4e914c29/analysis/jsm_tutorial.Rmd" target="_blank">c1d0298</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-28
+</td>
+<td>
+Added a couple more explanations to the jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/9beb89e1bd6f934cc3f946ac43fb509868cf8649/analysis/jsm_tutorial.Rmd" target="_blank">9beb89e</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-28
+</td>
+<td>
+Implemented the SER calculations for the jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/b35a69c2f281034284180ee3caf5033dce92fa17/analysis/jsm_tutorial.Rmd" target="_blank">b35a69c</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-28
+</td>
+<td>
+Added a couple explanations to the jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/f275af53c77c11941fe4897b4a9648999e2f51ac/analysis/jsm_tutorial.Rmd" target="_blank">f275af5</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-24
+</td>
+<td>
+Small fix.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/c06a7a09b9faede18debf251876d3e19d72e2368/analysis/jsm_tutorial.Rmd" target="_blank">c06a7a0</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-24
+</td>
+<td>
+Added likelihood expressions to jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/21db558b5fcbf7ea202ef4e9b97ac991907bd461/analysis/jsm_tutorial.Rmd" target="_blank">21db558</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-24
+</td>
+<td>
+Renamed susie_plot_better() as pip_plot().
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3011519e1581520bbf6b3abb7e923f0b86acdd40/analysis/jsm_tutorial.Rmd" target="_blank">3011519</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-24
+</td>
+<td>
+Added a line to one of the equations.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/5cb1feec030be75d35f74a30b24d8693b9f34d88/analysis/jsm_tutorial.Rmd" target="_blank">5cb1fee</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-24
+</td>
+<td>
+Added a couple equations to the jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/a4d5785497dfd0ef077b99e82bd34c6a39232cba/analysis/jsm_tutorial.Rmd" target="_blank">a4d5785</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+<td>
+Added a note.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/0dc51002238436dbe69701df264c8d9c089ad7a2/analysis/jsm_tutorial.Rmd" target="_blank">0dc5100</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+<td>
+Added a couple refs.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/b326a3dd9648c21e36b6d9f0cc9b42e814b68bbc/analysis/jsm_tutorial.Rmd" target="_blank">b326a3d</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+<td>
+Implemented the correct BF calculations.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/finemap/750d41b0d188d8e0860b5e78cc63ee790b16ceaa/docs/jsm_tutorial.html" target="_blank">750d41b</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+<td>
+Ran wflow_publish("jsm_tutorial.Rmd").
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -604,11 +947,15 @@ wflow_remove("jss_tutorial.Rmd")
 </div>
 </div>
 </div>
-<p>ADD TEXT HERE.</p>
+<p>The goal of this tutorial is to give some intuition for the key
+statistical concepts and computations involved in genetic fine-mapping
+with the <a href="https://doi.org/10.1101/501114">SuSiE</a> and <a
+href="https://doi.org/10.1371/journal.pgen.1010299">SuSiE-RSS</a> models
+without entering too deeply into the mathematical derivations.</p>
 <div id="initial-setup" class="section level2">
 <h2>Initial setup</h2>
 <p>For this tutorial, I’m using a lightly modified version of susieR
-that can be installed from the “output_residuals” branch:</p>
+available in the “output_residuals” branch:</p>
 <pre class="r"><code>library(remotes)
 install_github(&quot;stephenslab/susieR@output_residuals&quot;)</code></pre>
 <p>Load all the packages used in the tutorial:</p>
@@ -619,12 +966,23 @@ packageVersion(&quot;susieR&quot;)
 # [1] &#39;0.14.4&#39;</code></pre>
 <p>Set the seed for reproducibility:</p>
 <pre class="r"><code>set.seed(1)</code></pre>
-<p>ADD TEXT HERE.</p>
+<p>The data set contains genotype and quantitative trait data for <span
+class="math inline">\(n
+= 574\)</span> individuals and <span class="math inline">\(p =
+750\)</span> genetic markers (SNPs).</p>
 <pre class="r"><code>load(&quot;../data/jsm_tutorial_data.RData&quot;)
 n &lt;- nrow(X)
 dim(X)
 # [1] 574 740</code></pre>
-<p>ADD TEXT HERE.</p>
+</div>
+<div id="association-analysis-vs.-fine-mapping" class="section level2">
+<h2>Association analysis vs. fine-mapping</h2>
+<p>First let’s connect a genetic association analysis to a fine-mapping
+analysis in order to understand points of overlap and their
+differences.</p>
+<p>This is a function we will use in the code chunks below to create a
+basic Manhattan plot. Understanding how this function works is not
+important.</p>
 <pre class="r"><code>manhattan_plot &lt;- function (pval, causal_snps = NULL, xlab = &quot;&quot;) {
   n &lt;- length(pval)
   dat &lt;- data.frame(pos = 1:n,pval = -log10(pval))
@@ -639,14 +997,66 @@ dim(X)
   }
   return(out)
 }</code></pre>
-<p>ADD TEXT HERE.</p>
+<p>The Manhattan plot is a visualization of the association analysis: it
+summarizes the evidence for association with the quantitative trait at
+the 740 SNPs.</p>
 <pre class="r"><code>manhattan_plot(pval,xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/show-manhattan-plot-1.png" width="600" style="display: block; margin: auto;" /></p>
-<p>ADD TEXT HERE.</p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-show-manhattan-plot-1">
+Past versions of show-manhattan-plot-1.png
+</button>
+</p>
+<div id="fig-show-manhattan-plot-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/750d41b0d188d8e0860b5e78cc63ee790b16ceaa/docs/figure/jsm_tutorial.Rmd/show-manhattan-plot-1.png" target="_blank">750d41b</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>There are several “clusters” of SNPs that have very low
+<em>p</em>-values. This clustering is typical due to strong correlations
+(“LD”) between nearby SNPs. The fact that there are several clusters
+suggests that perhaps there is more than one SNP affecting the
+quantitative trait, but it is hard to say for sure based on an
+association analysis alone.</p>
+<p>Let’s now run a SuSiE fine-mapping analysis <em>using the same
+statistics that were used in the association tests</em>—specifically, we
+will use the z-scores. (We will also eventually need <span
+class="math inline">\({\bf R}\)</span>, the <span
+class="math inline">\(p \times p\)</span> matrix of correlations between
+all SNPs, also sometimes called the “LD matrix”.)</p>
 <pre class="r"><code>fit &lt;- susie_rss(zhat,R,n = n,estimate_prior_method = &quot;EM&quot;,
-                 tol = 1e-6,min_abs_corr = 0,verbose = FALSE)</code></pre>
-<p>ADD TEXT HERE.</p>
-<pre class="r"><code>susie_plot_better &lt;- function (fit, causal_snps = NULL, xlab = &quot;&quot;) {
+                 tol = 1e-8,min_abs_corr = 0)</code></pre>
+<p>This is a function we will use in the code chunks below to visualize
+the results of the SuSiE fine-mapping analysis. Understanding how this
+function works is not important.</p>
+<pre class="r"><code>pip_plot &lt;- function (fit, causal_snps = NULL, xlab = &quot;&quot;) {
   cs_colors &lt;- c(&quot;dodgerblue&quot;,&quot;limegreen&quot;)
   pip &lt;- fit$pip
   n   &lt;- length(pip)
@@ -663,7 +1073,7 @@ dim(X)
                mapping = aes(color = CS)) +
     scale_x_continuous(breaks = NULL) +
     scale_color_manual(values = cs_colors) + 
-    labs(x = xlab,y = &quot;-log10 p-value&quot;) +
+    labs(x = xlab,y = &quot;PIP&quot;) +
     theme_cowplot(font_size = 12)
   if (!is.null(causal_snps)) {
     dat_causal &lt;- dat[causal_snps,]
@@ -671,18 +1081,383 @@ dim(X)
   }
   return(out)
 }</code></pre>
-<p>ADD TEXT HERE.</p>
+<p>One thing we did not show in the previous plot is that there are
+actually 2 “causal SNPs”—that is, 2 SNPs that affect the trait, shown as
+2 red dots in the next plot. (This is a simulated quantitative trait, so
+we know the truth.)</p>
 <pre class="r"><code>causal_snps &lt;- which(b_true != 0)
-susie_plot_better(fit,causal_snps,
-                  xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)</code></pre>
+pip_plot(fit,causal_snps,
+         xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/susie-rss-plot-1.png" width="630" style="display: block; margin: auto;" /></p>
-<p>ADD TEXT HERE.</p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-susie-rss-plot-1">
+Past versions of susie-rss-plot-1.png
+</button>
+</p>
+<div id="fig-susie-rss-plot-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/750d41b0d188d8e0860b5e78cc63ee790b16ceaa/docs/figure/jsm_tutorial.Rmd/susie-rss-plot-1.png" target="_blank">750d41b</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This plot is a “PIP plot”, where PIP = “posterior inclusion
+probability”. The PIPs weigh the support a SNP being a causal SNP, and
+indeed, the two causal SNPs have the highest PIPs. Each of the two
+credible sets (CSs) is meant to capture a causal SNP with high
+probability, and indeed in this example they do. And then the PIPs
+within each CS capture the uncertainty in which of the nearby SNPs is
+the true causal SNP. In CS2, several SNPs are strongly correlated with
+each other—the minimum correlation among the four SNPs in CS2 is
+0.99—and so it difficult to say for sure which of these SNPs is the
+causal SNP. The PIPs in CS2 reflect this.</p>
+<pre class="r"><code>j &lt;- fit$sets$cs$L1
+min(R[j,j])
+# [1] 0.9904513</code></pre>
+<p>By contrast, in CS1 we are quite confident (PIP &gt; 0.95) that the
+one SNP is causal.</p>
+<p>To reinforce some of these points, it is helpful to compare the
+association analysis directly with the fine-mapping analysis:</p>
 <pre class="r"><code>p1 &lt;- manhattan_plot(pval,causal_snps,
                      xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)
-p2 &lt;- susie_plot_better(fit,causal_snps,
-                        xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)
+p2 &lt;- pip_plot(fit,causal_snps,
+               xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)
 plot_grid(p1,p2,nrow = 2,ncol = 1,align = &quot;v&quot;,axis = &quot;lr&quot;)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/more-susie-plots-1.png" width="630" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-more-susie-plots-1">
+Past versions of more-susie-plots-1.png
+</button>
+</p>
+<div id="fig-more-susie-plots-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/750d41b0d188d8e0860b5e78cc63ee790b16ceaa/docs/figure/jsm_tutorial.Rmd/more-susie-plots-1.png" target="_blank">750d41b</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="the-special-case-of-1-causal-snp" class="section level2">
+<h2>The special case of 1 causal SNP</h2>
+<p>A goal of this tutorial is to gain some insight into how we arrived
+at this fine-mapping result and how SuSiE works. Starting with the case
+of a single causal SNP will be our first step toward that goal.</p>
+<p>Assuming a single causal SNP simplifies things greatly because we can
+compute the PIPs and CS quite easily using the z-scores. Here we break
+down the analysis into three calculations: the calculation of the CS
+given the PIPs; the calculation of the PIPs given the Bayes factors
+(BFs); and the calculation of the BFs.</p>
+<p>Computing the PIPs given the BFs is quite simple. If we assume the
+prior inclusion probabilities are the same for all SNPs, we have <span
+class="math display">\[
+\mathrm{PIP}_j = \frac{\mathrm{BF}_j}{\sum_{j&#39;=1}^p
+\mathrm{BF}_{j&#39;}}.
+\]</span> This function performs this calculation in a numerically
+stable way given the log-BFs:</p>
+<pre class="r"><code>normalizelogweights &lt;- function (logw) {
+  x &lt;- max(logw)
+  w &lt;- exp(logw - x)
+  return(w/sum(w))
+}</code></pre>
+<p>This function returns a CS given the PIPs:</p>
+<pre class="r"><code>get_cs &lt;- function (pip, coverage = 0.95) {
+  i &lt;- order(pip,decreasing = TRUE)
+  n &lt;- which(cumsum(pip[i]) &gt; coverage)[1]
+  return(i[1:n])
+}</code></pre>
+<p>The Bayes factor for each SNP <span class="math inline">\(j\)</span>
+is a ratio of two likelihoods comparing a “single-SNP model” of the
+quantitative trait <span class="math inline">\(\boldsymbol{y}\)</span>
+against a “null model” in which no SNP affects the trait. In most of our
+analyses the single-SNP model for each SNP <span
+class="math inline">\(j\)</span> is a simple linear regression in which
+the prior distribution for the unknown coefficient <span
+class="math inline">\(b_j\)</span> is a normal distribution centered at
+zero (for simplicity I’ll assume the residual variance is 1, which is an
+assumption we will make later on anyhow): <span class="math display">\[
+\begin{aligned}
+\boldsymbol{y} \mid b_j &amp;\sim N_n(\boldsymbol{x}_j b_j, 1) \\
+b_j \mid \sigma_0^2 &amp;\sim N(0, \sigma_0^2)
+\end{aligned}
+\]</span></p>
+<p>A key idea is this single-SNP model can be reframed as a model of the
+z-score obtained from the association test: <span
+class="math display">\[
+\begin{aligned}
+z_j &amp;\sim N(\sqrt{n} b_j, 1) \\
+b_j &amp;\sim N(0, \sigma_0^2).
+\end{aligned}
+\]</span> Therefore, the BF calculation can be expressed as a comparison
+of two models of the z-scores: <span class="math display">\[
+\begin{aligned}
+\mathrm{BF}_j &amp;=
+\frac{p(\boldsymbol{y} \mid \boldsymbol{x}_j, b_j \neq 0)}
+     {p(\boldsymbol{y} \mid \boldsymbol{x}_j, b_j = 0)} \\
+&amp;= \frac{p(z_j \mid b_j \neq 0)}
+        {p(z_j \mid b_j = 0)} \\
+&amp;\propto \exp\bigg\{
+\frac{z_j^2}{2} \times
+\frac{\tilde{\sigma}_0^2}{\tilde{\sigma}_0^2 + 1}
+\bigg\}, \\
+\end{aligned}
+\]</span> where <span class="math inline">\(\tilde{\sigma}_0^2 := n
+\sigma_0^2\)</span>. The following function implements the BF
+calculation for all SNPs. (It also computes the posterior mean effect
+estimates <span class="math inline">\(b_{j1} :=
+E[b_j \mid z_j, \sigma_0^2]\)</span> which we do not need immediately,
+but we will need later on.)</p>
+<pre class="r"><code>compute_log_bf &lt;- function (z, s0) {
+  s0  &lt;- n * s0
+  lbf &lt;- z^2/2 * s0/(s0 + 1)
+  b1  &lt;- z/(1 + 1/s0)
+  return(list(lbf = lbf,b1 = b1))
+}</code></pre>
+<p>Compare to eq. A.3 of the <a
+href="https://doi.org/10.1101/501114">SuSiE paper</a> and eq. 17 of the
+<a href="https://doi.org/10.1371/journal.pgen.1010299">SuSiE-RSS
+paper</a>.</p>
+<p>Let’s now perform these calculations on the example data set:</p>
+<pre class="r"><code>s0  &lt;- 0.36
+z   &lt;- sqrt(n/(n + zhat^2)) * zhat
+lbf &lt;- compute_log_bf(z,s0)$lbf
+pip &lt;- normalizelogweights(lbf)
+cs &lt;- get_cs(pip)
+pip_plot(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
+         xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/single-snp-1.png" width="630" style="display: block; margin: auto;" /></p>
+<p>Note that we adjusted the z-scores in the same way as in
+<code>susie_rss()</code>. See the SuSiE-RSS paper for an explanation of
+why this is done.</p>
+<p>(Note that the prior variance setting of 0.36 here was mainly chosen
+to match the estimate obtained by running <code>susie_rss()</code>, and
+the particular choice is not critical.)</p>
+<p>Not surprisingly, because we assumed 1 causal SNP, the CS captures
+only one of the two causal SNPs. Despite this failure, we still made
+some progress by reusing the association tests to perform fine-mapping
+(that is, we computed a CS and a PIP for each SNP).</p>
+<p>A quick verification that these calculations match the
+<code>susie_rss()</code> result:</p>
+<pre class="r"><code>par(mar = c(4,4,2,1))
+fit_1cs &lt;- susie_rss(zhat,R,n = n,L = 1,estimate_prior_method = &quot;EM&quot;,
+                     tol = 1e-6)
+plot(fit_1cs$pip,pip,pch = 20,xlab = &quot;susie_rss PIP&quot;,ylab = &quot;JSM tutorial PIP&quot;)
+abline(a = 0,b = 1,lty = &quot;dotted&quot;,col = &quot;magenta&quot;)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-1-1.png" width="360" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="extending-to-more-than-1-causal-snp-a-simple-iterative-calculation"
+class="section level2">
+<h2>Extending to more than 1 causal SNP: a simple iterative
+calculation</h2>
+<p>Here we will show that we can reuse previous Bayes factor and PIP
+calculations above to make perform the necessary inferences for more
+than one causal SNP. In this example we will consider the case of <span
+class="math inline">\(L = 2\)</span> causal SNPs, but the implementation
+provided here works for any number of causal SNPs.</p>
+<p>To explain how this works, we first formalize the ideas from the
+previous section as a model which we call the “single effect regression”
+(SER) model. This is a model in which exactly 1 of the <span
+class="math inline">\(p\)</span> candidate SNPs affects the trait, and
+the choice of SNP <span class="math inline">\(j\)</span> is
+probabilistic, drawn uniformly at random from the pool of <span
+class="math inline">\(p\)</span> candidate SNPs. The SER in summary
+statistics form is <span class="math display">\[
+\begin{aligned}
+\boldsymbol{z} \mid b_j &amp;\sim N_p(\sqrt{n} b_j, 1) \\
+\gamma = j &amp;\sim \textstyle
+\mathrm{Multinom}\big(1, (\frac{1}{p}, \ldots, \frac{1}{p})\big) \\
+b_j \mid \sigma_0^2 &amp;\sim N(0, \sigma_0^2). \\
+\end{aligned}
+\]</span> The posterior distribution of <span
+class="math inline">\(b\)</span> under this SER model is a weighted
+mixture of normals in which the weights are the PIPs. For example, the
+posterior mean of each <span class="math inline">\(b_j\)</span> is
+simply <span class="math display">\[
+\bar{b}_j = \mathrm{PIP}_j b_{1j}.
+\]</span></p>
+<p>To describe the algorithm, we use <span
+class="math inline">\(\mathrm{SER}(\boldsymbol{z},
+\sigma_0^2)\)</span> as shorthand for the posterior distribution of
+<span class="math inline">\(\boldsymbol{b} := (b_1, \ldots,
+b_p)\)</span> given <span class="math inline">\(\boldsymbol{z},
+\sigma_0^2\)</span> under the SER model. Using the SER model, we define
+the solution fine-mapping analysis with <span
+class="math inline">\(L\)</span> causal SNPs as follows: it is an
+iterative solution obtained by repeatedly fitting <span
+class="math inline">\(L\)</span> SERs in which each SER is fit to the
+residuals obtained by removing the effects of the other <span
+class="math inline">\(L - 1\)</span> SERs. This involves repeating the
+following steps for each <span class="math inline">\(l = 1, \ldots,
+L\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><p>Compute the residuals obtained by removing the effects of the
+other SERs, <span class="math inline">\(\boldsymbol{r}_l =
+\boldsymbol{z} - {\bf R} \sum_{l&#39; \neq l}
+\bar{\boldsymbol{b}}^{(l&#39;)}\)</span>, where <span
+class="math inline">\(\bar{\boldsymbol{b}}^{(l)}\)</span> denotes the
+posterior mean of the coefficients <span
+class="math inline">\(\boldsymbol{b}\)</span> from the <span
+class="math inline">\(l\)</span>th the SER.</p></li>
+<li><p>Compute the posterior distribution for the <span
+class="math inline">\(l\)</span>th SER model fit to the residuals from
+Step 1, <span class="math inline">\(\mathrm{SER}(\boldsymbol{r}_l,
+\sigma_{0l}^2)\)</span>, then compute PIPs, CS and the posterior mean of
+<span class="math inline">\(\boldsymbol{b}\)</span>.</p></li>
+</ol>
+<p>Notice that the LD matrix <span class="math inline">\({\bf
+R}\)</span> is only used in Step 1.</p>
+<p>This iterative algorithm is called the IBSS algorithm, short for
+“iterative Bayesian stepwise selection”. The following function repeats
+Steps 1 and 2 “numiter” times for each of the <span
+class="math inline">\(L\)</span> SERs:</p>
+<pre class="r"><code>ibss &lt;- function (z, R, n, L, s0, numiter, coverage = 0.95) {
+  p   &lt;- length(zhat)
+  PIP &lt;- matrix(0,p,L)
+  B1  &lt;- matrix(0,p,L)
+  r   &lt;- z
+  residuals &lt;- matrix(0,p,L)
+  for (iter in 1:numiter) {
+    for (l in 1:L) {
+      b1  &lt;- B1[,l]
+      r   &lt;- r + R %*% b1
+      residuals[,l] &lt;- r
+      out &lt;- compute_log_bf(r,s0[l])
+      pip &lt;- normalizelogweights(out$lbf)
+      b1  &lt;- out$b1 * pip
+      r   &lt;- r - R %*% b1
+      PIP[,l] &lt;- pip
+      B1[,l]  &lt;- b1
+    }
+  }
+  return(list(pip = rowSums(PIP),
+              residuals = residuals,
+              sets = list(cs = apply(PIP,2,function (x) get_cs(x,coverage)))))
+}</code></pre>
+<p>Let’s now apply the IBSS algorithm to the z-scores and LD matrix,
+with <span class="math inline">\(L = 2\)</span>:</p>
+<pre class="r"><code>res &lt;- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)</code></pre>
+<p>The prior variances were chosen to match the estimated obtained by
+running <code>susie_rss()</code>.</p>
+<p>Indeed, this result is nearly the same as the original result we
+obtained from running SuSiE-RSS:</p>
+<pre class="r"><code>pip_plot(res,causal_snps,
+         xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/pip-plot-ibss-1.png" width="630" style="display: block; margin: auto;" /></p>
+<p>And:</p>
+<pre class="r"><code>par(mar = c(4,4,2,1))
+plot(fit$pip,res$pip,pch = 20,xlab = &quot;susie_rss PIP&quot;,
+     ylab = &quot;JSM tutorial PIP&quot;)
+abline(a = 0,b = 1,lty = &quot;dotted&quot;,col = &quot;magenta&quot;)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/compare-ibss-susie-rss-1.png" width="360" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>residuals_plot &lt;- function (fit, z, R, l, cs_color = &quot;black&quot;) {
+  ld_colors &lt;- c(&quot;darkblue&quot;,&quot;dodgerblue&quot;,&quot;limegreen&quot;,&quot;orange&quot;,&quot;red&quot;)
+  L   &lt;- length(fit$sets$cs)
+  l1  &lt;- setdiff(1:L,l)[1]
+  cs  &lt;- fit$sets$cs[[l1]]
+  i   &lt;- cs[which.max(fit$pip[cs])]
+  dat &lt;- data.frame(z   = z,
+                    res = fit$residuals[,l],
+                    cor = abs(R[,i]))
+  dat &lt;- transform(dat,cor = cut(cor,seq(0,1,length.out = 6)))
+  dat_cs &lt;- dat[cs,]
+  return(ggplot(dat,aes(x = z,y = res,color = cor)) +
+         geom_point() +
+         geom_point(data = dat_cs,shape = 1,size = 3,color = cs_color) +
+         geom_abline(intercept = 0,slope = 1,color = &quot;black&quot;,
+                     linetype = &quot;dotted&quot;)  +
+         scale_color_manual(values = ld_colors) +
+         labs(x = &quot;z-score&quot;,y = &quot;residual&quot;) +
+         theme_cowplot(font_size = 12))
+}</code></pre>
+<pre class="r"><code>residuals_plot(res,z,R,l = 2)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-2-1.png" width="360" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>residuals_plot(res,z,R,l = 1)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-3-1.png" width="360" style="display: block; margin: auto;" /></p>
+<p>Multi-SNP model: <span class="math display">\[
+\begin{aligned}
+\boldsymbol{y} \mid \boldsymbol{b} &amp;\sim
+N_n({\bf X}{\boldsymbol b}, {\bf I}_n) \\
+\boldsymbol{b} \mid \sigma_0^2 &amp;\sim N_p(0, \sigma_0^2 {\bf I}_p).
+\end{aligned}
+\]</span></p>
+<p>Multi-SNP regression likelihood: <span class="math display">\[
+{\boldsymbol y} \mid {\boldsymbol b}, \sigma^2 \sim
+N_n({\bf X}{\boldsymbol b}, \sigma^2 {\bf I}_n)
+\]</span> Equivalent likelihood formulated using summary statistics:
+<span class="math display">\[
+{\boldsymbol t} \mid {\bf R}, n, \tilde{\boldsymbol b}, \sigma^2 \sim
+N_p(\sqrt{n} {\bf R} \tilde{\boldsymbol b}, \sigma^2{\bf R})
+\]</span> With a few additional assumptions, the RSS likelihood using
+z-scores (actually these are “lightly modified” z-scores): <span
+class="math display">\[
+\tilde{\boldsymbol z} \mid {\bf R}, n, {\boldsymbol b}, \sigma^2 \sim
+N_p(\sqrt{n} {\bf R} \boldsymbol b, \sigma^2{\bf R})
+\]</span></p>
+<p><span class="math inline">\({\bf R}\)</span> is the <span
+class="math inline">\(p \times p\)</span> correlation (“LD”) matrix;
+<span class="math inline">\({\boldsymbol z}\)</span> is a “lightly
+modified” z-score. Refer to the corresponding equation for the RSS
+likelihood in the SuSiE-RSS paper.</p>
+<p>NEXT: Implement a simple version of the IBSS algorithm using the RSS
+likelihood. See Algorithm 1 in the S1 Text of the SuSiE-RSS paper.</p>
+<div id="references" class="section level3">
+<h3>References</h3>
+<p>Wang et al (2020). A simple new approach to variable selection in
+regression, with application to genetic fine mapping. <em>Journal of the
+Royal Statistical Society, Series B</em> 82, 1273-1300. <a
+href="https://doi.org/10.1101/501114">link</a></p>
+<p>Zou et al (2022). Fine-mapping from summary data with the Sum of
+Single Effects model. <em>PLoS Genetics</em> 18, e1010299. [link]</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -733,6 +1508,7 @@ Session information
 # [52] tidyselect_1.2.1    knitr_1.50          dichromat_2.0-0.1  
 # [55] farver_2.1.2        htmltools_0.5.8.1   rmarkdown_2.29     
 # [58] labeling_0.4.3      compiler_4.3.3</code></pre>
+</div>
 </div>
 </div>
 </div>
