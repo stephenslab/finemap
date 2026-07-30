@@ -310,54 +310,58 @@ abline(a = 0,b = 1,lty = "dotted",col = "magenta")
 Extending to more than 1 causal SNP: a simple iterative calculation
 -------------------------------------------------------------------
 
-Here we will show that we can reuse the previous Bayes factor and PIP
-calculations to make perform the necessary inferences for more than
+Here we will show that we can reuse previous Bayes factor and PIP
+calculations above to make perform the necessary inferences for more than
 one causal SNP. In this example we will consider the case of $L = 2$
 causal SNPs, but the implementation provided here works for any number
 of causal SNPs.
 
 To explain how this works, we first formalize the ideas from the
 previous section as a model which we call the "single effect
-regression" (SER) model. This is a model in which exactly 1 out of $p$
-SNPs affects the trait, and the choice of SNP $j$ is drawn uniformly
-at random from the pool of candidate SNPs. The SER in summary
-statistics form is
+regression" (SER) model. This is a model in which exactly 1 of the $p$
+candidate SNPs affects the trait, and the choice of SNP $j$ is
+probabilistic, drawn uniformly at random from the pool of $p$
+candidate SNPs. The SER in summary statistics form is
 $$
 \begin{aligned}
 \boldsymbol{z} \mid b_j &\sim N_p(\sqrt{n} b_j, 1) \\
 \gamma = j &\sim \textstyle
 \mathrm{Multinom}\big(1, (\frac{1}{p}, \ldots, \frac{1}{p})\big) \\
-b_j \mid \sigma_0^2 &\sim N(0, \sigma_0^2).
+b_j \mid \sigma_0^2 &\sim N(0, \sigma_0^2). \\
 \end{aligned}
 $$
-The posterior distribution of $b$ under the SER model is a weighted
-mixture of normals in which the weights are the PIPs. In particular,
-the posterior mean of the coefficients $\boldsymbol{b} = (b_1, \ldots, b_p)$
-is given by
+The posterior distribution of $b$ under this SER model is a weighted
+mixture of normals in which the weights are the PIPs. For example, the
+posterior mean of each $b_j$ is simply
 $$
 \bar{b}_j = \mathrm{PIP}_j b_{1j}.
 $$
-We use $\mathrm{SER}(\boldsymbol{z}, \sigma_0^2)$ to denote the
-posterior distribution of $\boldsymbol{b} \mid \boldsymbol{z},
-\sigma_0^2$ under the SER model.
 
-Now using the SER model, we can define the solution fine-mapping
-analysis as an iterative solution obtained by repeatedly fitting $L$
-SERs in which each SER iis fit to the residuals obtained by removing
-the effects of the other $L - 1$ SERs. This essentially involves
-repeating the following steps for each $l = 1, \ldots, L$:
+To describe the algorithm, we use $\mathrm{SER}(\boldsymbol{z},
+\sigma_0^2)$ as shorthand for the posterior distribution of
+$\boldsymbol{b} := (b_1, \ldots, b_p)$ given $\boldsymbol{z},
+\sigma_0^2$ under the SER model.  Using the SER model, we define the
+solution fine-mapping analysis with $L$ causal SNPs as follows: it is
+an iterative solution obtained by repeatedly fitting $L$ SERs in which
+each SER is fit to the residuals obtained by removing the effects of
+the other $L - 1$ SERs. This involves repeating the following steps
+for each $l = 1, \ldots, L$:
 
-1. Compute the residuals obtained by removing the effects of the other SERs,
-$\boldsymbol{r}_l = \boldsymbol{z} - {\bf R} \sum_{l' \neq l}
-\bar{\boldsymbol{b}}^{(l)}$, where $\bar{\boldsymbol{b}}^{(l)}$ denotes the
-posterior mean of the coefficients $\boldsymbol{b}$ from the $l$th the SER.
+1. Compute the residuals obtained by removing the effects of the other
+SERs, $\boldsymbol{r}_l = \boldsymbol{z} - {\bf R} \sum_{l' \neq l}
+\bar{\boldsymbol{b}}^{(l')}$, where $\bar{\boldsymbol{b}}^{(l)}$
+denotes the posterior mean of the coefficients $\boldsymbol{b}$ from
+the $l$th the SER.
 
-2. Compute the PIPs, CS and posterior mean of $\boldsymbol{b}$
-from the $l$th SER model fit to the residuals obtained in Step 1,
-$\mathrm{SER}(\boldsymbol{r}_l, \sigma_{0l}^2)$.
+2. Compute the posterior distribution for the $l$th SER model fit to
+the residuals from Step 1, $\mathrm{SER}(\boldsymbol{r}_l,
+\sigma_{0l}^2)$, then compute PIPs, CS and the posterior mean of
+$\boldsymbol{b}$.
 
-This iterative algorithm is called the IBSS algorithm, which is short
-for "iterative Bayesian stepwise selection". The following function
+Notice that the LD matrix ${\bf R}$ is only used in Step 1.
+
+This iterative algorithm is called the IBSS algorithm, short for
+"iterative Bayesian stepwise selection". The following function
 repeats Steps 1 and 2 "numiter" times for each of the $L$ SERs:
 
 ```{r ibss}
@@ -386,11 +390,35 @@ ibss <- function (z, R, n, L, s0, numiter, coverage = 0.95) {
 }
 ```
 
-```{r}
+Let's now apply the IBSS algorithm to the z-scores and LD matrix, with
+$L = 2$:
+
+```{r run-ibss}
 res <- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)
-range(res$pip - fit$pip)
+```
+
+The prior variances were chosen to match the estimated obtained by
+running `susie_rss()`.
+
+Indeed, this result is nearly the same as the original result we
+obtained from running SuSiE-RSS:
+
+```{r pip-plot-ibss, fig.height=1.75, fig.width=5.25}
 pip_plot(res,causal_snps,
          xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+```
+
+And:
+
+```{r compare-ibss-susie-rss, fig.height=3, fig.width=3}
+par(mar = c(4,4,2,1))
+plot(fit$pip,res$pip,pch = 20,xlab = "susie_rss PIP",
+     ylab = "JSM tutorial PIP")
+abline(a = 0,b = 1,lty = "dotted",col = "magenta")
+```
+
+```{r}
+range(res$pip - fit$pip)
 qplot(z,res$residuals[,2],color = abs(R[,679]))
 ```
 
