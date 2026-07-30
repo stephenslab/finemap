@@ -491,7 +491,7 @@ Royal Statistical Society, Series B* 82, 1273-1300.
 
 Zou et al (2022). Fine-mapping from summary data with the Sum of
 Single Effects model. *PLoS Genetics* 18, e1010299.
-[link]
+[link][susie_rss]
 
 [susie]: https://doi.org/10.1101/501114
 [susie_rss]: https://doi.org/10.1371/journal.pgen.1010299
