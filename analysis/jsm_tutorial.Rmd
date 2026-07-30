@@ -390,6 +390,11 @@ ibss <- function (z, R, n, L, s0, numiter, coverage = 0.95) {
 }
 ```
 
+For background and detailed derivations, see the
+[SuSiE-RSS paper][susie_rss]. Also compare this description of the
+IBSS algorithm and the `ibss()` R function to Algorithm 1 in the
+[SuSiE-RSS][susie_rss] paper.
+
 Let's now apply the IBSS algorithm to the z-scores and LD matrix, with
 $L = 2$:
 
@@ -417,6 +422,10 @@ plot(fit$pip,res$pip,pch = 20,xlab = "susie_rss PIP",
 abline(a = 0,b = 1,lty = "dotted",col = "magenta")
 ```
 
+To gain some a little more insight into what the IBSS algorithm is
+doing, it is helpful to see what are the data that are actually being
+used to fit the SERs.
+
 ```{r residuals-plot}
 residuals_plot <- function (fit, z, R, l, cs_color = "black") {
   ld_colors <- c("darkblue","dodgerblue","limegreen","orange","red")
@@ -440,47 +449,52 @@ residuals_plot <- function (fit, z, R, l, cs_color = "black") {
 }
 ```
 
+This scatterplot compares the z-scores to the residuals that were used
+to fit the second SER after removing the posterior mean effects of the
+first SER:
+
 ```{r, fig.height=2, fig.width=3}
 residuals_plot(res,z,R,l = 2)
 ```
+
+From this plot we see not only that the large z-scores corresponding
+to the SNPs in the CS1 (black circles) get "shrunk" toward zero, but
+the z-scores for SNPs strongly correlated with CS1 also get shrunk
+toward zero. This has the effect of focussing the second SER on the
+remaining large z-scores.
+
+Likewise, when we re-fit the first SER, the z-scores in CS2 as well as
+the z-scores correlated with the SNP in CS2 are also strongly shrunk
+toward zero:
 
 ```{r, fig.height=2, fig.width=3}
 residuals_plot(res,z,R,l = 1)
 ```
 
-Multi-SNP model:
-$$
-\begin{aligned}
-\boldsymbol{y} \mid \boldsymbol{b} &\sim
-N_n({\bf X}{\boldsymbol b}, {\bf I}_n) \\
-\boldsymbol{b} \mid \sigma_0^2 &\sim N_p(0, \sigma_0^2 {\bf I}_p).
-\end{aligned}
-$$
+TO DO NEXT: Give an example of what can go wrong when we use the
+"wrong" LD matrix.
+
+Appendix: the RSS likelihood
+----------------------------
 
 Multi-SNP regression likelihood:
 $$
-{\boldsymbol y} \mid {\boldsymbol b}, \sigma^2 \sim
-N_n({\bf X}{\boldsymbol b}, \sigma^2 {\bf I}_n)
+\boldsymbol{y} \mid \boldsymbol{b}, \sigma^2 \sim
+N_n({\bf X} \boldsymbol{b}, \sigma^2 {\bf I}_n)
 $$
 Equivalent likelihood formulated using summary statistics:
 $$
-{\boldsymbol t} \mid {\bf R}, n, \tilde{\boldsymbol b}, \sigma^2 \sim
-N_p(\sqrt{n} {\bf R} \tilde{\boldsymbol b}, \sigma^2{\bf R})
+\boldsymbol{t} \mid {\bf R}, n, \tilde{\boldsymbol{b}}, \sigma^2 \sim
+N_p(\sqrt{n} {\bf R} \tilde{\boldsymbol{b}}, \sigma^2{\bf R})
 $$
-With a few additional assumptions, the
-RSS likelihood using z-scores (actually these are "lightly modified"
+With a few additional assumptions, we get the
+RSS likelihood (the $\tilde{\boldsymbol{z}}$ are "lightly modified"
 z-scores):
 $$
 \tilde{\boldsymbol z} \mid {\bf R}, n, {\boldsymbol b}, \sigma^2 \sim
 N_p(\sqrt{n} {\bf R} \boldsymbol b, \sigma^2{\bf R})
 $$
-
-${\bf R}$ is the $p \times p$ correlation ("LD") matrix;
-${\boldsymbol z}$ is a "lightly modified" z-score. Refer to the corresponding
-equation for the RSS likelihood in the SuSiE-RSS paper.
-
-NEXT: Implement a simple version of the IBSS algorithm using the
-RSS likelihood. See Algorithm 1 in the S1 Text of the SuSiE-RSS paper.
+See also eq. 22 in the [SuSiE-RSS paper][susie_rss].
 
 ### References
 
