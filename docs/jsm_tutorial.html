@@ -301,7 +301,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-07-30
+<strong>Last updated:</strong> 2026-07-31
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -432,15 +432,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree735725f5c31f0e82a68cb2c9b9b33dc99842666atargetblank735725fa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree23b334598d986604d243a153d930f1d6fab61c63targetblank23b3345a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/finemap/tree/735725f5c31f0e82a68cb2c9b9b33dc99842666a" target="_blank">735725f</a>
+<a href="https://github.com/stephenslab/finemap/tree/23b334598d986604d243a153d930f1d6fab61c63" target="_blank">23b3345</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree735725f5c31f0e82a68cb2c9b9b33dc99842666atargetblank735725fa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree23b334598d986604d243a153d930f1d6fab61c63targetblank23b3345a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -450,7 +450,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/finemap/tree/735725f5c31f0e82a68cb2c9b9b33dc99842666a" target="_blank">735725f</a>.
+<a href="https://github.com/stephenslab/finemap/tree/23b334598d986604d243a153d930f1d6fab61c63" target="_blank">23b3345</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -468,7 +468,6 @@ Ignored files:
     Ignored:    data/small_data_11_sim_gaussian_pve_n_8_get_sumstats_n_1.ld_sample_n_file.in_n.ld
 
 Untracked files:
-    Untracked:  .#README.md
     Untracked:  data/Thyroid.FMO2.1Mb.RDS
 
 </code></pre>
@@ -514,6 +513,91 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/23b334598d986604d243a153d930f1d6fab61c63/analysis/jsm_tutorial.Rmd" target="_blank">23b3345</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+<td>
+wflow_publish("jsm_tutorial.Rmd", verbose = T, view = F)
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/0252178c981021c2c399dda001f0d895c492f6fc/analysis/jsm_tutorial.Rmd" target="_blank">0252178</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+<td>
+Added some code for running ibss with the wrong LD matrix.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/15b3cf93ea25da54f9d878f22a46694b08c1e6b6/analysis/jsm_tutorial.Rmd" target="_blank">15b3cf9</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+<td>
+A few misc. improvements to the jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/400acbbe9207ccc45eb593915c1c3c412cb92c69/analysis/jsm_tutorial.Rmd" target="_blank">400acbb</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+<td>
+Fixed a link in the jsm tutorial.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/finemap/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/jsm_tutorial.html" target="_blank">3075e9f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+<td>
+Ran wflow_publish("jsm_tutorial.Rmd").
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -952,10 +1036,14 @@ statistical concepts and computations involved in genetic fine-mapping
 with the <a href="https://doi.org/10.1101/501114">SuSiE</a> and <a
 href="https://doi.org/10.1371/journal.pgen.1010299">SuSiE-RSS</a> models
 without entering too deeply into the mathematical derivations.</p>
+<p>Feedback on this tutorial—including bug reports, typos and
+suggestions—are most welcome, and can be given by posting a [GitHub
+Issue][github_issues].</p>
 <div id="initial-setup" class="section level2">
 <h2>Initial setup</h2>
 <p>For this tutorial, I’m using a lightly modified version of susieR
-available in the “output_residuals” branch:</p>
+available in the “output_residuals” branch. I would recommend using this
+version to reproduce the same results I got.</p>
 <pre class="r"><code>library(remotes)
 install_github(&quot;stephenslab/susieR@output_residuals&quot;)</code></pre>
 <p>Load all the packages used in the tutorial:</p>
@@ -1057,12 +1145,12 @@ all SNPs, also sometimes called the “LD matrix”.)</p>
 the results of the SuSiE fine-mapping analysis. Understanding how this
 function works is not important.</p>
 <pre class="r"><code>pip_plot &lt;- function (fit, causal_snps = NULL, xlab = &quot;&quot;) {
-  cs_colors &lt;- c(&quot;dodgerblue&quot;,&quot;limegreen&quot;)
+  cs_colors &lt;- c(&quot;dodgerblue&quot;,&quot;limegreen&quot;,&quot;darkorange&quot;)
   pip &lt;- fit$pip
   n   &lt;- length(pip)
   dat &lt;- data.frame(pos = 1:n,pip = pip,CS = as.character(NA))
   num_cs &lt;- length(fit$sets$cs)
-  for (i in 1:num_cs) {
+  for (i in num_cs:1) {
     j &lt;- fit$sets$cs[[i]]
     dat[j,&quot;CS&quot;] &lt;- paste0(&quot;CS&quot;,i)
   }
@@ -1111,6 +1199,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/susie-rss-plot-1.png" target="_blank">3075e9f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/stephenslab/finemap/blob/750d41b0d188d8e0860b5e78cc63ee790b16ceaa/docs/figure/jsm_tutorial.Rmd/susie-rss-plot-1.png" target="_blank">750d41b</a>
@@ -1171,6 +1270,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/more-susie-plots-1.png" target="_blank">3075e9f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/stephenslab/finemap/blob/750d41b0d188d8e0860b5e78cc63ee790b16ceaa/docs/figure/jsm_tutorial.Rmd/more-susie-plots-1.png" target="_blank">750d41b</a>
@@ -1275,6 +1385,43 @@ cs &lt;- get_cs(pip)
 pip_plot(list(pip = pip,sets = list(cs = list(L1 = cs))),causal_snps,
          xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/single-snp-1.png" width="630" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-single-snp-1">
+Past versions of single-snp-1.png
+</button>
+</p>
+<div id="fig-single-snp-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/single-snp-1.png" target="_blank">3075e9f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Note that we adjusted the z-scores in the same way as in
 <code>susie_rss()</code>. See the SuSiE-RSS paper for an explanation of
 why this is done.</p>
@@ -1293,6 +1440,43 @@ fit_1cs &lt;- susie_rss(zhat,R,n = n,L = 1,estimate_prior_method = &quot;EM&quot
 plot(fit_1cs$pip,pip,pch = 20,xlab = &quot;susie_rss PIP&quot;,ylab = &quot;JSM tutorial PIP&quot;)
 abline(a = 0,b = 1,lty = &quot;dotted&quot;,col = &quot;magenta&quot;)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-1-1.png" width="360" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-1">
+Past versions of unnamed-chunk-1-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/unnamed-chunk-1-1.png" target="_blank">3075e9f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div
 id="extending-to-more-than-1-causal-snp-a-simple-iterative-calculation"
@@ -1383,6 +1567,12 @@ class="math inline">\(L\)</span> SERs:</p>
               residuals = residuals,
               sets = list(cs = apply(PIP,2,function (x) get_cs(x,coverage)))))
 }</code></pre>
+<p>For background and detailed derivations, see the <a
+href="https://doi.org/10.1371/journal.pgen.1010299">SuSiE-RSS paper</a>.
+Also compare this description of the IBSS algorithm and the
+<code>ibss()</code> R function to Algorithm 1 in the <a
+href="https://doi.org/10.1371/journal.pgen.1010299">SuSiE-RSS</a>
+paper.</p>
 <p>Let’s now apply the IBSS algorithm to the z-scores and LD matrix,
 with <span class="math inline">\(L = 2\)</span>:</p>
 <pre class="r"><code>res &lt;- ibss(z,R,n,L = 2,s0 = c(0.3,0.2),numiter = 10)</code></pre>
@@ -1393,12 +1583,89 @@ obtained from running SuSiE-RSS:</p>
 <pre class="r"><code>pip_plot(res,causal_snps,
          xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/pip-plot-ibss-1.png" width="630" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-pip-plot-ibss-1">
+Past versions of pip-plot-ibss-1.png
+</button>
+</p>
+<div id="fig-pip-plot-ibss-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/pip-plot-ibss-1.png" target="_blank">3075e9f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>And:</p>
 <pre class="r"><code>par(mar = c(4,4,2,1))
 plot(fit$pip,res$pip,pch = 20,xlab = &quot;susie_rss PIP&quot;,
      ylab = &quot;JSM tutorial PIP&quot;)
 abline(a = 0,b = 1,lty = &quot;dotted&quot;,col = &quot;magenta&quot;)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/compare-ibss-susie-rss-1.png" width="360" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-compare-ibss-susie-rss-1">
+Past versions of compare-ibss-susie-rss-1.png
+</button>
+</p>
+<div id="fig-compare-ibss-susie-rss-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/compare-ibss-susie-rss-1.png" target="_blank">3075e9f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>To gain some a little more insight into what the IBSS algorithm is
+doing, it is helpful to see what are the data that are actually being
+used to fit the SERs.</p>
 <pre class="r"><code>residuals_plot &lt;- function (fit, z, R, l, cs_color = &quot;black&quot;) {
   ld_colors &lt;- c(&quot;darkblue&quot;,&quot;dodgerblue&quot;,&quot;limegreen&quot;,&quot;orange&quot;,&quot;red&quot;)
   L   &lt;- length(fit$sets$cs)
@@ -1419,37 +1686,177 @@ abline(a = 0,b = 1,lty = &quot;dotted&quot;,col = &quot;magenta&quot;)</code></p
          labs(x = &quot;z-score&quot;,y = &quot;residual&quot;) +
          theme_cowplot(font_size = 12))
 }</code></pre>
+<p>This scatterplot compares the z-scores to the residuals that were
+used to fit the second SER after removing the posterior mean effects of
+the first SER:</p>
 <pre class="r"><code>residuals_plot(res,z,R,l = 2)</code></pre>
-<p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-2-1.png" width="360" style="display: block; margin: auto;" /></p>
+<p><img src="figure/jsm_tutorial.Rmd/residuals-plot-ser-2-1.png" width="360" style="display: block; margin: auto;" /></p>
+<p>From this plot we see not only that the large z-scores corresponding
+to the SNPs in the CS1 (black circles) get “shrunk” toward zero, but the
+z-scores for SNPs strongly correlated with CS1 also get shrunk toward
+zero. This has the effect of focussing the second SER on the remaining
+large z-scores.</p>
+<p>Likewise, when we re-fit the first SER, the z-scores in CS2 as well
+as the z-scores correlated with the SNP in CS2 are also strongly shrunk
+toward zero:</p>
 <pre class="r"><code>residuals_plot(res,z,R,l = 1)</code></pre>
-<p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-3-1.png" width="360" style="display: block; margin: auto;" /></p>
-<p>Multi-SNP model: <span class="math display">\[
-\begin{aligned}
-\boldsymbol{y} \mid \boldsymbol{b} &amp;\sim
-N_n({\bf X}{\boldsymbol b}, {\bf I}_n) \\
-\boldsymbol{b} \mid \sigma_0^2 &amp;\sim N_p(0, \sigma_0^2 {\bf I}_p).
-\end{aligned}
-\]</span></p>
+<p><img src="figure/jsm_tutorial.Rmd/residuals-plot-ser-1-1.png" width="360" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fine-mapping-with-the-wrong-ld-matrix" class="section level2">
+<h2>Fine-mapping with the “wrong” LD matrix</h2>
+<p>It is common to use an LD matrix that was computed using a differnet
+sample than what was used to perform the association tests. Since R is
+used in computing the residuals, it follows that the “wrong” LD matrix
+could result in the “wrong” residuals.</p>
+<p>To understand the implications, let’s re-run the fine-mapping with
+<span class="math inline">\(L
+= 3\)</span>, with the correct (“in-sample”) LD matrix, and an
+“out-of-sample” LD matrix:</p>
+<pre class="r"><code>res_in  &lt;- ibss(z,R,n,L = 3,s0 = rep(0.3,3),numiter = 10)
+res_out &lt;- ibss(z,R_out,n,L = 3,s0 = rep(0.3,3),numiter = 10)
+p1 &lt;- pip_plot(res_in,causal_snps,
+         xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)
+p2 &lt;- pip_plot(res_out,causal_snps,
+         xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)
+plot_grid(p1,p2,nrow = 2,ncol = 1)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/in-vs-out-1.png" width="630" style="display: block; margin: auto;" /></p>
+<p>With the in-sample LD, the third CS is effectively a “dummy” CS that
+captures most of the candidate SNPs because there isn’t enough
+information to narrow down the signal to a small number of SNPs. The
+<code>susie_rss()</code> function can automatically prune such “weakly
+informative” SERs.</p>
+<p>With the out-of-sample LD, however, the third CS captures a “ghost”
+causal SNP; that is, the third CS is a false positive. Let’s look at the
+residuals again to understand why this happens.</p>
+<p>As before, let’s look at the residuals to understand what is going
+on.</p>
+<pre class="r"><code>another_residuals_plot &lt;- function (fit, z, l, cs_color = &quot;red&quot;) {
+  cs  &lt;- fit$sets$cs[[l]]
+  dat &lt;- data.frame(z = z,res = fit$residuals[,l])
+  dat_cs &lt;- dat[cs,]
+  zmin &lt;- with(dat,min(c(z,res)))
+  zmax &lt;- with(dat,max(c(z,res)))
+  return(ggplot(dat,aes(x = z,y = res)) +
+         geom_point() +
+         geom_point(data = dat_cs,shape = 1,size = 3,color = cs_color) +
+         geom_abline(intercept = 0,slope = 1,color = &quot;magenta&quot;,
+                     linetype = &quot;dotted&quot;)  +
+         xlim(zmin,zmax) +
+         ylim(zmin,zmax) +
+         labs(x = &quot;z-score&quot;,y = &quot;residual&quot;) +
+         theme_cowplot(font_size = 12))
+}</code></pre>
+<p>The data for the first SER look quite similar:</p>
+<pre class="r"><code>p1 &lt;- another_residuals_plot(res_in,z,l = 1)
+p2 &lt;- another_residuals_plot(res_out,z,l = 1)
+plot_grid(p1,p2,nrow = 1,ncol = 2)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-2-1.png" width="540" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/unnamed-chunk-2-1.png" target="_blank">3075e9f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Same for the second SER:</p>
+<pre class="r"><code>p1 &lt;- another_residuals_plot(res_in,z,l = 2)
+p2 &lt;- another_residuals_plot(res_out,z,l = 2)
+plot_grid(p1,p2,nrow = 1,ncol = 2)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-3-1.png" width="540" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/unnamed-chunk-3-1.png" target="_blank">3075e9f</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>For the third SER, however, since most of the “signal” is gone, the
+out-of-sample LD matrix contributes a lot of error to the calculation of
+the residuals, and as a result SuSiE mistakenly thinks that there is a
+signal to be captured by a CS. This is the origin of the false positive
+CS.</p>
+<pre class="r"><code>p1 &lt;- another_residuals_plot(res_in,z,l = 3)
+p2 &lt;- another_residuals_plot(res_out,z,l = 3)
+plot_grid(p1,p2,nrow = 1,ncol = 2)</code></pre>
+<p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-4-1.png" width="540" style="display: block; margin: auto;" /></p>
+</div>
+<div id="appendix-the-rss-likelihood" class="section level2">
+<h2>Appendix: the RSS likelihood</h2>
 <p>Multi-SNP regression likelihood: <span class="math display">\[
-{\boldsymbol y} \mid {\boldsymbol b}, \sigma^2 \sim
-N_n({\bf X}{\boldsymbol b}, \sigma^2 {\bf I}_n)
+\boldsymbol{y} \mid \boldsymbol{b}, \sigma^2 \sim
+N_n({\bf X} \boldsymbol{b}, \sigma^2 {\bf I}_n)
 \]</span> Equivalent likelihood formulated using summary statistics:
 <span class="math display">\[
-{\boldsymbol t} \mid {\bf R}, n, \tilde{\boldsymbol b}, \sigma^2 \sim
-N_p(\sqrt{n} {\bf R} \tilde{\boldsymbol b}, \sigma^2{\bf R})
-\]</span> With a few additional assumptions, the RSS likelihood using
-z-scores (actually these are “lightly modified” z-scores): <span
-class="math display">\[
+\boldsymbol{t} \mid {\bf R}, n, \tilde{\boldsymbol{b}}, \sigma^2 \sim
+N_p(\sqrt{n} {\bf R} \tilde{\boldsymbol{b}}, \sigma^2{\bf R})
+\]</span> With a few additional assumptions, we get the RSS likelihood
+(the <span class="math inline">\(\tilde{\boldsymbol{z}}\)</span> are
+“lightly modified” z-scores): <span class="math display">\[
 \tilde{\boldsymbol z} \mid {\bf R}, n, {\boldsymbol b}, \sigma^2 \sim
 N_p(\sqrt{n} {\bf R} \boldsymbol b, \sigma^2{\bf R})
-\]</span></p>
-<p><span class="math inline">\({\bf R}\)</span> is the <span
-class="math inline">\(p \times p\)</span> correlation (“LD”) matrix;
-<span class="math inline">\({\boldsymbol z}\)</span> is a “lightly
-modified” z-score. Refer to the corresponding equation for the RSS
-likelihood in the SuSiE-RSS paper.</p>
-<p>NEXT: Implement a simple version of the IBSS algorithm using the RSS
-likelihood. See Algorithm 1 in the S1 Text of the SuSiE-RSS paper.</p>
+\]</span> See also eq. 22 in the <a
+href="https://doi.org/10.1371/journal.pgen.1010299">SuSiE-RSS
+paper</a>.</p>
 <div id="references" class="section level3">
 <h3>References</h3>
 <p>Wang et al (2020). A simple new approach to variable selection in
@@ -1457,7 +1864,8 @@ regression, with application to genetic fine mapping. <em>Journal of the
 Royal Statistical Society, Series B</em> 82, 1273-1300. <a
 href="https://doi.org/10.1101/501114">link</a></p>
 <p>Zou et al (2022). Fine-mapping from summary data with the Sum of
-Single Effects model. <em>PLoS Genetics</em> 18, e1010299. [link]</p>
+Single Effects model. <em>PLoS Genetics</em> 18, e1010299. <a
+href="https://doi.org/10.1371/journal.pgen.1010299">link</a></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
