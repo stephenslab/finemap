@@ -304,7 +304,7 @@ some progress by reusing the association tests to perform fine-mapping
 A quick verification that these calculations match the `susie_rss()`
 result:
 
-```{r, fig.height=3, fig.width=3}
+```{r verify-pips, fig.height=3, fig.width=3}
 par(mar = c(4,4,2,1))
 fit_1cs <- susie_rss(zhat,R,n = n,L = 1,estimate_prior_method = "EM",
                      tol = 1e-6)
@@ -526,13 +526,14 @@ another_residuals_plot <- function (fit, z, l, cs_color = "red",
 	     xlim(zmin,zmax) +
 		 ylim(zmin,zmax) +
 		 labs(x = "z-score",y = "residual",title = title) +
-		 theme_cowplot(font_size = 12))
+		 theme_cowplot(font_size = 12) +
+		 theme(plot.title = element_text(face = "plain",size = 12)))
 }
 ```
 
 The data for the first SER look quite similar:
 
-```{r, fig.height=2, fig.width=4.5}
+```{r another-residuals-plot-ser-1, fig.height=2, fig.width=4}
 p1 <- another_residuals_plot(res_in,z,l = 1,title = "in-sample LD")
 p2 <- another_residuals_plot(res_out,z,l = 1,title = "out-of-sample LD")
 plot_grid(p1,p2,nrow = 1,ncol = 2)
@@ -540,7 +541,7 @@ plot_grid(p1,p2,nrow = 1,ncol = 2)
 
 Same for the second SER:
 
-```{r, fig.height=2, fig.width=4.5}
+```{r another-residuals-plot-ser-2, fig.height=2, fig.width=4}
 p1 <- another_residuals_plot(res_in,z,l = 2,title = "in-sample LD")
 p2 <- another_residuals_plot(res_out,z,l = 2,title = "out-of-sample LD")
 plot_grid(p1,p2,nrow = 1,ncol = 2)
@@ -552,7 +553,7 @@ of the residuals, and as a result SuSiE mistakenly thinks that there
 is a signal to be captured by a CS. This is the origin of the false
 positive CS.
 
-```{r, fig.height=2, fig.width=4.5}
+```{r another-residuals-plot-ser-3, fig.height=2, fig.width=4}
 p1 <- another_residuals_plot(res_in,z,l = 3,title = "in-sample LD")
 p2 <- another_residuals_plot(res_out,z,l = 3,title = "out-of-sample LD")
 plot_grid(p1,p2,nrow = 1,ncol = 2)
