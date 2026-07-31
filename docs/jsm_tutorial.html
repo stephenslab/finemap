@@ -432,15 +432,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree23b334598d986604d243a153d930f1d6fab61c63targetblank23b3345a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree3ee04faee8a0b2c7e0b887fef20558e4234b90e4targetblank3ee04faa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/finemap/tree/23b334598d986604d243a153d930f1d6fab61c63" target="_blank">23b3345</a>
+<a href="https://github.com/stephenslab/finemap/tree/3ee04faee8a0b2c7e0b887fef20558e4234b90e4" target="_blank">3ee04fa</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree23b334598d986604d243a153d930f1d6fab61c63targetblank23b3345a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree3ee04faee8a0b2c7e0b887fef20558e4234b90e4targetblank3ee04faa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -450,7 +450,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/finemap/tree/23b334598d986604d243a153d930f1d6fab61c63" target="_blank">23b3345</a>.
+<a href="https://github.com/stephenslab/finemap/tree/3ee04faee8a0b2c7e0b887fef20558e4234b90e4" target="_blank">3ee04fa</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -513,6 +513,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/3ee04faee8a0b2c7e0b887fef20558e4234b90e4/analysis/jsm_tutorial.Rmd" target="_blank">3ee04fa</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+<td>
+wflow_publish("jsm_tutorial.Rmd", verbose = T, view = F)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/finemap/7f22e27e5eb3f1256dcfa4f263463f25a608c55f/docs/jsm_tutorial.html" target="_blank">7f22e27</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+<td>
+Added a couple extra notes to the JSM tutorial.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1037,8 +1071,9 @@ with the <a href="https://doi.org/10.1101/501114">SuSiE</a> and <a
 href="https://doi.org/10.1371/journal.pgen.1010299">SuSiE-RSS</a> models
 without entering too deeply into the mathematical derivations.</p>
 <p>Feedback on this tutorial—including bug reports, typos and
-suggestions—are most welcome, and can be given by posting a [GitHub
-Issue][github_issues].</p>
+suggestions—are most welcome, and can be given by posting a <a
+href="https://github.com/stephenslab/finemap/issues">GitHub
+Issue</a>.</p>
 <div id="initial-setup" class="section level2">
 <h2>Initial setup</h2>
 <p>For this tutorial, I’m using a lightly modified version of susieR
@@ -1691,6 +1726,43 @@ used to fit the second SER after removing the posterior mean effects of
 the first SER:</p>
 <pre class="r"><code>residuals_plot(res,z,R,l = 2)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/residuals-plot-ser-2-1.png" width="360" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-residuals-plot-ser-2-1">
+Past versions of residuals-plot-ser-2-1.png
+</button>
+</p>
+<div id="fig-residuals-plot-ser-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/7f22e27e5eb3f1256dcfa4f263463f25a608c55f/docs/figure/jsm_tutorial.Rmd/residuals-plot-ser-2-1.png" target="_blank">7f22e27</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>From this plot we see not only that the large z-scores corresponding
 to the SNPs in the CS1 (black circles) get “shrunk” toward zero, but the
 z-scores for SNPs strongly correlated with CS1 also get shrunk toward
@@ -1701,6 +1773,43 @@ as the z-scores correlated with the SNP in CS2 are also strongly shrunk
 toward zero:</p>
 <pre class="r"><code>residuals_plot(res,z,R,l = 1)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/residuals-plot-ser-1-1.png" width="360" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-residuals-plot-ser-1-1">
+Past versions of residuals-plot-ser-1-1.png
+</button>
+</p>
+<div id="fig-residuals-plot-ser-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/7f22e27e5eb3f1256dcfa4f263463f25a608c55f/docs/figure/jsm_tutorial.Rmd/residuals-plot-ser-1-1.png" target="_blank">7f22e27</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="fine-mapping-with-the-wrong-ld-matrix" class="section level2">
 <h2>Fine-mapping with the “wrong” LD matrix</h2>
@@ -1720,6 +1829,43 @@ p2 &lt;- pip_plot(res_out,causal_snps,
          xlab = &quot;SNPs on human chromosome 1 near the FMO2 gene&quot;)
 plot_grid(p1,p2,nrow = 2,ncol = 1)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/in-vs-out-1.png" width="630" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-in-vs-out-1">
+Past versions of in-vs-out-1.png
+</button>
+</p>
+<div id="fig-in-vs-out-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/7f22e27e5eb3f1256dcfa4f263463f25a608c55f/docs/figure/jsm_tutorial.Rmd/in-vs-out-1.png" target="_blank">7f22e27</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>With the in-sample LD, the third CS is effectively a “dummy” CS that
 captures most of the candidate SNPs because there isn’t enough
 information to narrow down the signal to a small number of SNPs. The
@@ -1775,6 +1921,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/stephenslab/finemap/blob/7f22e27e5eb3f1256dcfa4f263463f25a608c55f/docs/figure/jsm_tutorial.Rmd/unnamed-chunk-2-1.png" target="_blank">7f22e27</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/unnamed-chunk-2-1.png" target="_blank">3075e9f</a>
 </td>
 <td>
@@ -1817,6 +1974,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/stephenslab/finemap/blob/7f22e27e5eb3f1256dcfa4f263463f25a608c55f/docs/figure/jsm_tutorial.Rmd/unnamed-chunk-3-1.png" target="_blank">7f22e27</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/stephenslab/finemap/blob/3075e9fd693c7f38d9957c86dda14c1b616fcb8e/docs/figure/jsm_tutorial.Rmd/unnamed-chunk-3-1.png" target="_blank">3075e9f</a>
 </td>
 <td>
@@ -1839,6 +2007,43 @@ CS.</p>
 p2 &lt;- another_residuals_plot(res_out,z,l = 3)
 plot_grid(p1,p2,nrow = 1,ncol = 2)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-4-1.png" width="540" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/7f22e27e5eb3f1256dcfa4f263463f25a608c55f/docs/figure/jsm_tutorial.Rmd/unnamed-chunk-4-1.png" target="_blank">7f22e27</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="appendix-the-rss-likelihood" class="section level2">
 <h2>Appendix: the RSS likelihood</h2>
