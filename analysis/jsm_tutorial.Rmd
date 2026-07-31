@@ -592,4 +592,4 @@ Single Effects model. *PLoS Genetics* 18, e1010299.
 
 [susie]: https://doi.org/10.1101/501114
 [susie_rss]: https://doi.org/10.1371/journal.pgen.1010299
-[github_issue]: https://github.com/stephenslab/finemap/issues
+[github_issues]: https://github.com/stephenslab/finemap/issues
