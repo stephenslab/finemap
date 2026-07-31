@@ -432,15 +432,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree3ee04faee8a0b2c7e0b887fef20558e4234b90e4targetblank3ee04faa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree6f5bd6a9cb83c568f1fba280da8dc63ab85605e6targetblank6f5bd6aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/finemap/tree/3ee04faee8a0b2c7e0b887fef20558e4234b90e4" target="_blank">3ee04fa</a>
+<a href="https://github.com/stephenslab/finemap/tree/6f5bd6a9cb83c568f1fba280da8dc63ab85605e6" target="_blank">6f5bd6a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree3ee04faee8a0b2c7e0b887fef20558e4234b90e4targetblank3ee04faa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfinemaptree6f5bd6a9cb83c568f1fba280da8dc63ab85605e6targetblank6f5bd6aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -450,7 +450,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/finemap/tree/3ee04faee8a0b2c7e0b887fef20558e4234b90e4" target="_blank">3ee04fa</a>.
+<a href="https://github.com/stephenslab/finemap/tree/6f5bd6a9cb83c568f1fba280da8dc63ab85605e6" target="_blank">6f5bd6a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -513,6 +513,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/finemap/blob/6f5bd6a9cb83c568f1fba280da8dc63ab85605e6/analysis/jsm_tutorial.Rmd" target="_blank">6f5bd6a</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+<td>
+wflow_publish("jsm_tutorial.Rmd", verbose = T, view = F)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/finemap/56b4959b25c1fef57565551f0762b007a0c7854b/docs/jsm_tutorial.html" target="_blank">56b4959</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2026-07-31
+</td>
+<td>
+Fixed a broken link.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1876,7 +1910,8 @@ causal SNP; that is, the third CS is a false positive. Let’s look at the
 residuals again to understand why this happens.</p>
 <p>As before, let’s look at the residuals to understand what is going
 on.</p>
-<pre class="r"><code>another_residuals_plot &lt;- function (fit, z, l, cs_color = &quot;red&quot;) {
+<pre class="r"><code>another_residuals_plot &lt;- function (fit, z, l, cs_color = &quot;red&quot;,
+                                    title = &quot;&quot;) {
   cs  &lt;- fit$sets$cs[[l]]
   dat &lt;- data.frame(z = z,res = fit$residuals[,l])
   dat_cs &lt;- dat[cs,]
@@ -1889,12 +1924,12 @@ on.</p>
                      linetype = &quot;dotted&quot;)  +
          xlim(zmin,zmax) +
          ylim(zmin,zmax) +
-         labs(x = &quot;z-score&quot;,y = &quot;residual&quot;) +
+         labs(x = &quot;z-score&quot;,y = &quot;residual&quot;,title = title) +
          theme_cowplot(font_size = 12))
 }</code></pre>
 <p>The data for the first SER look quite similar:</p>
-<pre class="r"><code>p1 &lt;- another_residuals_plot(res_in,z,l = 1)
-p2 &lt;- another_residuals_plot(res_out,z,l = 1)
+<pre class="r"><code>p1 &lt;- another_residuals_plot(res_in,z,l = 1,title = &quot;in-sample LD&quot;)
+p2 &lt;- another_residuals_plot(res_out,z,l = 1,title = &quot;out-of-sample LD&quot;)
 plot_grid(p1,p2,nrow = 1,ncol = 2)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-2-1.png" width="540" style="display: block; margin: auto;" /></p>
 <p>
@@ -1946,8 +1981,8 @@ Peter Carbonetto
 </div>
 </div>
 <p>Same for the second SER:</p>
-<pre class="r"><code>p1 &lt;- another_residuals_plot(res_in,z,l = 2)
-p2 &lt;- another_residuals_plot(res_out,z,l = 2)
+<pre class="r"><code>p1 &lt;- another_residuals_plot(res_in,z,l = 2,title = &quot;in-sample LD&quot;)
+p2 &lt;- another_residuals_plot(res_out,z,l = 2,title = &quot;out-of-sample LD&quot;)
 plot_grid(p1,p2,nrow = 1,ncol = 2)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-3-1.png" width="540" style="display: block; margin: auto;" /></p>
 <p>
@@ -2003,8 +2038,8 @@ out-of-sample LD matrix contributes a lot of error to the calculation of
 the residuals, and as a result SuSiE mistakenly thinks that there is a
 signal to be captured by a CS. This is the origin of the false positive
 CS.</p>
-<pre class="r"><code>p1 &lt;- another_residuals_plot(res_in,z,l = 3)
-p2 &lt;- another_residuals_plot(res_out,z,l = 3)
+<pre class="r"><code>p1 &lt;- another_residuals_plot(res_in,z,l = 3,title = &quot;in-sample LD&quot;)
+p2 &lt;- another_residuals_plot(res_out,z,l = 3,title = &quot;out-of-sample LD&quot;)
 plot_grid(p1,p2,nrow = 1,ncol = 2)</code></pre>
 <p><img src="figure/jsm_tutorial.Rmd/unnamed-chunk-4-1.png" width="540" style="display: block; margin: auto;" /></p>
 <p>
