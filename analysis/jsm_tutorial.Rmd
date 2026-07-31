@@ -511,7 +511,8 @@ the residuals again to understand why this happens.
 As before, let's look at the residuals to understand what is going on.
 
 ```{r another-residuals-plot}
-another_residuals_plot <- function (fit, z, l, cs_color = "red") {
+another_residuals_plot <- function (fit, z, l, cs_color = "red",
+                                    title = "") {
   cs  <- fit$sets$cs[[l]]
   dat <- data.frame(z = z,res = fit$residuals[,l])
   dat_cs <- dat[cs,]
@@ -524,7 +525,7 @@ another_residuals_plot <- function (fit, z, l, cs_color = "red") {
 		             linetype = "dotted")  +
 	     xlim(zmin,zmax) +
 		 ylim(zmin,zmax) +
-		 labs(x = "z-score",y = "residual") +
+		 labs(x = "z-score",y = "residual",title = title) +
 		 theme_cowplot(font_size = 12))
 }
 ```
@@ -532,16 +533,16 @@ another_residuals_plot <- function (fit, z, l, cs_color = "red") {
 The data for the first SER look quite similar:
 
 ```{r, fig.height=2, fig.width=4.5}
-p1 <- another_residuals_plot(res_in,z,l = 1)
-p2 <- another_residuals_plot(res_out,z,l = 1)
+p1 <- another_residuals_plot(res_in,z,l = 1,title = "in-sample LD")
+p2 <- another_residuals_plot(res_out,z,l = 1,title = "out-of-sample LD")
 plot_grid(p1,p2,nrow = 1,ncol = 2)
 ```
 
 Same for the second SER:
 
 ```{r, fig.height=2, fig.width=4.5}
-p1 <- another_residuals_plot(res_in,z,l = 2)
-p2 <- another_residuals_plot(res_out,z,l = 2)
+p1 <- another_residuals_plot(res_in,z,l = 2,title = "in-sample LD")
+p2 <- another_residuals_plot(res_out,z,l = 2,title = "out-of-sample LD")
 plot_grid(p1,p2,nrow = 1,ncol = 2)
 ```
 
@@ -552,8 +553,8 @@ is a signal to be captured by a CS. This is the origin of the false
 positive CS.
 
 ```{r, fig.height=2, fig.width=4.5}
-p1 <- another_residuals_plot(res_in,z,l = 3)
-p2 <- another_residuals_plot(res_out,z,l = 3)
+p1 <- another_residuals_plot(res_in,z,l = 3,title = "in-sample LD")
+p2 <- another_residuals_plot(res_out,z,l = 3,title = "out-of-sample LD")
 plot_grid(p1,p2,nrow = 1,ncol = 2)
 ```
 
