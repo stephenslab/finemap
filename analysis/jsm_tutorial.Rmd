@@ -9,6 +9,10 @@ statistical concepts and computations involved in genetic fine-mapping
 with the [SuSiE][susie] and [SuSiE-RSS][susie_rss] models without
 entering too deeply into the mathematical derivations.
 
+Feedback on this tutorial—including bug reports, typos and
+suggestions—are most welcome, and can be given by posting a
+[GitHub Issue][github_issues].
+
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
                       fig.align = "center",dpi = 120)
@@ -18,7 +22,8 @@ Initial setup
 -------------
 
 For this tutorial, I'm using a lightly modified version of susieR
-available in the "output_residuals" branch:
+available in the "output_residuals" branch. I would recommend using this
+version to reproduce the same results I got.
 
 ```{r install-susie, eval=FALSE}
 library(remotes)
@@ -471,34 +476,85 @@ toward zero:
 residuals_plot(res,z,R,l = 1)
 ```
 
-ADD TEXT HERE:
+Fine-mapping with the "wrong" LD matrix
+---------------------------------------
 
-TO DO: Create another residuals plot to handle L > 2.
+It is common to use an LD matrix that was computed using a differnet
+sample than what was used to perform the association tests. Since R is
+used in computing the residuals, it follows that the "wrong" LD matrix
+could result in the "wrong" residuals.
 
-```{r pip-plot-ibss-L3, fig.height=1.75, fig.width=5.25}
-res <- ibss(z,R,n,L = 3,s0 = rep(0.3,3),numiter = 10)
-pip_plot(res,causal_snps,
+To understand the implications, let's re-run the fine-mapping with $L
+= 3$, with the correct ("in-sample") LD matrix, and an "out-of-sample"
+LD matrix:
+
+```{r in-vs-out, fig.height=3, fig.width=5.25}
+res_in  <- ibss(z,R,n,L = 3,s0 = rep(0.3,3),numiter = 10)
+res_out <- ibss(z,R_out,n,L = 3,s0 = rep(0.3,3),numiter = 10)
+p1 <- pip_plot(res_in,causal_snps,
          xlab = "SNPs on human chromosome 1 near the FMO2 gene")
-residuals_plot(res,z,R,l = 3) +
-  scale_y_continuous(limits = c(-12,15),breaks = seq(-15,15,5))
+p2 <- pip_plot(res_out,causal_snps,
+         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
+plot_grid(p1,p2,nrow = 2,ncol = 1)
 ```
 
-TO DO NEXT: Give an example of what can go wrong when we use the
-"wrong" LD matrix.
+With the in-sample LD, the third CS is effectively a "dummy" CS that
+captures most of the candidate SNPs because there isn't enough
+information to narrow down the signal to a small number of SNPs. The
+`susie_rss()` function can automatically prune such "weakly
+informative" SERs.
 
-```{r}
-res_L2 <- ibss(z,R_out,n,L = 2,s0 = rep(0.3,3),numiter = 10)
-res_L3 <- ibss(z,R_out,n,L = 3,s0 = rep(0.3,3),numiter = 10)
-pip_plot(res_L2,causal_snps,
-         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
-pip_plot(res_L3,causal_snps,
-         xlab = "SNPs on human chromosome 1 near the FMO2 gene")
-pdat <- data.frame(z = z,res = res_L3$residuals[,3])
-pdat <- pdat[res_L3$sets$cs[[3]],]
-residuals_plot(res_L3,z,R,l = 3) +
-  geom_point(data = pdat,aes(x = z,y = res),shape = 1,size = 3,
-             color = "magenta") +
-  scale_y_continuous(limits = c(-12,15),breaks = seq(-15,15,5)) 
+With the out-of-sample LD, however, the third CS captures a "ghost"
+causal SNP; that is, the third CS is a false positive. Let's look at
+the residuals again to understand why this happens.
+
+As before, let's look at the residuals to understand what is going on.
+
+```{r another-residuals-plot}
+another_residuals_plot <- function (fit, z, l, cs_color = "red") {
+  cs  <- fit$sets$cs[[l]]
+  dat <- data.frame(z = z,res = fit$residuals[,l])
+  dat_cs <- dat[cs,]
+  zmin <- with(dat,min(c(z,res)))
+  zmax <- with(dat,max(c(z,res)))
+  return(ggplot(dat,aes(x = z,y = res)) +
+         geom_point() +
+    	 geom_point(data = dat_cs,shape = 1,size = 3,color = cs_color) +
+		 geom_abline(intercept = 0,slope = 1,color = "magenta",
+		             linetype = "dotted")  +
+	     xlim(zmin,zmax) +
+		 ylim(zmin,zmax) +
+		 labs(x = "z-score",y = "residual") +
+		 theme_cowplot(font_size = 12))
+}
+```
+
+The data for the first SER look quite similar:
+
+```{r, fig.height=2, fig.width=4.5}
+p1 <- another_residuals_plot(res_in,z,l = 1)
+p2 <- another_residuals_plot(res_out,z,l = 1)
+plot_grid(p1,p2,nrow = 1,ncol = 2)
+```
+
+Same for the second SER:
+
+```{r, fig.height=2, fig.width=4.5}
+p1 <- another_residuals_plot(res_in,z,l = 2)
+p2 <- another_residuals_plot(res_out,z,l = 2)
+plot_grid(p1,p2,nrow = 1,ncol = 2)
+```
+
+For the third SER, however, since most of the "signal" is gone, the
+out-of-sample LD matrix contributes a lot of error to the calculation
+of the residuals, and as a result SuSiE mistakenly thinks that there
+is a signal to be captured by a CS. This is the origin of the false
+positive CS.
+
+```{r, fig.height=2, fig.width=4.5}
+p1 <- another_residuals_plot(res_in,z,l = 3)
+p2 <- another_residuals_plot(res_out,z,l = 3)
+plot_grid(p1,p2,nrow = 1,ncol = 2)
 ```
 
 Appendix: the RSS likelihood
@@ -536,3 +592,4 @@ Single Effects model. *PLoS Genetics* 18, e1010299.
 
 [susie]: https://doi.org/10.1101/501114
 [susie_rss]: https://doi.org/10.1371/journal.pgen.1010299
+[github_issue]: https://github.com/stephenslab/finemap/issues
